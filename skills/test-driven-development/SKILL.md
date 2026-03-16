@@ -9,6 +9,14 @@ description: Use when implementing any feature or bugfix, before writing impleme
 
 Write the test first. Watch it fail. Write minimal code to pass.
 
+AUTO-CONTINUE: ON
+- 默认值/推荐答案：如有则写明；无则写 N/A
+- 推荐原因：如有则写明；无则写 N/A
+- 假设与适用范围：默认全自动；慢速模式例外
+- 风险提示（如有）：高风险动作将记录提示
+- 完成宣称约束：若验证失败/审阅未通过，只记录失败，不宣称完成
+
+
 **Core principle:** If you didn't watch the test fail, you don't know if it tests the right thing.
 
 **Violating the letter of the rules is violating the spirit of the rules.**

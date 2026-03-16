@@ -9,6 +9,14 @@ description: Use when you have a spec or requirements for a multi-step task, bef
 
 Write comprehensive implementation plans assuming the engineer has zero context for our codebase and questionable taste. Document everything they need to know: which files to touch for each task, code, testing, docs they might need to check, how to test it. Give them the whole plan as bite-sized tasks. DRY. YAGNI. TDD. Frequent commits.
 
+AUTO-CONTINUE: ON
+- 默认值/推荐答案：如有则写明；无则写 N/A
+- 推荐原因：如有则写明；无则写 N/A
+- 假设与适用范围：默认全自动；慢速模式例外
+- 风险提示（如有）：高风险动作将记录提示
+- 完成宣称约束：若验证失败/审阅未通过，只记录失败，不宣称完成
+
+
 Assume they are a skilled developer, but know almost nothing about our toolset or problem domain. Assume they don't know good test design very well.
 
 **Announce at start:** "I'm using the writing-plans skill to create the implementation plan."

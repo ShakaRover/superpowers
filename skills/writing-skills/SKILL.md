@@ -9,6 +9,14 @@ description: Use when creating new skills, editing existing skills, or verifying
 
 **Writing skills IS Test-Driven Development applied to process documentation.**
 
+AUTO-CONTINUE: ON
+- 默认值/推荐答案：如有则写明；无则写 N/A
+- 推荐原因：如有则写明；无则写 N/A
+- 假设与适用范围：默认全自动；慢速模式例外
+- 风险提示（如有）：高风险动作将记录提示
+- 完成宣称约束：若验证失败/审阅未通过，只记录失败，不宣称完成
+
+
 **Personal skills live in agent-specific directories (`~/.claude/skills` for Claude Code, `~/.agents/skills/` for Codex)** 
 
 You write test cases (pressure scenarios with subagents), watch them fail (baseline behavior), write the skill (documentation), watch tests pass (agents comply), and refactor (close loopholes).
