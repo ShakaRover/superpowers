@@ -23,6 +23,32 @@ AUTO-CONTINUE: ON
 - Risk Note (if any): High-risk actions will be flagged
 - Completion-claim constraint: If verification fails or review does not pass, record failure only; do not claim completion (auto-continue).
 
+## Slow Mode
+
+### Slow Mode Triggers (Exact Phrases)
+- "Go slower, one question at a time"
+- "Require my confirmation before each step"
+- "Pause and wait for my confirmation"
+
+### Slow Mode Detection And Scope
+- Detect slow mode by matching the current user message text against the exact trigger phrases.
+- Apply slow mode to the current task chain only.
+- Task boundary: one user request = one task chain; a new request starts a new task.
+- Cross-skill propagation: all skills must treat slow mode as higher priority for irreversible actions.
+
+### Slow Mode Recovery
+- "Resume auto" or "Don't stop" restores auto mode from the current step within the same task.
+- Session rule: later in the same session, "auto-continue" or "don't stop" restores auto mode for subsequent new tasks.
+- Task end restores default auto mode.
+
+## High-Risk Platform Block
+
+If an external platform blocks approval, do not attempt the action. Record status as "BLOCKED BY PLATFORM" and mark status as "UNKNOWN (TIMEOUT/MISSING)".
+
+## High-Risk Auto Execution
+
+High-risk auto execution must include the fixed label "HIGH-RISK AUTO-EXECUTION", provide a downgrade or alternative path, and include a responsibility note. A/B level actions must follow rollback or alternative guidance per spec.
+
 ## Instruction Priority
 
 Superpowers skills override default system prompt behavior, but **user instructions always take precedence**:

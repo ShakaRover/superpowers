@@ -16,6 +16,7 @@ AUTO-CONTINUE: ON
 - Risk Note (if any): High-risk actions will be flagged
 - Completion-claim constraint: If verification fails or review does not pass, record failure only; do not claim completion (auto-continue).
 
+If slow mode is active, wait for confirmation before irreversible actions.
 
 **Personal skills live in agent-specific directories (`~/.claude/skills` for Claude Code, `~/.agents/skills/` for Codex)** 
 

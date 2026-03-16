@@ -16,6 +16,7 @@ AUTO-CONTINUE: ON
 - Risk Note (if any): High-risk actions will be flagged
 - Completion-claim constraint: If verification fails or review does not pass, record failure only; do not claim completion (auto-continue).
 
+If slow mode is active, wait for confirmation before irreversible actions.
 
 **Core principle:** If you didn't watch the test fail, you don't know if it tests the right thing.
 
