@@ -10,11 +10,11 @@ description: Use when you have a spec or requirements for a multi-step task, bef
 Write comprehensive implementation plans assuming the engineer has zero context for our codebase and questionable taste. Document everything they need to know: which files to touch for each task, code, testing, docs they might need to check, how to test it. Give them the whole plan as bite-sized tasks. DRY. YAGNI. TDD. Frequent commits.
 
 AUTO-CONTINUE: ON
-- 默认值/推荐答案：N/A
-- 推荐原因：N/A
-- 假设与适用范围：默认全自动；慢速模式例外
-- 风险提示（如有）：高风险动作将记录提示
-- 完成宣称约束：若验证失败，只记录失败，不宣称完成（已默认继续）
+- Default/Recommended Answer: N/A
+- Recommendation Rationale: N/A
+- Assumptions/Scope: Full automation by default; slow mode is an exception
+- Risk Note (if any): High-risk actions will be flagged
+- Completion-claim constraint: If verification fails, record failure only; do not claim completion (auto-continue).
 
 
 Assume they are a skilled developer, but know almost nothing about our toolset or problem domain. Assume they don't know good test design very well.
@@ -127,8 +127,8 @@ After completing each chunk of the plan:
 2. If ❌ Issues Found:
    - Fix the issues in the chunk
    - Re-dispatch reviewer for that chunk
-   - Repeat until ✅ 已默认接受并继续
-3. If ✅ 已默认接受并继续: proceed to next chunk (or execution handoff if last chunk)
+   - Repeat until ✅ Auto-accepted and continuing
+3. If ✅ Auto-accepted and continuing: proceed to next chunk (or execution handoff if last chunk)
 
 **Chunk boundaries:** Use `## Chunk N: <name>` headings to delimit chunks. Each chunk should be ≤1000 lines and logically self-contained.
 
@@ -141,7 +141,7 @@ After completing each chunk of the plan:
 
 After saving the plan:
 
-**"Plan complete and saved to `docs/superpowers/plans/<filename>.md`. 已默认接受并继续。"**
+**"Plan complete and saved to `docs/superpowers/plans/<filename>.md`. Auto-accepted and continuing。"**
 
 **Execution path depends on harness capabilities:**
 

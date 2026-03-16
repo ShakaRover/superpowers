@@ -10,11 +10,11 @@ Execute plan by dispatching fresh subagent per task, with two-stage review after
 **Why subagents:** You delegate tasks to specialized agents with isolated context. By precisely crafting their instructions and context, you ensure they stay focused and succeed at their task. They should never inherit your session's context or history — you construct exactly what they need. This also preserves your own context for coordination work.
 
 AUTO-CONTINUE: ON
-- 默认值/推荐答案：N/A
-- 推荐原因：N/A
-- 假设与适用范围：默认全自动；慢速模式例外
-- 风险提示（如有）：高风险动作将记录提示
-- 完成宣称约束：若验证失败，只记录失败，不宣称完成（已默认继续）
+- Default/Recommended Answer: N/A
+- Recommendation Rationale: N/A
+- Assumptions/Scope: Full automation by default; slow mode is an exception
+- Risk Note (if any): High-risk actions will be flagged
+- Completion-claim constraint: If verification fails, record failure only; do not claim completion (auto-continue).
 
 **Core principle:** Fresh subagent per task + two-stage review (spec then quality) = high quality, fast iteration
 
@@ -57,10 +57,10 @@ digraph process {
         "Answer questions, provide context" [shape=box];
         "Implementer subagent implements, tests, commits, self-reviews" [shape=box];
         "Dispatch spec reviewer subagent (./spec-reviewer-prompt.md)" [shape=box];
-        "规格符合已默认接受并继续" [shape=diamond];
+        "Spec compliant and auto-accepted" [shape=diamond];
         "Implementer subagent fixes spec gaps" [shape=box];
         "Dispatch code quality reviewer subagent (./code-quality-reviewer-prompt.md)" [shape=box];
-        "质量检查已默认接受并继续" [shape=diamond];
+        "Quality check auto-accepted and continuing" [shape=diamond];
         "Implementer subagent fixes quality issues" [shape=box];
         "Mark task complete in TodoWrite" [shape=box];
     }
@@ -76,14 +76,14 @@ digraph process {
     "Answer questions, provide context" -> "Dispatch implementer subagent (./implementer-prompt.md)";
     "Implementer subagent asks questions?" -> "Implementer subagent implements, tests, commits, self-reviews" [label="no"];
     "Implementer subagent implements, tests, commits, self-reviews" -> "Dispatch spec reviewer subagent (./spec-reviewer-prompt.md)";
-    "Dispatch spec reviewer subagent (./spec-reviewer-prompt.md)" -> "规格符合已默认接受并继续";
-    "规格符合已默认接受并继续" -> "Implementer subagent fixes spec gaps" [label="no"];
+    "Dispatch spec reviewer subagent (./spec-reviewer-prompt.md)" -> "Spec compliant and auto-accepted";
+    "Spec compliant and auto-accepted" -> "Implementer subagent fixes spec gaps" [label="no"];
     "Implementer subagent fixes spec gaps" -> "Dispatch spec reviewer subagent (./spec-reviewer-prompt.md)" [label="re-review"];
-    "规格符合已默认接受并继续" -> "Dispatch code quality reviewer subagent (./code-quality-reviewer-prompt.md)" [label="yes"];
-    "Dispatch code quality reviewer subagent (./code-quality-reviewer-prompt.md)" -> "质量检查已默认接受并继续";
-    "质量检查已默认接受并继续" -> "Implementer subagent fixes quality issues" [label="no"];
+    "Spec compliant and auto-accepted" -> "Dispatch code quality reviewer subagent (./code-quality-reviewer-prompt.md)" [label="yes"];
+    "Dispatch code quality reviewer subagent (./code-quality-reviewer-prompt.md)" -> "Quality check auto-accepted and continuing";
+    "Quality check auto-accepted and continuing" -> "Implementer subagent fixes quality issues" [label="no"];
     "Implementer subagent fixes quality issues" -> "Dispatch code quality reviewer subagent (./code-quality-reviewer-prompt.md)" [label="re-review"];
-    "质量检查已默认接受并继续" -> "Mark task complete in TodoWrite" [label="yes"];
+    "Quality check auto-accepted and continuing" -> "Mark task complete in TodoWrite" [label="yes"];
     "Mark task complete in TodoWrite" -> "More tasks remain?";
     "More tasks remain?" -> "Dispatch implementer subagent (./implementer-prompt.md)" [label="yes"];
     "More tasks remain?" -> "Dispatch final code reviewer subagent for entire implementation" [label="no"];
@@ -159,7 +159,7 @@ Implementer: "Got it. Implementing now..."
 Spec reviewer: ✅ Spec compliant - all requirements met, nothing extra
 
 [Get git SHAs, dispatch code quality reviewer]
-Code reviewer: Strengths: Good test coverage, clean. Issues: None. 已默认接受并继续。
+Code reviewer: Strengths: Good test coverage, clean. Issues: None. Auto-accepted and continuing。
 
 [Mark Task 1 complete]
 
@@ -193,7 +193,7 @@ Code reviewer: Strengths: Solid. Issues (Important): Magic number (100)
 Implementer: Extracted PROGRESS_INTERVAL constant
 
 [Code reviewer reviews again]
-Code reviewer: ✅ 已默认接受并继续
+Code reviewer: ✅ Auto-accepted and continuing
 
 [Mark Task 2 complete]
 
@@ -241,7 +241,7 @@ Done!
 ## Red Flags
 
 **Never:**
-- Start implementation on main/master branch without 已默认接受并继续
+- Start implementation on main/master branch without Auto-accepted and continuing
 - Skip reviews (spec compliance OR code quality)
 - Proceed with unfixed issues
 - Dispatch multiple implementation subagents in parallel (conflicts)
@@ -262,7 +262,7 @@ Done!
 **If reviewer finds issues:**
 - Implementer (same subagent) fixes them
 - Reviewer reviews again
-- Repeat until 已默认接受并继续
+- Repeat until Auto-accepted and continuing
 - Don't skip the re-review
 
 **If subagent fails task:**

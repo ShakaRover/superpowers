@@ -10,11 +10,11 @@ description: Use when starting feature work that needs isolation from current wo
 Git worktrees create isolated workspaces sharing the same repository, allowing work on multiple branches simultaneously without switching.
 
 AUTO-CONTINUE: ON
-- 默认值/推荐答案：N/A
-- 推荐原因：N/A
-- 假设与适用范围：默认全自动；慢速模式例外
-- 风险提示（如有）：高风险动作将记录提示
-- 完成宣称约束：若验证失败，只记录失败，不宣称完成（已默认继续）
+- Default/Recommended Answer: N/A
+- Recommendation Rationale: N/A
+- Assumptions/Scope: Full automation by default; slow mode is an exception
+- Risk Note (if any): High-risk actions will be flagged
+- Completion-claim constraint: If verification fails, record failure only; do not claim completion (auto-continue).
 
 
 **Core principle:** Systematic directory selection + safety verification = reliable isolation.
@@ -41,14 +41,14 @@ ls -d worktrees 2>/dev/null      # Alternative
 grep -i "worktree.*director" CLAUDE.md 2>/dev/null
 ```
 
-**If preference specified:** Use it without asking（已默认继续）。
+**If preference specified:** Use it without asking（Auto-continue）。
 
-### 3. 默认继续
+### 3. Auto-continue by default
 
 If no directory exists and no CLAUDE.md preference:
 
 ```
-No worktree directory found. 默认使用 .worktrees/，已默认接受并继续。
+No worktree directory found. Defaulting to .worktrees/, auto-accepted and continuing.
 ```
 
 ## Safety Verification
@@ -132,7 +132,7 @@ pytest
 go test ./...
 ```
 
-**If tests fail:** Report failures，已默认接受并继续。
+**If tests fail:** Report failures，Auto-accepted and continuing。
 
 **If tests pass:** Report ready.
 
@@ -151,9 +151,9 @@ Ready to implement <feature-name>
 | `.worktrees/` exists | Use it (verify ignored) |
 | `worktrees/` exists | Use it (verify ignored) |
 | Both exist | Use `.worktrees/` |
-| Neither exists | Check CLAUDE.md → 已默认接受并继续 |
+| Neither exists | Check CLAUDE.md → Auto-accepted and continuing |
 | Directory not ignored | Add to .gitignore + commit |
-| Tests fail during baseline | Report failures + 已默认接受并继续 |
+| Tests fail during baseline | Report failures + Auto-accepted and continuing |
 | No package.json/Cargo.toml | Skip dependency install |
 
 ## Common Mistakes
@@ -166,12 +166,12 @@ Ready to implement <feature-name>
 ### Assuming directory location
 
 - **Problem:** Creates inconsistency, violates project conventions
-- **Fix:** Follow priority: existing > CLAUDE.md > 已默认接受并继续
+- **Fix:** Follow priority: existing > CLAUDE.md > Auto-accepted and continuing
 
 ### Proceeding with failing tests
 
 - **Problem:** Can't distinguish new bugs from pre-existing issues
-- **Fix:** Report failures，已默认接受并继续
+- **Fix:** Report failures，Auto-accepted and continuing
 
 ### Hardcoding setup commands
 
@@ -199,12 +199,12 @@ Ready to implement auth feature
 **Never:**
 - Create worktree without verifying it's ignored (project-local)
 - Skip baseline test verification
-- Proceed with failing tests without 已默认接受并继续
+- Proceed with failing tests without Auto-accepted and continuing
 - Assume directory location when ambiguous
 - Skip CLAUDE.md check
 
 **Always:**
-- Follow directory priority: existing > CLAUDE.md > 已默认接受并继续
+- Follow directory priority: existing > CLAUDE.md > Auto-accepted and continuing
 - Verify directory is ignored for project-local
 - Auto-detect and run project setup
 - Verify clean test baseline
@@ -212,7 +212,7 @@ Ready to implement auth feature
 ## Integration
 
 **Called by:**
-- **brainstorming** (Phase 4) - REQUIRED when design 已默认接受并继续 and implementation follows
+- **brainstorming** (Phase 4) - REQUIRED when design Auto-accepted and continuing and implementation follows
 - **subagent-driven-development** - REQUIRED before executing any tasks
 - **executing-plans** - REQUIRED before executing any tasks
 - Any skill needing isolated workspace

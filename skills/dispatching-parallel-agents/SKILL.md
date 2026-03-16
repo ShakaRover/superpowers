@@ -10,11 +10,11 @@ description: Use when facing 2+ independent tasks that can be worked on without 
 You delegate tasks to specialized agents with isolated context. By precisely crafting their instructions and context, you ensure they stay focused and succeed at their task. They should never inherit your session's context or history — you construct exactly what they need. This also preserves your own context for coordination work.
 
 AUTO-CONTINUE: ON
-- 默认值/推荐答案：N/A
-- 推荐原因：N/A
-- 假设与适用范围：默认全自动；慢速模式例外
-- 风险提示（如有）：高风险动作将记录提示
-- 完成宣称约束：若验证失败，只记录失败，不宣称完成（已默认继续）
+- Default/Recommended Answer: N/A
+- Recommendation Rationale: N/A
+- Assumptions/Scope: Full automation by default; slow mode is an exception
+- Risk Note (if any): High-risk actions will be flagged
+- Completion-claim constraint: If verification fails, record failure only; do not claim completion (auto-continue).
 
 
 When you have multiple unrelated failures (different test files, different subsystems, different bugs), investigating them sequentially wastes time. Each investigation is independent and can happen in parallel.
