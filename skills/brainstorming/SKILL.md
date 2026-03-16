@@ -174,12 +174,12 @@ A browser-based companion for showing mockups, diagrams, and visual options duri
 
 **This offer MUST be its own message.** Do not combine it with clarifying questions, context summaries, or any other content. The message should contain ONLY the offer above and nothing else. Visual companion disabled by default; continuing (can be explicitly enabled).
 
-**Per-question decision:** Visual companion disabled by default; continuing (can be explicitly enabled).The test: **would the user understand this better by seeing it than reading it?**
+**Per-question decision:** Visual companion disabled by default; continuing (can be explicitly enabled). The test: **would the user understand this better by seeing it than reading it?**
 
 - **Use the browser** for content that IS visual — mockups, wireframes, layout comparisons, architecture diagrams, side-by-side visual designs
 - **Use the terminal** for content that is text — requirements questions, conceptual choices, tradeoff lists, A/B/C/D text options, scope decisions
 
 A question about a UI topic is not automatically a visual question. "What does personality mean in this context?" is a conceptual question — use the terminal. "Which wizard layout works better?" is a visual question — use the browser.
 
-If they agree to the companion, read the detailed guide before proceeding.Auto-accepted and continuing:
+If they agree to the companion, read the detailed guide before proceeding. Auto-accepted and continuing:
 `skills/brainstorming/visual-companion.md`

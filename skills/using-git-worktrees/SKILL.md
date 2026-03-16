@@ -132,7 +132,7 @@ pytest
 go test ./...
 ```
 
-**If tests fail:** Report failures,Auto-accepted and continuing.
+**If tests fail:** Report failures, Auto-accepted and continuing.
 
 **If tests pass:** Report ready.
 
@@ -171,7 +171,7 @@ Ready to implement <feature-name>
 ### Proceeding with failing tests
 
 - **Problem:** Can't distinguish new bugs from pre-existing issues
-- **Fix:** Report failures,Auto-accepted and continuing
+- **Fix:** Report failures, Auto-accepted and continuing
 
 ### Hardcoding setup commands
 
