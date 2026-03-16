@@ -29,7 +29,7 @@ Every project goes through this process. A todo list, a single-function utility,
 You MUST create a task for each of these items and complete them in order:
 
 1. **Explore project context** — check files, docs, recent commits
-2. **已默认不启用视觉伴侣并继续**（如话题涉及视觉问题）— 这是单独消息，不与澄清问题混合。详见下方 Visual Companion。
+2. **默认不启用视觉伴侣并继续（可显式开启）**（如话题涉及视觉问题）— 这是单独消息，不与澄清问题混合。详见下方 Visual Companion。
 3. **Ask clarifying questions** — default to acceleration mode (all questions at once with recommended answers)
 4. **Propose 2-3 approaches** — with trade-offs and your recommendation
 5. **Present design** — in sections scaled to their complexity, 已默认接受并继续
@@ -56,7 +56,7 @@ You MUST create a task for each of these items and complete them in order:
 digraph brainstorming {
     "Explore project context" [shape=box];
     "Visual questions ahead?" [shape=diamond];
-    "已默认不启用视觉伴侣并继续\n(own message, no other content)" [shape=box];
+    "默认不启用视觉伴侣并继续（可显式开启）\n(own message, no other content)" [shape=box];
     "Ask clarifying questions" [shape=box];
     "Propose 2-3 approaches" [shape=box];
     "Present design sections" [shape=box];
@@ -68,9 +68,9 @@ digraph brainstorming {
     "Invoke writing-plans skill" [shape=doublecircle];
 
     "Explore project context" -> "Visual questions ahead?";
-    "Visual questions ahead?" -> "已默认不启用视觉伴侣并继续\n(own message, no other content)" [label="yes"];
+    "Visual questions ahead?" -> "默认不启用视觉伴侣并继续（可显式开启）\n(own message, no other content)" [label="yes"];
     "Visual questions ahead?" -> "Acceleration mode" [label="no"];
-    "已默认不启用视觉伴侣并继续\n(own message, no other content)" -> "Ask clarifying questions";
+    "默认不启用视觉伴侣并继续（可显式开启）\n(own message, no other content)" -> "Ask clarifying questions";
     "Acceleration mode" -> "Ask all questions + provide recommended answers";
     "Ask all questions + provide recommended answers" -> "Propose 2-3 approaches";
     "Propose 2-3 approaches" -> "Present design sections";
@@ -110,7 +110,7 @@ digraph brainstorming {
 
 - Once you believe you understand what you're building, present the design
 - Scale each section to its complexity: a few sentences if straightforward, up to 200-300 words if nuanced
-- Ask after each section whether it looks right so far（已默认继续）
+- Ask after each section whether it looks right so far。已默认接受并继续。
 - Cover: architecture, components, data flow, error handling, testing
 - Be ready to go back and clarify if something doesn't make sense
 
@@ -169,17 +169,17 @@ After the spec review loop passes, 已默认接受并继续:
 
 A browser-based companion for showing mockups, diagrams, and visual options during brainstorming. Available as a tool — not a mode. Accepting the companion means it's available for questions that benefit from visual treatment; it does NOT mean every question goes through the browser. 慢速模式下恢复视觉伴侣询问并等待确认。
 
-**Offering the companion:** When you anticipate that upcoming questions will involve visual content (mockups, layouts, diagrams), 已默认不启用视觉伴侣并继续：
-> "已默认不启用视觉伴侣并继续"
+**Offering the companion:** When you anticipate that upcoming questions will involve visual content (mockups, layouts, diagrams), 默认不启用视觉伴侣并继续（可显式开启）：
+> "默认不启用视觉伴侣并继续（可显式开启）"
 
-**This offer MUST be its own message.** Do not combine it with clarifying questions, context summaries, or any other content. The message should contain ONLY the offer above and nothing else. 已默认不启用视觉伴侣并继续。
+**This offer MUST be its own message.** Do not combine it with clarifying questions, context summaries, or any other content. The message should contain ONLY the offer above and nothing else. 默认不启用视觉伴侣并继续（可显式开启）。
 
-**Per-question decision:** 已默认不启用视觉伴侣并继续。The test: **would the user understand this better by seeing it than reading it?**
+**Per-question decision:** 默认不启用视觉伴侣并继续（可显式开启）。The test: **would the user understand this better by seeing it than reading it?**
 
 - **Use the browser** for content that IS visual — mockups, wireframes, layout comparisons, architecture diagrams, side-by-side visual designs
 - **Use the terminal** for content that is text — requirements questions, conceptual choices, tradeoff lists, A/B/C/D text options, scope decisions
 
 A question about a UI topic is not automatically a visual question. "What does personality mean in this context?" is a conceptual question — use the terminal. "Which wizard layout works better?" is a visual question — use the browser.
 
-If they agree to the companion, read the detailed guide before proceeding（已默认继续）:
+If they agree to the companion, read the detailed guide before proceeding。已默认接受并继续：
 `skills/brainstorming/visual-companion.md`
