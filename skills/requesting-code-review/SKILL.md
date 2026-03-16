@@ -15,7 +15,7 @@ AUTO-CONTINUE: ON
 - Completion-claim constraint: If verification fails or review does not pass, record failure only; do not claim completion (auto-continue).
 
 Status Output Language
-- Status: NOT-PASSED / UNKNOWN (TIMEOUT/MISSING) / SKIPPED (MISSING INPUT)
+- Status: PASSED / NOT-PASSED / UNKNOWN (TIMEOUT/MISSING) / SKIPPED (MISSING INPUT)
 - Reason: ...
 - Impact: ...
 - Continuation Strategy: AUTO-CONTINUE
