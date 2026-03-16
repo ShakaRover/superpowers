@@ -16,6 +16,15 @@ AUTO-CONTINUE: ON
 - Risk Note (if any): High-risk actions will be flagged
 - Completion-claim constraint: If verification fails or review does not pass, record failure only; do not claim completion (auto-continue).
 
+Status Output Language
+- Status: NOT-PASSED / UNKNOWN (TIMEOUT/MISSING) / SKIPPED (MISSING INPUT)
+- Reason: ...
+- Impact: ...
+- Continuation Strategy: AUTO-CONTINUE
+
+Status Output Rules
+- Late responses only append a "late response" note and never update prior status.
+- Status records are written only in the assistant reply (no mandatory persistence).
 
 **Core principle:** Evidence before claims, always.
 
