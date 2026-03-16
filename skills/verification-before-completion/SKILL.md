@@ -10,8 +10,8 @@ description: Use when about to claim work is complete, fixed, or passing, before
 Claiming work is complete without verification is dishonesty, not efficiency.
 
 AUTO-CONTINUE: ON
-- 默认值/推荐答案：如有则写明；无则写 N/A
-- 推荐原因：如有则写明；无则写 N/A
+- 默认值/推荐答案：N/A
+- 推荐原因：N/A
 - 假设与适用范围：默认全自动；慢速模式例外
 - 风险提示（如有）：高风险动作将记录提示
 - 完成宣称约束：若验证失败/审阅未通过，只记录失败，不宣称完成
