@@ -187,6 +187,8 @@ Define risk levels for consistent handling:
 Add to skills/using-superpowers/SKILL.md global rules: include the Level A/Level B definitions and handling requirements in the High-Risk block.
 
 
+## Chunk 2: Status, Missing Input, Timeouts, Idempotency
+
 ### Task 6: Consistent Status Output Language
 
 **Files:**
@@ -264,6 +266,8 @@ Document: key = skill name + step name + action ID + 60s window (start at first 
 Document: use last available output; if none, use default value and record “使用默认值” + “输入缺失” + downgrade source + downstream impact.
 If default is `N/A`, record “缺失输入-不可执行”，状态为“已跳过（缺失输入）”.
 Validation/review steps are excluded from this rule; they must follow failure/unknown status paths.
+
+## Chunk 3: Coverage, Acceptance, Plan Review
 
 ### Task 8: Coverage Checklist and Commit
 
