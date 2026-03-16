@@ -7,14 +7,14 @@ description: Use when completing tasks, implementing major features, or before m
 
 Dispatch superpowers:code-reviewer subagent to catch issues before they cascade. The reviewer gets precisely crafted context for evaluation — never your session's history. This keeps the reviewer focused on the work product, not your thought process, and preserves your own context for continued work.
 
-**Core principle:** Review early, review often.
-
 AUTO-CONTINUE: ON
 - 默认值/推荐答案：N/A
 - 推荐原因：N/A
 - 假设与适用范围：默认全自动；慢速模式例外
 - 风险提示（如有）：高风险动作将记录提示
 - 完成宣称约束：若验证失败/审阅未通过，只记录失败，不宣称完成
+
+**Core principle:** Review early, review often.
 
 ## When to Request Review
 
