@@ -67,6 +67,9 @@ If an external platform blocks approval, do not attempt the action. Record statu
 ## High-Risk Auto Execution
 
 High-risk auto execution must include the fixed label "HIGH-RISK AUTO-EXECUTION", provide a downgrade or alternative path, and include a responsibility note. A/B level actions must follow rollback or alternative guidance per spec.
+Risk levels (apply to irreversible actions):
+- Level A (external/irreversible): real-world impact (payments, publishing, destructive external actions) -> require rollback/alternative and responsibility note.
+- Level B (local/irreversible): destructive local changes (delete/wipe/reset) -> require safe fallback/alternative and responsibility note.
 
 ## Instruction Priority
 
