@@ -29,7 +29,7 @@ Status Output Rules
 ## Operational Rules
 
 - Missing input rule does not apply to review/verification steps. If required inputs are missing, follow the failure/unknown status paths and auto-continue.
-- Default downgrade: for non-review inputs, prefer the most recent available output; otherwise use a default placeholder and record "USED DEFAULT" with Reason/Impact plus the source and downstream impact. If the default is `N/A`, record "MISSING INPUT - NOT EXECUTABLE" and set status to `SKIPPED (MISSING INPUT)`.
+- Default downgrade: for non-review inputs, prefer the most recent available output; otherwise use a default placeholder and record "USED DEFAULT" with Reason/Impact plus the source and downstream impact. If the default is `N/A` or no default exists, record "MISSING INPUT - NOT EXECUTABLE" with Reason/Impact and set status to `SKIPPED (MISSING INPUT)`.
 - Timeout + retry + idempotency: on 60s timeout, perform one idempotent retry (no duplicate side effects), wait another 60s, then record status. Review/subagent timeouts -> `UNKNOWN (TIMEOUT/MISSING)`. Verification timeouts or failures -> `NOT-PASSED`. Late responses only append a note and never update prior status.
 - Status linkage: missing input -> SKIPPED; timeout/missing -> UNKNOWN.
 ## The Iron Law
