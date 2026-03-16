@@ -86,7 +86,7 @@ In BOTH `skills/using-superpowers/SKILL.md` and `skills/writing-skills/SKILL.md`
 
 - [ ] **Step 1: Locate confirmation gates (keywords + phrases)**
 
-Run: `rg -n "请确认|请审阅|是否继续|等你确认|等待批准|review gate|must wait|wait for approval|ask user to review" skills`
+Run: `rg -n "请确认|请审阅|是否继续|等你确认|等待批准|review gate|must wait|wait for approval|wait for confirmation|ask user to review" skills`
 Expected: Matches listed for manual edit
 
 - [ ] **Step 2: Semantic gate scan (manual)**
@@ -111,10 +111,10 @@ Add `CONFIRMATION-POINT: <原话术>` line above ambiguous gates to force replac
 - [ ] **Step 5: Special case — Visual Companion**
 
 Replace any visual-companion prompts with:
-“已默认不启用视觉伴侣并继续”
+"Visual companion disabled by default; continuing (can be explicitly enabled)"
 
-同时在视觉伴侣定义处增加慢速模式提示语：
-“慢速模式下恢复视觉伴侣询问并等待确认（spec aligned）。”
+Also add a slow-mode note in the visual-companion definition:
+"In slow mode, restore the visual-companion prompt and wait for confirmation."
 
 - [ ] **Step 6: Re-scan for semantic gates**
 
@@ -286,7 +286,7 @@ Expected: No output (all skills have exactly 1 match)
 
 - [ ] **Step 3: Ensure no residual confirmation gates remain**
 
-Run: `rg -n "请确认|请审阅|是否继续|等你确认|等待批准|review gate|must wait|wait for approval|ask user to review" skills`
+Run: `rg -n "请确认|请审阅|是否继续|等你确认|等待批准|review gate|must wait|wait for approval|wait for confirmation|ask user to review" skills`
 Expected: No gate phrases except explanatory cases with “（已默认继续）”
 
 - [ ] **Step 4: Ensure no visual-companion prompts remain**
@@ -315,7 +315,7 @@ Expected: Commit created
 Verify `skills/brainstorming/SKILL.md` contains:
 - AUTO-CONTINUE block
 - Visual companion default skip text
-- No “请确认/是否继续” gates
+- No confirmation gates (except the slow-mode note)
 Expected: All present
 
 - [ ] **Step 2: Writing-skills scenario**
