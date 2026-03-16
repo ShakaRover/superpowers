@@ -98,6 +98,7 @@ Search for semantic gates even without keywords, e.g.:
 - [ ] **Step 3: Apply decision rules (gate vs explanatory)**
 
 Decision rules from spec (order matters):
+- Preserve MUST/NO EXCEPTIONS tone in existing rules; do not soften imperative language.
 - Exclusion first: explanatory-only → append “（已默认继续）”.
 - Then semantic gate → replace with “已默认接受并继续”.
 - Then keyword gate (only if exclusion not triggered) → replace.
@@ -119,6 +120,8 @@ Also add a slow-mode note in the visual-companion definition:
 - [ ] **Step 6: Re-scan for semantic gates**
 
 After edits, re-scan the same patterns to ensure no semantic gates remain.
+
+## Chunk 2: STOP + Slow Mode + High-Risk
 
 ### Task 4: STOP-TYPE Annotations and Behavior Alignment
 
@@ -187,7 +190,7 @@ Define risk levels for consistent handling:
 Add to skills/using-superpowers/SKILL.md global rules: include the Level A/Level B definitions and handling requirements in the High-Risk block.
 
 
-## Chunk 2: Status, Missing Input, Timeouts, Idempotency
+## Chunk 3: Status + Missing Input + Timeouts/Idempotency
 
 ### Task 6: Consistent Status Output Language
 
@@ -267,7 +270,7 @@ Document: use last available output; if none, use default value and record “�
 If default is `N/A`, record “缺失输入-不可执行”，状态为“已跳过（缺失输入）”.
 Validation/review steps are excluded from this rule; they must follow failure/unknown status paths.
 
-## Chunk 3: Coverage, Acceptance, Plan Review
+## Chunk 4: Coverage, Acceptance, Plan Review
 
 ### Task 8: Coverage Checklist and Commit
 
