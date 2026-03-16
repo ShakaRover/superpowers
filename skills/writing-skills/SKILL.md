@@ -521,6 +521,7 @@ Make it easy for agents to self-check when rationalizing:
 ```markdown
 ## Red Flags - STOP and Start Over
 
+STOP-TYPE: RECOVERABLE
 - Code before test
 - "I already manually tested it"
 - "Tests after achieve the same purpose"
@@ -590,6 +591,7 @@ helper1, helper2, step3, pattern4
 
 ## STOP: Before Moving to Next Skill
 
+STOP-TYPE: RECOVERABLE
 **After writing ANY skill, you MUST STOP and complete the deployment process.**
 
 **Do NOT:**

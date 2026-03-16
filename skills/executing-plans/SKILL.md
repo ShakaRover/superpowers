@@ -46,6 +46,7 @@ After all tasks complete and verified:
 
 ## When to Stop and Ask for Help
 
+STOP-TYPE: RECOVERABLE
 **STOP executing immediately when:**
 - Hit a blocker (missing dependency, test fails, instruction unclear)
 - Plan has critical gaps preventing starting

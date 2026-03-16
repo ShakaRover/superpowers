@@ -198,6 +198,7 @@ You MUST complete each phase before proceeding to the next.
    - Issue actually resolved?
 
 4. **If Fix Doesn't Work**
+   STOP-TYPE: RECOVERABLE
    - STOP
    - Count: How many fixes have you tried?
    - If < 3: Return to Phase 1, re-analyze with new information
@@ -211,6 +212,7 @@ You MUST complete each phase before proceeding to the next.
    - Fixes require "massive refactoring" to implement
    - Each fix creates new symptoms elsewhere
 
+   STOP-TYPE: RECOVERABLE
    **STOP and question fundamentals:**
    - Is this pattern fundamentally sound?
    - Are we "sticking with it through sheer inertia"?
@@ -222,6 +224,7 @@ You MUST complete each phase before proceeding to the next.
 
 ## Red Flags - STOP and Follow Process
 
+STOP-TYPE: RECOVERABLE
 If you catch yourself thinking:
 - "Quick fix for now, investigate later"
 - "Just try changing X and see if it works"
@@ -235,6 +238,7 @@ If you catch yourself thinking:
 - **"One more fix attempt" (when already tried 2+)**
 - **Each fix reveals new problem in different place**
 
+STOP-TYPE: RECOVERABLE
 **ALL of these mean: STOP. Return to Phase 1.**
 
 **If 3+ fixes failed:** Question the architecture (see Phase 4.5)
@@ -248,6 +252,7 @@ If you catch yourself thinking:
 - "Ultrathink this" - Question fundamentals, not just symptoms
 - "We're stuck?" (frustrated) - Your approach isn't working
 
+STOP-TYPE: RECOVERABLE
 **When you see these:** STOP. Return to Phase 1.
 
 ## Common Rationalizations

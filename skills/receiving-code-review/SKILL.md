@@ -49,6 +49,7 @@ WHEN receiving code review feedback:
 
 ```
 IF any item is unclear:
+  STOP-TYPE: RECOVERABLE
   STOP - do not implement anything yet
   ASK for clarification on unclear items
 

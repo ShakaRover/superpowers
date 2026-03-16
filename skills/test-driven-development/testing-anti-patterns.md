@@ -55,6 +55,7 @@ BEFORE asserting on any mock element:
   Ask: "Am I testing real component behavior or just mock existence?"
 
   IF testing mock existence:
+    STOP-TYPE: RECOVERABLE
     STOP - Delete the assertion or unmock the component
 
   Test real behavior instead
@@ -106,12 +107,14 @@ BEFORE adding any method to production class:
   Ask: "Is this only used by tests?"
 
   IF yes:
+    STOP-TYPE: RECOVERABLE
     STOP - Don't add it
     Put it in test utilities instead
 
   Ask: "Does this class own this resource's lifecycle?"
 
   IF no:
+    STOP-TYPE: RECOVERABLE
     STOP - Wrong class for this method
 ```
 
@@ -152,6 +155,7 @@ test('detects duplicate server', () => {
 
 ```
 BEFORE mocking any method:
+  STOP-TYPE: RECOVERABLE
   STOP - Don't mock yet
 
   1. Ask: "What side effects does the real method have?"

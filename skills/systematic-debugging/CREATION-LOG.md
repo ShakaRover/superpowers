@@ -13,7 +13,7 @@ Extracted debugging framework from `/Users/jesse/.claude/CLAUDE.md`:
 
 **What to include:**
 - Complete 4-phase framework with all rules
-- Anti-shortcuts ("NEVER fix symptom", "STOP and re-analyze")
+- Anti-shortcuts ("NEVER fix symptom", "STOP and re-analyze") [STOP-TYPE: RECOVERABLE]
 - Pressure-resistant language ("even if faster", "even if I seem in a hurry")
 - Concrete steps for each phase
 
@@ -38,7 +38,7 @@ Framework designed to resist rationalization under pressure:
 ### Language Choices
 - "ALWAYS" / "NEVER" (not "should" / "try to")
 - "even if faster" / "even if I seem in a hurry"
-- "STOP and re-analyze" (explicit pause)
+- "STOP and re-analyze" (explicit pause) [STOP-TYPE: RECOVERABLE]
 - "Don't skip past" (catches the actual behavior)
 
 ### Structural Defenses

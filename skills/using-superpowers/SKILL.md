@@ -4,6 +4,7 @@ description: Use when starting any conversation - establishes how to find and us
 ---
 
 <SUBAGENT-STOP>
+STOP-TYPE: TERMINAL
 If you were dispatched as a subagent to execute a specific task, skip this skill.
 </SUBAGENT-STOP>
 
@@ -82,6 +83,7 @@ digraph skill_flow {
 
 ## Red Flags
 
+STOP-TYPE: RECOVERABLE
 These thoughts mean STOP—you're rationalizing:
 
 | Thought | Reality |
@@ -98,6 +100,12 @@ These thoughts mean STOP—you're rationalizing:
 | "I'll just do this one thing first" | Check BEFORE doing anything. |
 | "This feels productive" | Undisciplined action wastes time. Skills prevent this. |
 | "I know what that means" | Knowing the concept ≠ using the skill. Invoke it. |
+
+## STOP-TYPE Criteria
+
+Use these criteria when labeling STOP blocks:
+- If the instruction means terminate the current path with no continuation (terminate/stop/never continue), label `STOP-TYPE: TERMINAL`.
+- If the instruction means fix, clarify, or redo before continuing, label `STOP-TYPE: RECOVERABLE`.
 
 ## Skill Priority
 

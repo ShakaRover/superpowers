@@ -279,6 +279,7 @@ Tests-first force edge case discovery before implementing. Tests-after verify yo
 
 ## Red Flags - STOP and Start Over
 
+STOP-TYPE: RECOVERABLE
 - Code before test
 - Test after implementation
 - Test passes immediately

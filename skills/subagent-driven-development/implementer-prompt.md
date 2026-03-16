@@ -59,6 +59,7 @@ Task tool (general-purpose):
     It is always OK to stop and say "this is too hard for me." Bad work is worse than
     no work. You will not be penalized for escalating.
 
+    STOP-TYPE: RECOVERABLE
     **STOP and escalate when:**
     - The task requires architectural decisions with multiple valid approaches
     - You need to understand code beyond what was provided and can't find clarity
