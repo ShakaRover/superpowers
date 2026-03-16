@@ -14,7 +14,7 @@ AUTO-CONTINUE: ON
 - Recommendation Rationale: N/A
 - Assumptions/Scope: Full automation by default; slow mode is an exception
 - Risk Note (if any): High-risk actions will be flagged
-- Completion-claim constraint: If verification fails, record failure only; do not claim completion (auto-continue).
+- Completion-claim constraint: If verification fails or review does not pass, record failure only; do not claim completion (auto-continue).
 
 <HARD-GATE>
 Do NOT invoke any implementation skill, write any code, scaffold any project, or take any implementation action until you have presented a design and Auto-accepted and continuing. This applies to EVERY project regardless of perceived simplicity.
@@ -29,13 +29,13 @@ Every project goes through this process. A todo list, a single-function utility,
 You MUST create a task for each of these items and complete them in order:
 
 1. **Explore project context** — check files, docs, recent commits
-2. **Visual companion disabled by default; continuing (can be explicitly enabled)**(when the topic involves visual questions) — this must be its own message and not combined with clarifying questions. See Visual Companion below.
+2. **Visual companion disabled by default; continuing (can be explicitly enabled)** (when the topic involves visual questions) — this must be its own message and not combined with clarifying questions. See Visual Companion below.
 3. **Ask clarifying questions** — default to acceleration mode (all questions at once with recommended answers)
 4. **Propose 2-3 approaches** — with trade-offs and your recommendation
 5. **Present design** — in sections scaled to their complexity, Auto-accepted and continuing
 6. **Write design doc** — save to `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md` and commit
-7. **Spec review loop** — dispatch spec-document-reviewer subagent with precisely crafted review context (never your session history); fix issues and re-dispatch Auto-accepted and continuing（max 5 iterations, then surface to human）
-8. **Auto-accepted and continuing** — continue to the next steps
+7. **Spec review loop** — dispatch spec-document-reviewer subagent with precisely crafted review context (never your session history); fix issues and re-dispatch Auto-accepted and continuing (max 5 iterations, then surface to human)
+8. **User reviews written spec** — Auto-accepted and continuing
 9. **Transition to implementation** — invoke writing-plans skill to create implementation plan
 
 ## Acceleration Mode (Default)
@@ -110,7 +110,7 @@ digraph brainstorming {
 
 - Once you believe you understand what you're building, present the design
 - Scale each section to its complexity: a few sentences if straightforward, up to 200-300 words if nuanced
-- Ask after each section whether it looks right so far。Auto-accepted and continuing。
+- Ask after each section whether it looks right so far. Auto-accepted and continuing.
 - Cover: architecture, components, data flow, error handling, testing
 - Be ready to go back and clarify if something doesn't make sense
 
@@ -143,7 +143,7 @@ After writing the spec document:
 2. If Issues Found: fix, re-dispatch, repeat Auto-accepted and continuing
 3. If loop exceeds 5 iterations, surface to human for guidance
 
-**Auto-continue by default：**
+**Auto-continue by default:**
 After the spec review loop passes, Auto-accepted and continuing:
 
 > "Auto-accepted and continuing"
@@ -169,17 +169,17 @@ Auto-accepted and continuing. If changes are needed, update and re-run the spec 
 
 A browser-based companion for showing mockups, diagrams, and visual options during brainstorming. Available as a tool — not a mode. Accepting the companion means it's available for questions that benefit from visual treatment; it does NOT mean every question goes through the browser. In slow mode, restore the visual companion prompt and wait for confirmation.
 
-**Offering the companion:** When you anticipate that upcoming questions will involve visual content (mockups, layouts, diagrams), Visual companion disabled by default; continuing (can be explicitly enabled)：
+**Offering the companion:** When you anticipate that upcoming questions will involve visual content (mockups, layouts, diagrams), Visual companion disabled by default; continuing (can be explicitly enabled):
 > "Visual companion disabled by default; continuing (can be explicitly enabled)"
 
-**This offer MUST be its own message.** Do not combine it with clarifying questions, context summaries, or any other content. The message should contain ONLY the offer above and nothing else. Visual companion disabled by default; continuing (can be explicitly enabled)。
+**This offer MUST be its own message.** Do not combine it with clarifying questions, context summaries, or any other content. The message should contain ONLY the offer above and nothing else. Visual companion disabled by default; continuing (can be explicitly enabled).
 
-**Per-question decision:** Visual companion disabled by default; continuing (can be explicitly enabled)。The test: **would the user understand this better by seeing it than reading it?**
+**Per-question decision:** Visual companion disabled by default; continuing (can be explicitly enabled).The test: **would the user understand this better by seeing it than reading it?**
 
 - **Use the browser** for content that IS visual — mockups, wireframes, layout comparisons, architecture diagrams, side-by-side visual designs
 - **Use the terminal** for content that is text — requirements questions, conceptual choices, tradeoff lists, A/B/C/D text options, scope decisions
 
 A question about a UI topic is not automatically a visual question. "What does personality mean in this context?" is a conceptual question — use the terminal. "Which wizard layout works better?" is a visual question — use the browser.
 
-If they agree to the companion, read the detailed guide before proceeding。Auto-accepted and continuing：
+If they agree to the companion, read the detailed guide before proceeding.Auto-accepted and continuing:
 `skills/brainstorming/visual-companion.md`

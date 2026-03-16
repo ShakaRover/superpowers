@@ -1,20 +1,20 @@
 ---
 name: executing-plans
-description: Use when you have a written implementation plan to execute in a separate session with review checkpoints（Auto-continue）
+description: Use when you have a written implementation plan to execute in a separate session with review checkpoints (Auto-continue)
 ---
 
 # Executing Plans
 
 ## Overview
 
-Load plan, review critically, execute all tasks, report when complete（Auto-continue）。
+Load plan, review critically, execute all tasks, report when complete (Auto-continue).
 
 AUTO-CONTINUE: ON
 - Default/Recommended Answer: N/A
 - Recommendation Rationale: N/A
 - Assumptions/Scope: Full automation by default; slow mode is an exception
 - Risk Note (if any): High-risk actions will be flagged
-- Completion-claim constraint: If verification fails, record failure only; do not claim completion (auto-continue).
+- Completion-claim constraint: If verification fails or review does not pass, record failure only; do not claim completion (auto-continue).
 
 
 **Announce at start:** "I'm using the executing-plans skill to implement this plan."

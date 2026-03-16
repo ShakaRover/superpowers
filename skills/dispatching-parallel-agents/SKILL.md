@@ -14,7 +14,7 @@ AUTO-CONTINUE: ON
 - Recommendation Rationale: N/A
 - Assumptions/Scope: Full automation by default; slow mode is an exception
 - Risk Note (if any): High-risk actions will be flagged
-- Completion-claim constraint: If verification fails, record failure only; do not claim completion (auto-continue).
+- Completion-claim constraint: If verification fails or review does not pass, record failure only; do not claim completion (auto-continue).
 
 
 When you have multiple unrelated failures (different test files, different subsystems, different bugs), investigating them sequentially wastes time. Each investigation is independent and can happen in parallel.

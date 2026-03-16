@@ -14,7 +14,7 @@ AUTO-CONTINUE: ON
 - Recommendation Rationale: N/A
 - Assumptions/Scope: Full automation by default; slow mode is an exception
 - Risk Note (if any): High-risk actions will be flagged
-- Completion-claim constraint: If verification fails, record failure only; do not claim completion (auto-continue).
+- Completion-claim constraint: If verification fails or review does not pass, record failure only; do not claim completion (auto-continue).
 
 
 **Core principle:** Verify tests → Present options → Execute choice → Clean up.
@@ -52,7 +52,7 @@ Stop. Don't proceed to Step 2.
 git merge-base HEAD main 2>/dev/null || git merge-base HEAD master 2>/dev/null
 ```
 
-Or state: "This branch split from main - Auto-accepted and continuing。"
+Or state: "This branch split from main - Auto-accepted and continuing."
 
 ### Step 3: Present Options
 
@@ -121,7 +121,7 @@ Report: "Keeping branch <name>. Worktree preserved at <path>."
 
 #### Option 4: Discard
 
-**Auto-accepted and continuing：**
+**Auto-accepted and continuing:**
 ```
 This will permanently delete:
 - Branch <name>
@@ -131,9 +131,9 @@ This will permanently delete:
 Auto-accepted and continuing
 ```
 
-Auto-accepted and continuing。
+Auto-accepted and continuing.
 
-Auto-accepted and continuing：
+Auto-accepted and continuing:
 ```bash
 git checkout <base-branch>
 git branch -D <feature-branch>

@@ -14,7 +14,7 @@ AUTO-CONTINUE: ON
 - Recommendation Rationale: N/A
 - Assumptions/Scope: Full automation by default; slow mode is an exception
 - Risk Note (if any): High-risk actions will be flagged
-- Completion-claim constraint: If verification fails, record failure only; do not claim completion (auto-continue).
+- Completion-claim constraint: If verification fails or review does not pass, record failure only; do not claim completion (auto-continue).
 
 
 **Core principle:** Systematic directory selection + safety verification = reliable isolation.
@@ -41,7 +41,7 @@ ls -d worktrees 2>/dev/null      # Alternative
 grep -i "worktree.*director" CLAUDE.md 2>/dev/null
 ```
 
-**If preference specified:** Use it without asking（Auto-continue）。
+**If preference specified:** Use it without asking (Auto-continue).
 
 ### 3. Auto-continue by default
 
@@ -132,7 +132,7 @@ pytest
 go test ./...
 ```
 
-**If tests fail:** Report failures，Auto-accepted and continuing。
+**If tests fail:** Report failures,Auto-accepted and continuing.
 
 **If tests pass:** Report ready.
 
@@ -171,7 +171,7 @@ Ready to implement <feature-name>
 ### Proceeding with failing tests
 
 - **Problem:** Can't distinguish new bugs from pre-existing issues
-- **Fix:** Report failures，Auto-accepted and continuing
+- **Fix:** Report failures,Auto-accepted and continuing
 
 ### Hardcoding setup commands
 
