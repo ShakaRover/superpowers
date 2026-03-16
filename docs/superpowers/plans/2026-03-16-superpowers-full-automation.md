@@ -273,6 +273,36 @@ git commit -m "实现 superpowers 全自动执行规则"
 ```
 Expected: Commit created
 
----
+### Task 9: Acceptance Scenario Checks
 
-**Plan Review Loop (required):** After writing this chunk, dispatch plan-document-reviewer for Chunk 1 using `skills/writing-plans/plan-document-reviewer-prompt.md` and the spec at `docs/superpowers/specs/2026-03-16-superpowers-full-automation-design.md`. Fix issues and re-dispatch until approved.
+**Files:**
+- Modify: selected skills
+
+- [ ] **Step 1: Brainstorming scenario**
+
+Verify `skills/brainstorming/SKILL.md` contains:
+- AUTO-CONTINUE block
+- Visual companion default skip text
+- No “请确认/是否继续” gates
+Expected: All present
+
+- [ ] **Step 2: Writing-skills scenario**
+
+Verify `skills/writing-skills/SKILL.md` contains:
+- STOP-TYPE labels
+- RECOVERABLE/TERMINAL handling
+Expected: All present
+
+- [ ] **Step 3: Verification-before-completion scenario**
+
+Verify `skills/verification-before-completion/SKILL.md` contains:
+- Status output format
+- Timeout/failed handling
+Expected: All present
+
+- [ ] **Step 4: Mark Plan Review Loop done**
+
+- [ ] **Plan Review Loop (required)**
+
+Dispatch plan-document-reviewer for Chunk 1 using `skills/writing-plans/plan-document-reviewer-prompt.md` and the spec at `docs/superpowers/specs/2026-03-16-superpowers-full-automation-design.md`. Fix issues and re-dispatch until approved.
+
