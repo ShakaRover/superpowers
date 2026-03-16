@@ -60,7 +60,7 @@ Or state: "This branch split from main - Auto-accepted and continuing."
 Present exactly these 4 options, do not ask a question, then auto-select the default if the user hasn't already specified a choice:
 
 ```
-Implementation complete. What would you like to do?
+Implementation complete. Proceeding with the default option unless a choice was already specified.
 
 1. Merge back to <base-branch> locally
 2. Push and create a Pull Request
