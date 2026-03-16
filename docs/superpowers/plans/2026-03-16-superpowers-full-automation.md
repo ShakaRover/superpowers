@@ -10,7 +10,7 @@
 
 ---
 
-## Chunk 1: Skill Automation Updates
+## Chunk 0: Worktree Setup
 
 ### Task 1: Create Automation Worktree
 
@@ -26,6 +26,10 @@ Expected: A new worktree directory is created and checked out at `../superpowers
 
 Run: `git status --short`
 Expected: Clean working tree
+
+## Chunk 1: AUTO-CONTINUE + Confirmation Replacement
+
+Chunk 1 scope: Task 2 and Task 3 only.
 
 ### Task 2: Add AUTO-CONTINUE Block Template to All Skills
 
@@ -123,6 +127,8 @@ After edits, re-scan the same patterns to ensure no semantic gates remain.
 
 ## Chunk 2: STOP + Slow Mode + High-Risk
 
+Chunk 2 scope: Task 4 and Task 5 only.
+
 ### Task 4: STOP-TYPE Annotations and Behavior Alignment
 
 **Files:**
@@ -191,6 +197,8 @@ Add to skills/using-superpowers/SKILL.md global rules: include the Level A/Level
 
 
 ## Chunk 3: Status + Missing Input + Timeouts/Idempotency
+
+Chunk 3 scope: Task 6, Task 7A, Task 7 only.
 
 ### Task 6: Consistent Status Output Language
 
@@ -272,6 +280,8 @@ Validation/review steps are excluded from this rule; they must follow failure/un
 
 ## Chunk 4: Coverage, Acceptance, Plan Review
 
+Chunk 4 scope: Task 8 and Task 9 only.
+
 ### Task 8: Coverage Checklist and Commit
 
 **Files:**
@@ -350,5 +360,5 @@ Expected: All present
 
 使用 `skills/writing-plans/plan-document-reviewer-prompt.md` 派发 Chunk 1 审阅，引用规格 `docs/superpowers/specs/2026-03-16-superpowers-full-automation-design.md`，修复问题并复审直到 Approved。
 
-Note: Chunk 1 already includes missing-input handling, review/verification timeout+retry, idempotency keys, and downgrade strategy in Task 7.
+Note: Chunk 3 includes missing-input handling, review/verification timeout+retry, idempotency keys, and downgrade strategy (Tasks 6/7/7A).
 
