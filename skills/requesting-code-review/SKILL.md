@@ -26,14 +26,10 @@ Status Output Rules
 
 ## Operational Rules
 
-- Missing input: record status as `SKIPPED (MISSING INPUT)` with Reason/Impact, then auto-continue.
-- Blocked or risky review request: prefer a safe downgrade/alternative path, record the decision and why.
-- Timeout or missing result: record status as `UNKNOWN (TIMEOUT/MISSING)` and auto-continue.
-- Retries must be idempotent, limited, and record attempt count/outcomes.
+- Missing input rule does not apply to review/verification steps. If required inputs are missing, follow the failure/unknown status paths and auto-continue.
+- Default downgrade: for non-review inputs, prefer the most recent available output; otherwise use a default placeholder and record the source plus downstream impact. If the default is `N/A`, record "MISSING INPUT - NOT EXECUTABLE" and set status to `SKIPPED (MISSING INPUT)`.
+- Timeout + retry + idempotency: on 60s timeout, perform one idempotent retry (no duplicate side effects), wait another 60s, then record status. Review/subagent timeouts -> `UNKNOWN (TIMEOUT/MISSING)`. Verification timeouts or failures -> `NOT-PASSED`. Late responses only append a note and never update prior status.
 - Status linkage: missing input -> SKIPPED; timeout/missing -> UNKNOWN.
-
-**Core principle:** Review early, review often.
-
 ## When to Request Review
 
 **Mandatory:**

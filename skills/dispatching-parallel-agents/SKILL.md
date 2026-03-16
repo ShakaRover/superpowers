@@ -26,6 +26,14 @@ Status Output Rules
 - Late responses only append a "late response" note and never update prior status.
 - Status records are written only in the assistant reply (no mandatory persistence).
 
+## Operational Rules
+
+- Missing input: if required input is missing, use a default value if available and record "USED DEFAULT" with Reason/Impact. If no default exists, record "MISSING INPUT - NOT EXECUTABLE" and set status to `SKIPPED (MISSING INPUT)`, then auto-continue.
+- Default downgrade: prefer the most recent available output; otherwise use a default placeholder and record the source plus downstream impact.
+- Timeout + retry + idempotency: on 60s timeout, perform one idempotent retry (no duplicate side effects), wait another 60s, then record status. Review/subagent timeouts -> `UNKNOWN (TIMEOUT/MISSING)`. Verification timeouts or failures -> `NOT-PASSED`. Late responses only append a note and never update prior status.
+- Status linkage: missing input -> SKIPPED; timeout/missing -> UNKNOWN.
+
+
 When you have multiple unrelated failures (different test files, different subsystems, different bugs), investigating them sequentially wastes time. Each investigation is independent and can happen in parallel.
 
 **Core principle:** Dispatch one agent per independent problem domain. Let them work concurrently.
