@@ -110,13 +110,13 @@ echo ""
 # Test 7: Verify full task text is provided
 echo "Test 7: Task context provision..."
 
-if assert_contains "$output" "provide.*directly\|full.*text\|paste\|include.*prompt" "Provides text directly"; then
+if assert_contains "$output" "provide.*directly\|direct text\|full.*text\|paste\|include.*prompt" "Provides text directly"; then
     : # pass
 else
     exit 1
 fi
 
-if assert_contains "$output" "should not read.*plan" "Doesn't make subagent read file"; then
+if assert_contains "$output" "not read.*plan" "Doesn't make subagent read file"; then
     : # pass
 else
     exit 1

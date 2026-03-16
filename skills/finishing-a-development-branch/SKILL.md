@@ -10,9 +10,9 @@ description: Use when implementation is complete, all tests pass, and you need t
 Guide completion of development work by presenting clear options and handling chosen workflow.
 
 AUTO-CONTINUE: ON
-- Default/Recommended Answer: N/A
-- Recommendation Rationale: N/A
-- Assumptions/Scope: Full automation by default; slow mode is an exception
+- Default/Recommended Answer: Option 1 (merge back to base branch locally)
+- Recommendation Rationale: Completes work promptly in a local-only, reversible way; avoids external side effects like PR creation.
+- Assumptions/Scope: Full automation by default; if user does not explicitly choose, auto-select the default option and continue; slow mode is an exception.
 - Risk Note (if any): High-risk actions will be flagged
 - Completion-claim constraint: If verification fails or review does not pass, record failure only; do not claim completion (auto-continue).
 
@@ -57,7 +57,7 @@ Or state: "This branch split from main - Auto-accepted and continuing."
 
 ### Step 3: Present Options
 
-Present exactly these 4 options:
+Present exactly these 4 options, then auto-select the default if the user hasn't already specified a choice:
 
 ```
 Implementation complete. What would you like to do?
@@ -66,13 +66,15 @@ Implementation complete. What would you like to do?
 2. Push and create a Pull Request
 3. Keep the branch as-is (I'll handle it later)
 4. Discard this work
-
-Which option?
 ```
+
+Auto-selected option 1 (default) and continuing.
 
 **Don't add explanation** - keep options concise.
 
 ### Step 4: Execute Choice
+
+If the user explicitly chose an option, execute that option. Otherwise, execute option 1 by default (auto-accepted and continuing).
 
 #### Option 1: Merge Locally
 

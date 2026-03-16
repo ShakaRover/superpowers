@@ -25,8 +25,10 @@ echo ""
 TEST_PROJECT=$(create_test_project)
 echo "Test project: $TEST_PROJECT"
 
-# Trap to cleanup
-trap "cleanup_test_project $TEST_PROJECT" EXIT
+# Trap to cleanup (can be disabled with KEEP_TEST_PROJECT=1)
+if [ "${KEEP_TEST_PROJECT:-}" != "1" ]; then
+    trap "cleanup_test_project $TEST_PROJECT" EXIT
+fi
 
 # Set up minimal Node.js project
 cd "$TEST_PROJECT"
@@ -119,6 +121,7 @@ echo ""
 # Capture full output to analyze
 OUTPUT_FILE="$TEST_PROJECT/codex-output.txt"
 EVENTS_FILE="$TEST_PROJECT/codex-events.jsonl"
+LOG_FILE="$TEST_PROJECT/codex-run.log"
 
 # Create prompt file
 cat > "$TEST_PROJECT/prompt.txt" <<'EOF'
@@ -154,12 +157,19 @@ Begin now. Execute the plan."
 
 echo "Running Codex (output will be saved to $OUTPUT_FILE)..."
 echo "================================================================================"
-cd "$SCRIPT_DIR/../.." && timeout 1800 CODEX_HOME="$SCRIPT_DIR/.codex-home" codex exec --full-auto -C "$SCRIPT_DIR/../.." --add-dir "$TEST_PROJECT" --output-last-message "$OUTPUT_FILE" --json "$PROMPT" > "$EVENTS_FILE" 2>&1 || {
+set +e
+cd "$SCRIPT_DIR/../.." && timeout 1800 env CODEX_HOME="$SCRIPT_DIR/.codex-home" codex exec --full-auto -C "$SCRIPT_DIR/../.." --add-dir "$TEST_PROJECT" --output-last-message "$OUTPUT_FILE" --json "$PROMPT" > "$EVENTS_FILE" 2> "$LOG_FILE"
+exit_code=$?
+set -e
+if [ $exit_code -ne 0 ]; then
     echo ""
     echo "================================================================================"
-    echo "EXECUTION FAILED (exit code: $?)"
+    echo "EXECUTION FAILED (exit code: $exit_code)"
+    echo ""
+    echo "Last 200 lines of $LOG_FILE:"
+    tail -n 200 "$LOG_FILE" || true
     exit 1
-}
+fi
 echo "================================================================================"
 
 echo ""
@@ -193,7 +203,10 @@ echo ""
 
 # Test 2: Subagents were used (Task tool)
 echo "Test 2: Subagents dispatched..."
-task_count=$(grep -c '"name":"Task"' "$EVENTS_FILE" || echo "0")
+task_count=$(grep -c '"name":"Task"' "$EVENTS_FILE" || true)
+if [ -z "$task_count" ]; then
+    task_count=0
+fi
 if [ "$task_count" -ge 2 ]; then
     echo "  [PASS] $task_count subagents dispatched"
 else
@@ -204,7 +217,10 @@ echo ""
 
 # Test 3: TodoWrite was used for tracking
 echo "Test 3: Task tracking..."
-todo_count=$(grep -c '"name":"TodoWrite"' "$EVENTS_FILE" || echo "0")
+todo_count=$(grep -c '"name":"TodoWrite"' "$EVENTS_FILE" || true)
+if [ -z "$todo_count" ]; then
+    todo_count=0
+fi
 if [ "$todo_count" -ge 1 ]; then
     echo "  [PASS] TodoWrite used $todo_count time(s) for task tracking"
 else
@@ -305,6 +321,9 @@ else
     echo "Failed $FAILED verification tests"
     echo ""
     echo "Output saved to: $OUTPUT_FILE"
+    if [ "${KEEP_TEST_PROJECT:-}" = "1" ]; then
+        echo "Test project preserved at: $TEST_PROJECT"
+    fi
     echo ""
     echo "Review the output to see what went wrong."
     exit 1
