@@ -4,8 +4,8 @@ description: Use when starting any conversation - establishes how to find and us
 ---
 
 <SUBAGENT-STOP>
-STOP-TYPE: TERMINAL
-If you were dispatched as a subagent to execute a specific task, skip this skill.
+STOP-TYPE: RECOVERABLE
+If you were dispatched as a subagent to execute a specific task, skip this skill and continue with the assigned task.
 </SUBAGENT-STOP>
 
 <EXTREMELY-IMPORTANT>
@@ -105,8 +105,8 @@ These thoughts mean STOP—you're rationalizing:
 ## STOP-TYPE Semantics
 
 - `STOP-TYPE: TERMINAL`: End the flow and output a failure status.
-- `STOP-TYPE: RECOVERABLE`: Perform the required action, then auto-continue. If the action fails or cannot be executed, mark status as failed and continue.
-- High-risk STOP actions: In auto mode, still execute and label **high-risk auto-execution**. In slow mode, wait for confirmation.
+- `STOP-TYPE: RECOVERABLE`: Perform the required action, then auto-continue. If the action fails or cannot be executed, mark status as NOT-PASSED and continue.
+- High-risk STOP actions: In auto mode, still execute and label **HIGH-RISK AUTO-EXECUTION**. In slow mode, wait for confirmation.
 - Unlabeled STOP defaults to TERMINAL and logs a warning.
 
 ## STOP-TYPE Criteria
