@@ -10,26 +10,25 @@ run_codex() {
     local output_file=$(mktemp)
     local error_file=$(mktemp)
     local repo_root
-    local prompt_with_language
-    local auth_file
+    local llms_key
+    local codex_home
 
     repo_root="$(cd "$(dirname "$0")/../.." && pwd)"
-    prompt_with_language="Respond in English.\n\n${prompt}"
-    auth_file="$HOME/.codex/auth.json"
-
-    if [ -z "${OPENAI_API_KEY:-}" ] && [ -z "${CODEX_API_KEY:-}" ]; then
-        if [ ! -s "$auth_file" ] || ! grep -Eq '"access_token"|"api_key"|"auth_token"' "$auth_file"; then
-            echo "Codex auth not configured. Run 'codex login' or set OPENAI_API_KEY." >&2
-            return 2
-        fi
-    fi
+    codex_home="$repo_root/tests/codex/.codex-home"
+    llms_key="${LLMS_OPEN_API_KEY:-}"
 
     # Build command
     # allowed_tools currently has no effect for codex exec; keep parameter for compatibility
-    local cmd="codex exec --full-auto -C \"$repo_root\" --output-last-message \"$output_file\" \"$prompt_with_language\""
+    if [ -n "$llms_key" ]; then
+        echo "LLMS_OPEN_API_KEY=SET" >&2
+        local cmd=(env CODEX_HOME="$codex_home" LLMS_OPEN_API_KEY="$llms_key" codex exec --full-auto -C "$repo_root" --output-last-message "$output_file" "$prompt")
+    else
+        echo "LLMS_OPEN_API_KEY=NOT_SET" >&2
+        local cmd=(env CODEX_HOME="$codex_home" codex exec --full-auto -C "$repo_root" --output-last-message "$output_file" "$prompt")
+    fi
 
     # Run Codex in headless mode with timeout
-    if timeout "$timeout" bash -c "$cmd" >"$error_file" 2>&1; then
+    if timeout --kill-after=5s "$timeout" "${cmd[@]}" >"$error_file" 2>&1; then
         cat "$output_file"
         rm -f "$output_file" "$error_file"
         return 0

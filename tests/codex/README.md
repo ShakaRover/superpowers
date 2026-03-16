@@ -125,7 +125,7 @@ Full workflow execution test (~10-30 minutes):
 
 ## Timeout Considerations
 
-- Default timeout: 5 minutes per test
+- Default timeout: 15 minutes per test
 - Codex may take time to respond
 - Adjust with `--timeout` if needed
 - Tests should be focused to avoid long runs

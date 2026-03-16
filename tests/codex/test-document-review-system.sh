@@ -77,9 +77,7 @@ echo ""
 OUTPUT_FILE="$TEST_PROJECT/codex-output.txt"
 LOG_FILE="$TEST_PROJECT/codex-log.txt"
 
-PROMPT="Respond in English.
-
-You are testing the spec document reviewer.
+PROMPT="You are testing the spec document reviewer.
 
 Read the spec-document-reviewer-prompt.md template in skills/brainstorming/ to understand the review format.
 
@@ -93,7 +91,7 @@ Look for:
 Output your review in the format specified in the template."
 
 echo "================================================================================"
-cd "$SCRIPT_DIR/../.." && timeout 120 codex exec --full-auto -C "$SCRIPT_DIR/../.." --add-dir "$TEST_PROJECT" --output-last-message "$OUTPUT_FILE" "$PROMPT" > "$LOG_FILE" 2>&1 || {
+cd "$SCRIPT_DIR/../.." && timeout 120 CODEX_HOME="$SCRIPT_DIR/.codex-home" codex exec --full-auto -C "$SCRIPT_DIR/../.." --add-dir "$TEST_PROJECT" --output-last-message "$OUTPUT_FILE" "$PROMPT" > "$LOG_FILE" 2>&1 || {
     echo ""
     echo "================================================================================"
     echo "EXECUTION FAILED (exit code: $?)"

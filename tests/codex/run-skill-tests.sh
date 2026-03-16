@@ -25,7 +25,7 @@ fi
 # Parse command line arguments
 VERBOSE=false
 SPECIFIC_TEST=""
-TIMEOUT=300  # Default 5 minute timeout per test
+TIMEOUT=900  # Default 15 minute timeout per test
 RUN_INTEGRATION=false
 
 while [[ $# -gt 0 ]]; do

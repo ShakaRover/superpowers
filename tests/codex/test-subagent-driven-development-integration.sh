@@ -154,7 +154,7 @@ Begin now. Execute the plan."
 
 echo "Running Codex (output will be saved to $OUTPUT_FILE)..."
 echo "================================================================================"
-cd "$SCRIPT_DIR/../.." && timeout 1800 codex exec --full-auto -C "$SCRIPT_DIR/../.." --add-dir "$TEST_PROJECT" --output-last-message "$OUTPUT_FILE" --json "$PROMPT" > "$EVENTS_FILE" 2>&1 || {
+cd "$SCRIPT_DIR/../.." && timeout 1800 CODEX_HOME="$SCRIPT_DIR/.codex-home" codex exec --full-auto -C "$SCRIPT_DIR/../.." --add-dir "$TEST_PROJECT" --output-last-message "$OUTPUT_FILE" --json "$PROMPT" > "$EVENTS_FILE" 2>&1 || {
     echo ""
     echo "================================================================================"
     echo "EXECUTION FAILED (exit code: $?)"

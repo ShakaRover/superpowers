@@ -1,0 +1,14 @@
+model_provider = "llms"
+model = "gpt-5.2-codex"
+model_reasoning_effort = "medium"
+network_access = "enabled"
+disable_response_storage = true
+approval_policy = "never"
+sandbox_mode = "workspace-write"
+
+[model_providers.llms]
+name = "llms"
+type = "openai"
+base_url = "https://a.llms.plus/v1"
+wire_api = "responses"
+env_key = "LLMS_OPEN_API_KEY"
