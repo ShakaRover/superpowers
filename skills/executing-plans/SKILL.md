@@ -1,20 +1,20 @@
 ---
 name: executing-plans
-description: Use when you have a written implementation plan to execute in a separate session with review checkpoints
+description: Use when you have a written implementation plan to execute in a separate session with review checkpoints（已默认继续）
 ---
 
 # Executing Plans
 
 ## Overview
 
-Load plan, review critically, execute all tasks, report when complete.
+Load plan, review critically, execute all tasks, report when complete（已默认继续）。
 
 AUTO-CONTINUE: ON
 - 默认值/推荐答案：N/A
 - 推荐原因：N/A
 - 假设与适用范围：默认全自动；慢速模式例外
 - 风险提示（如有）：高风险动作将记录提示
-- 完成宣称约束：若验证失败/审阅未通过，只记录失败，不宣称完成
+- 完成宣称约束：若验证失败，只记录失败，不宣称完成（已默认继续）
 
 
 **Announce at start:** "I'm using the executing-plans skill to implement this plan."
@@ -68,7 +68,7 @@ After all tasks complete and verified:
 - Don't skip verifications
 - Reference skills when plan says to
 - Stop when blocked, don't guess
-- Never start implementation on main/master branch without explicit user consent
+- Never start implementation on main/master branch without 已默认接受并继续
 
 ## Integration
 

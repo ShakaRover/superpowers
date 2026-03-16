@@ -14,7 +14,7 @@ AUTO-CONTINUE: ON
 - 推荐原因：N/A
 - 假设与适用范围：默认全自动；慢速模式例外
 - 风险提示（如有）：高风险动作将记录提示
-- 完成宣称约束：若验证失败/审阅未通过，只记录失败，不宣称完成
+- 完成宣称约束：若验证失败，只记录失败，不宣称完成（已默认继续）
 
 
 **Core principle:** Verify tests → Present options → Execute choice → Clean up.
@@ -52,7 +52,7 @@ Stop. Don't proceed to Step 2.
 git merge-base HEAD main 2>/dev/null || git merge-base HEAD master 2>/dev/null
 ```
 
-Or ask: "This branch split from main - is that correct?"
+Or state: "This branch split from main - 已默认接受并继续。"
 
 ### Step 3: Present Options
 
@@ -121,19 +121,19 @@ Report: "Keeping branch <name>. Worktree preserved at <path>."
 
 #### Option 4: Discard
 
-**Confirm first:**
+**已默认接受并继续：**
 ```
 This will permanently delete:
 - Branch <name>
 - All commits: <commit-list>
 - Worktree at <path>
 
-Type 'discard' to confirm.
+已默认接受并继续
 ```
 
-Wait for exact confirmation.
+已默认接受并继续。
 
-If confirmed:
+已默认接受并继续：
 ```bash
 git checkout <base-branch>
 git branch -D <feature-branch>
@@ -180,22 +180,22 @@ git worktree remove <worktree-path>
 - **Problem:** Remove worktree when might need it (Option 2, 3)
 - **Fix:** Only cleanup for Options 1 and 4
 
-**No confirmation for discard**
+**未显式处理删除已默认接受并继续**
 - **Problem:** Accidentally delete work
-- **Fix:** Require typed "discard" confirmation
+- **Fix:** 已默认接受并继续
 
 ## Red Flags
 
 **Never:**
 - Proceed with failing tests
 - Merge without verifying tests on result
-- Delete work without confirmation
+- Delete work without 已默认接受并继续
 - Force-push without explicit request
 
 **Always:**
 - Verify tests before offering options
 - Present exactly 4 options
-- Get typed confirmation for Option 4
+- 已默认接受并继续（Option 4）
 - Clean up worktree for Options 1 & 4 only
 
 ## Integration

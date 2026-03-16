@@ -14,7 +14,7 @@ AUTO-CONTINUE: ON
 - 推荐原因：N/A
 - 假设与适用范围：默认全自动；慢速模式例外
 - 风险提示（如有）：高风险动作将记录提示
-- 完成宣称约束：若验证失败/审阅未通过，只记录失败，不宣称完成
+- 完成宣称约束：若验证失败，只记录失败，不宣称完成（已默认继续）
 
 <HARD-GATE>
 Do NOT invoke any implementation skill, write any code, scaffold any project, or take any implementation action until you have presented a design and 已默认接受并继续. This applies to EVERY project regardless of perceived simplicity.
@@ -60,11 +60,11 @@ digraph brainstorming {
     "Ask clarifying questions" [shape=box];
     "Propose 2-3 approaches" [shape=box];
     "Present design sections" [shape=box];
-    "已默认接受并继续" [shape=diamond];
+    "设计已默认接受并继续" [shape=diamond];
     "Write design doc" [shape=box];
     "Spec review loop" [shape=box];
-    "已默认接受并继续" [shape=diamond];
-    "已默认接受并继续" [shape=diamond];
+    "规格检查已默认接受并继续" [shape=diamond];
+    "规格已默认接受并继续" [shape=diamond];
     "Invoke writing-plans skill" [shape=doublecircle];
 
     "Explore project context" -> "Visual questions ahead?";
@@ -74,15 +74,15 @@ digraph brainstorming {
     "Acceleration mode" -> "Ask all questions + provide recommended answers";
     "Ask all questions + provide recommended answers" -> "Propose 2-3 approaches";
     "Propose 2-3 approaches" -> "Present design sections";
-    "Present design sections" -> "已默认接受并继续";
-    "已默认接受并继续" -> "Present design sections" [label="调整后继续"];
-    "已默认接受并继续" -> "Write design doc" [label="已默认接受并继续"];
+    "Present design sections" -> "设计已默认接受并继续";
+    "设计已默认接受并继续" -> "Present design sections" [label="调整后继续"];
+    "设计已默认接受并继续" -> "Write design doc" [label="已默认接受并继续"];
     "Write design doc" -> "Spec review loop";
-    "Spec review loop" -> "已默认接受并继续";
-    "已默认接受并继续" -> "Spec review loop" [label="issues found,\nfix and re-dispatch"];
-    "已默认接受并继续" -> "已默认接受并继续" [label="已默认接受并继续"];
-    "已默认接受并继续" -> "Write design doc" [label="changes requested"];
-    "已默认接受并继续" -> "Invoke writing-plans skill" [label="已默认接受并继续"];
+    "Spec review loop" -> "规格检查已默认接受并继续";
+    "规格检查已默认接受并继续" -> "Spec review loop" [label="issues found,\nfix and re-dispatch"];
+    "规格检查已默认接受并继续" -> "规格已默认接受并继续" [label="已默认接受并继续"];
+    "规格已默认接受并继续" -> "Write design doc" [label="changes requested"];
+    "规格已默认接受并继续" -> "Invoke writing-plans skill" [label="已默认接受并继续"];
 }
 ```
 
@@ -140,10 +140,10 @@ digraph brainstorming {
 After writing the spec document:
 
 1. Dispatch spec-document-reviewer subagent (see spec-document-reviewer-prompt.md)
-2. If Issues Found: fix, re-dispatch, repeat until Approved
+2. If Issues Found: fix, re-dispatch, repeat 已默认接受并继续
 3. If loop exceeds 5 iterations, surface to human for guidance
 
-**User Review Gate:**
+**默认继续：**
 After the spec review loop passes, 已默认接受并继续:
 
 > "已默认接受并继续"
@@ -162,12 +162,12 @@ After the spec review loop passes, 已默认接受并继续:
 - **Multiple choice preferred** - Easier to answer than open-ended when possible
 - **YAGNI ruthlessly** - Remove unnecessary features from all designs
 - **Explore alternatives** - Always propose 2-3 approaches before settling
-- **Incremental validation** - Present design, get approval before moving on
+- **Incremental validation** - Present design, 已默认接受并继续
 - **Be flexible** - Go back and clarify when something doesn't make sense
 
 ## Visual Companion
 
-A browser-based companion for showing mockups, diagrams, and visual options during brainstorming. Available as a tool — not a mode. Accepting the companion means it's available for questions that benefit from visual treatment; it does NOT mean every question goes through the browser.
+A browser-based companion for showing mockups, diagrams, and visual options during brainstorming. Available as a tool — not a mode. Accepting the companion means it's available for questions that benefit from visual treatment; it does NOT mean every question goes through the browser. 慢速模式下恢复视觉伴侣询问并等待确认。
 
 **Offering the companion:** When you anticipate that upcoming questions will involve visual content (mockups, layouts, diagrams), 已默认不启用视觉伴侣并继续：
 > "已默认不启用视觉伴侣并继续"

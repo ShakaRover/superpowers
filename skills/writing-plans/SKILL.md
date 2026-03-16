@@ -14,7 +14,7 @@ AUTO-CONTINUE: ON
 - 推荐原因：N/A
 - 假设与适用范围：默认全自动；慢速模式例外
 - 风险提示（如有）：高风险动作将记录提示
-- 完成宣称约束：若验证失败/审阅未通过，只记录失败，不宣称完成
+- 完成宣称约束：若验证失败，只记录失败，不宣称完成（已默认继续）
 
 
 Assume they are a skilled developer, but know almost nothing about our toolset or problem domain. Assume they don't know good test design very well.
@@ -120,23 +120,28 @@ git commit -m "feat: add specific feature"
 
 ## Plan Review Loop
 
-After writing the complete plan:
+After completing each chunk of the plan:
 
-1. Dispatch a single plan-document-reviewer subagent (see plan-document-reviewer-prompt.md) with precisely crafted review context — never your session history. This keeps the reviewer focused on the plan, not your thought process.
-   - Provide: path to the plan document, path to spec document
-2. If ❌ Issues Found: fix the issues, re-dispatch reviewer for the whole plan
-3. If ✅ Approved: proceed to execution handoff
+1. Dispatch plan-document-reviewer subagent (see plan-document-reviewer-prompt.md) with precisely crafted review context — never your session history. This keeps the reviewer focused on the plan, not your thought process.
+   - Provide: chunk content, path to spec document
+2. If ❌ Issues Found:
+   - Fix the issues in the chunk
+   - Re-dispatch reviewer for that chunk
+   - Repeat until ✅ 已默认接受并继续
+3. If ✅ 已默认接受并继续: proceed to next chunk (or execution handoff if last chunk)
+
+**Chunk boundaries:** Use `## Chunk N: <name>` headings to delimit chunks. Each chunk should be ≤1000 lines and logically self-contained.
 
 **Review loop guidance:**
 - Same agent that wrote the plan fixes it (preserves context)
-- If loop exceeds 3 iterations, surface to human for guidance
-- Reviewers are advisory — explain disagreements if you believe feedback is incorrect
+- If loop exceeds 5 iterations, surface to human for guidance
+- Reviewers are advisory - explain disagreements if you believe feedback is incorrect
 
 ## Execution Handoff
 
 After saving the plan:
 
-**"Plan complete and saved to `docs/superpowers/plans/<filename>.md`. Ready to execute?"**
+**"Plan complete and saved to `docs/superpowers/plans/<filename>.md`. 已默认接受并继续。"**
 
 **Execution path depends on harness capabilities:**
 
