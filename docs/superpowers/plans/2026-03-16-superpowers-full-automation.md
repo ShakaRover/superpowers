@@ -198,6 +198,8 @@ Add to skills/using-superpowers/SKILL.md global rules: include the Level A/Level
 - Modify: `skills/receiving-code-review/SKILL.md`
 - Modify: `skills/dispatching-parallel-agents/SKILL.md`
 
+Note: Review/verification automation status rules are explicitly applied to the file list above (Tasks 6/7A/7 cover timeouts, idempotency, and missing-input handling).
+
 - [ ] **Step 1: Add full status output format snippet**
 
 Add snippet:
