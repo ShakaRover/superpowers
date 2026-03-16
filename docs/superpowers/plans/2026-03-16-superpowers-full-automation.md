@@ -179,8 +179,12 @@ Expected: Any skill with such terms includes slow-mode wait-for-confirmation rul
 
 - [ ] **Step 4: Add high-risk platform block**
 
-Include clause: if external platform blocks approval, do not attempt; record “被平台阻断”，并标记状态为“未知（超时/缺失）”。
-Also require: high-risk auto execution must include fixed label “高风险自动执行” + downgrade/alternative path + responsibility note; A/B级按规范执行回滚/替代。
+Include clause: if external platform blocks approval, do not attempt; record "BLOCKED BY PLATFORM" and set status "UNKNOWN (TIMEOUT/MISSING)".
+Also require: high-risk auto execution must include fixed label "HIGH-RISK AUTO-EXECUTION" + downgrade/alternative path + responsibility note.
+Define risk levels for consistent handling:
+- Level A (external/irreversible): real-world impact (payments, publishing, destructive external actions) -> require rollback/alternative.
+- Level B (local/irreversible): destructive local changes (delete/wipe/reset) -> require safe fallback/alternative.
+
 
 ### Task 6: Consistent Status Output Language
 
