@@ -184,6 +184,7 @@ Also require: high-risk auto execution must include fixed label "HIGH-RISK AUTO-
 Define risk levels for consistent handling:
 - Level A (external/irreversible): real-world impact (payments, publishing, destructive external actions) -> require rollback/alternative.
 - Level B (local/irreversible): destructive local changes (delete/wipe/reset) -> require safe fallback/alternative.
+Add to skills/using-superpowers/SKILL.md global rules: include the Level A/Level B definitions and handling requirements in the High-Risk block.
 
 
 ### Task 6: Consistent Status Output Language
