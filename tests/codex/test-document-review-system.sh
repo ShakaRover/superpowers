@@ -77,7 +77,9 @@ echo ""
 OUTPUT_FILE="$TEST_PROJECT/codex-output.txt"
 LOG_FILE="$TEST_PROJECT/codex-log.txt"
 
-PROMPT="You are testing the spec document reviewer.
+PROMPT="Respond in English.
+
+You are testing the spec document reviewer.
 
 Read the spec-document-reviewer-prompt.md template in skills/brainstorming/ to understand the review format.
 

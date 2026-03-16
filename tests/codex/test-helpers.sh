@@ -10,12 +10,23 @@ run_codex() {
     local output_file=$(mktemp)
     local error_file=$(mktemp)
     local repo_root
+    local prompt_with_language
+    local auth_file
 
     repo_root="$(cd "$(dirname "$0")/../.." && pwd)"
+    prompt_with_language="Respond in English.\n\n${prompt}"
+    auth_file="$HOME/.codex/auth.json"
+
+    if [ -z "${OPENAI_API_KEY:-}" ] && [ -z "${CODEX_API_KEY:-}" ]; then
+        if [ ! -s "$auth_file" ] || ! grep -Eq '"access_token"|"api_key"|"auth_token"' "$auth_file"; then
+            echo "Codex auth not configured. Run 'codex login' or set OPENAI_API_KEY." >&2
+            return 2
+        fi
+    fi
 
     # Build command
     # allowed_tools currently has no effect for codex exec; keep parameter for compatibility
-    local cmd="codex exec --full-auto -C \"$repo_root\" --output-last-message \"$output_file\" \"$prompt\""
+    local cmd="codex exec --full-auto -C \"$repo_root\" --output-last-message \"$output_file\" \"$prompt_with_language\""
 
     # Run Codex in headless mode with timeout
     if timeout "$timeout" bash -c "$cmd" >"$error_file" 2>&1; then
@@ -116,12 +127,21 @@ assert_order() {
     if [ "$line_a" -lt "$line_b" ]; then
         echo "  [PASS] $test_name (A at line $line_a, B at line $line_b)"
         return 0
-    else
-        echo "  [FAIL] $test_name"
-        echo "  Expected '$pattern_a' before '$pattern_b'"
-        echo "  But found A at line $line_a, B at line $line_b"
-        return 1
     fi
+
+    if [ "$line_a" -eq "$line_b" ]; then
+        local line_content
+        line_content=$(echo "$output" | sed -n "${line_a}p")
+        if echo "$line_content" | grep -Eq "$pattern_a.*$pattern_b"; then
+            echo "  [PASS] $test_name (A and B on same line, correct order)"
+            return 0
+        fi
+    fi
+
+    echo "  [FAIL] $test_name"
+    echo "  Expected '$pattern_a' before '$pattern_b'"
+    echo "  But found A at line $line_a, B at line $line_b"
+    return 1
 }
 
 # Create a temporary test project directory

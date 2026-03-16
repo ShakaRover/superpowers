@@ -122,6 +122,8 @@ EVENTS_FILE="$TEST_PROJECT/codex-events.jsonl"
 
 # Create prompt file
 cat > "$TEST_PROJECT/prompt.txt" <<'EOF'
+Respond in English.
+
 I want you to execute the implementation plan at docs/superpowers/plans/implementation-plan.md using the subagent-driven-development skill.
 
 IMPORTANT: Follow the skill exactly. I will be verifying that you:
@@ -137,7 +139,9 @@ EOF
 # Note: We use a longer timeout since this is integration testing
 # Use --full-auto to allow tool usage in headless mode
 # IMPORTANT: Run from superpowers directory so local dev skills are available
-PROMPT="Change to directory $TEST_PROJECT and then execute the implementation plan at docs/superpowers/plans/implementation-plan.md using the subagent-driven-development skill.
+PROMPT="Respond in English.
+
+Change to directory $TEST_PROJECT and then execute the implementation plan at docs/superpowers/plans/implementation-plan.md using the subagent-driven-development skill.
 
 IMPORTANT: Follow the skill exactly. I will be verifying that you:
 1. Read the plan once at the beginning
