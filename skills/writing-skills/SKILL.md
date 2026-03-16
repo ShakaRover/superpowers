@@ -522,6 +522,10 @@ Make it easy for agents to self-check when rationalizing:
 ```markdown
 ## Red Flags - STOP and Start Over
 
+STOP-TYPE Semantics:
+- STOP-TYPE: TERMINAL ends the flow and outputs a failure status.
+- STOP-TYPE: RECOVERABLE performs the required action, then auto-continues; if it fails, mark NOT-PASSED and continue.
+
 STOP-TYPE: RECOVERABLE
 - Code before test
 - "I already manually tested it"
