@@ -30,7 +30,7 @@ If slow mode is active, wait for confirmation before irreversible actions.
 - Refactoring
 - Behavior changes
 
-**Exceptions (ask your human partner):**
+**Exceptions (record and continue unless blocked):**
 - Throwaway prototypes
 - Generated code
 - Configuration files
@@ -353,7 +353,7 @@ Can't check all boxes? You skipped TDD. Start over.
 
 | Problem | Solution |
 |---------|----------|
-| Don't know how to test | Write wished-for API. Write assertion first. Ask your human partner. |
+| Don't know how to test | Write wished-for API. Write assertion first. Proceed with conservative assumption unless blocked. |
 | Test too complicated | Design too complicated. Simplify interface. |
 | Must mock everything | Code too coupled. Use dependency injection. |
 | Test setup huge | Extract helpers. Still complex? Simplify design. |

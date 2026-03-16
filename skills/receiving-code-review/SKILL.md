@@ -40,7 +40,7 @@ Status Output Rules
 WHEN receiving code review feedback:
 
 1. READ: Complete feedback without reacting
-2. UNDERSTAND: Restate requirement in own words (or ask)
+2. UNDERSTAND: Restate requirement in own words; if unclear, infer and record assumptions
 3. VERIFY: Check against codebase reality
 4. EVALUATE: Technically sound for THIS codebase?
 5. RESPOND: Technical acknowledgment or reasoned pushback
@@ -56,7 +56,7 @@ WHEN receiving code review feedback:
 
 **INSTEAD:**
 - Restate the technical requirement
-- Ask clarifying questions
+- Record assumptions and continue
 - Push back with technical reasoning if wrong
 - Just start working (actions > words)
 
@@ -64,11 +64,11 @@ WHEN receiving code review feedback:
 
 ```
 IF any item is unclear:
-  STOP-TYPE: RECOVERABLE
-  STOP - do not implement anything yet
-  ASK for clarification on unclear items
+  Infer the most conservative interpretation
+  Record assumptions and limitations
+  Continue unless execution is impossible
 
-WHY: Items may be related. Partial understanding = wrong implementation.
+WHY: Auto-continue by default; only stop if blocked.
 ```
 
 **Example:**
@@ -76,15 +76,15 @@ WHY: Items may be related. Partial understanding = wrong implementation.
 your human partner: "Fix 1-6"
 You understand 1,2,3,6. Unclear on 4,5.
 
-❌ WRONG: Implement 1,2,3,6 now, ask about 4,5 later
-✅ RIGHT: "I understand items 1,2,3,6. Need clarification on 4 and 5 before proceeding."
+❌ WRONG: Implement 1,2,3,6 now, defer 4,5 without assumptions
+✅ RIGHT: "I understand items 1,2,3,6. For 4 and 5 I assumed [X] and [Y] to proceed. If that is wrong, I'll revise."
 ```
 
 ## Source-Specific Handling
 
 ### From your human partner
 - **Trusted** - implement after understanding
-- **Still ask** if scope unclear
+- If scope unclear, proceed with explicit assumptions unless blocked
 - **No performative agreement**
 - **Skip to action** or technical acknowledgment
 
@@ -101,7 +101,7 @@ IF suggestion seems wrong:
   Push back with technical reasoning
 
 IF can't easily verify:
-  Say so: "I can't verify this without [X]. Should I [investigate/ask/proceed]?"
+  Say so: "I can't verify this without [X]. Proceeding with a conservative default and recording the limitation."
 
 IF conflicts with your human partner's prior decisions:
   Stop and discuss with your human partner first
@@ -146,7 +146,7 @@ Push back when:
 
 **How to push back:**
 - Use technical reasoning, not defensiveness
-- Ask specific questions
+- Record specific assumptions and limitations
 - Reference working tests/code
 - Involve your human partner if architectural
 
@@ -195,7 +195,7 @@ State the correction factually and move on.
 | Assuming reviewer is right | Check if breaks things |
 | Avoiding pushback | Technical correctness > comfort |
 | Partial implementation | Clarify all items first |
-| Can't verify, proceed anyway | State limitation, ask for direction |
+| Can't verify, proceed anyway | State limitation, proceed with conservative default |
 
 ## Real Examples
 

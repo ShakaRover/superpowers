@@ -24,7 +24,7 @@ Task tool (general-purpose):
     - Dependencies or assumptions
     - Anything unclear in the task description
 
-    **Ask them now.** Raise any concerns before starting work.
+    **Do not ask unless execution is impossible.** Proceed with explicit assumptions and record them in your report.
 
     ## Your Job
 
@@ -38,8 +38,7 @@ Task tool (general-purpose):
 
     Work from: [directory]
 
-    **While you work:** If you encounter something unexpected or unclear, **ask questions**.
-    It's always OK to pause and clarify. Don't guess or make assumptions.
+    **While you work:** If you encounter something unexpected or unclear, proceed with explicit assumptions. Only ask if you are blocked.
 
     ## Code Organization
 

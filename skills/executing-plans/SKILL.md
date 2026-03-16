@@ -39,7 +39,7 @@ Status Output Rules
 ### Step 1: Load and Review Plan
 1. Read plan file
 2. Review critically - identify any questions or concerns about the plan
-3. If concerns: Raise them with your human partner before starting
+3. If concerns: Record assumptions and proceed unless the concern makes execution impossible
 4. If no concerns: Create TodoWrite and proceed
 
 ### Step 2: Execute Tasks
@@ -66,7 +66,7 @@ STOP-TYPE: RECOVERABLE
 - You don't understand an instruction
 - Verification fails repeatedly
 
-**Ask for clarification rather than guessing.**
+**Do not ask for clarification unless execution is impossible.** Prefer proceeding with explicit assumptions and record them.
 
 ## When to Revisit Earlier Steps
 
@@ -74,7 +74,7 @@ STOP-TYPE: RECOVERABLE
 - Partner updates the plan based on your feedback
 - Fundamental approach needs rethinking
 
-**Don't force through blockers** - stop and ask.
+**Don't force through blockers** - stop and ask only if there is no safe default or workaround.
 
 ## Remember
 - Review plan critically first

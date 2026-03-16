@@ -69,8 +69,8 @@ digraph process {
     subgraph cluster_per_task {
         label="Per Task";
         "Dispatch implementer subagent (./implementer-prompt.md)" [shape=box];
-        "Implementer subagent asks questions?" [shape=diamond];
-        "Answer questions, provide context" [shape=box];
+        "Implementer subagent blocked?" [shape=diamond];
+        "Provide context, re-dispatch" [shape=box];
         "Implementer subagent implements, tests, commits, self-reviews" [shape=box];
         "Dispatch spec reviewer subagent (./spec-reviewer-prompt.md)" [shape=box];
         "Spec compliant and auto-accepted" [shape=diamond];
@@ -87,10 +87,10 @@ digraph process {
     "Use superpowers:finishing-a-development-branch" [shape=box style=filled fillcolor=lightgreen];
 
     "Read plan, extract all tasks with full text, note context, create TodoWrite" -> "Dispatch implementer subagent (./implementer-prompt.md)";
-    "Dispatch implementer subagent (./implementer-prompt.md)" -> "Implementer subagent asks questions?";
-    "Implementer subagent asks questions?" -> "Answer questions, provide context" [label="yes"];
-    "Answer questions, provide context" -> "Dispatch implementer subagent (./implementer-prompt.md)";
-    "Implementer subagent asks questions?" -> "Implementer subagent implements, tests, commits, self-reviews" [label="no"];
+    "Dispatch implementer subagent (./implementer-prompt.md)" -> "Implementer subagent blocked?";
+    "Implementer subagent blocked?" -> "Provide context, re-dispatch" [label="yes"];
+    "Provide context, re-dispatch" -> "Dispatch implementer subagent (./implementer-prompt.md)";
+    "Implementer subagent blocked?" -> "Implementer subagent implements, tests, commits, self-reviews" [label="no"];
     "Implementer subagent implements, tests, commits, self-reviews" -> "Dispatch spec reviewer subagent (./spec-reviewer-prompt.md)";
     "Dispatch spec reviewer subagent (./spec-reviewer-prompt.md)" -> "Spec compliant and auto-accepted";
     "Spec compliant and auto-accepted" -> "Implementer subagent fixes spec gaps" [label="no"];
@@ -228,7 +228,7 @@ Done!
 - Subagents follow TDD naturally
 - Fresh context per task (no confusion)
 - Parallel-safe (subagents don't interfere)
-- Subagent can ask questions (before AND during work)
+- Subagent proceeds with explicit assumptions; only blocks if execution is impossible
 
 **vs. Executing Plans:**
 - Same session (no handoff)
@@ -263,14 +263,14 @@ Done!
 - Dispatch multiple implementation subagents in parallel (conflicts)
 - Make subagent read plan file (provide full text instead)
 - Skip scene-setting context (subagent needs to understand where task fits)
-- Ignore subagent questions (answer before letting them proceed)
+- Ignore subagent blocked/needs-context reports (resolve before letting them proceed)
 - Accept "close enough" on spec compliance (spec reviewer found issues = not done)
 - Skip review loops (reviewer found issues = implementer fixes = review again)
 - Let implementer self-review replace actual review (both are needed)
 - **Start code quality review before spec compliance is ✅** (wrong order)
 - Move to next task while either review has open issues
 
-**If subagent asks questions:**
+**If subagent is blocked:**
 - Answer clearly and completely
 - Provide additional context if needed
 - Don't rush them into implementation
