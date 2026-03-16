@@ -57,7 +57,7 @@ Or state: "This branch split from main - Auto-accepted and continuing."
 
 ### Step 3: Present Options
 
-Present exactly these 4 options, then auto-select the default if the user hasn't already specified a choice:
+Present exactly these 4 options, do not ask a question, then auto-select the default if the user hasn't already specified a choice:
 
 ```
 Implementation complete. What would you like to do?
@@ -75,6 +75,10 @@ Auto-selected option 1 (default) and continuing.
 ### Step 4: Execute Choice
 
 If the user explicitly chose an option, execute that option. Otherwise, execute option 1 by default (auto-accepted and continuing).
+
+### Step 6: Stop Here
+
+After completing the chosen option and any required cleanup, do not add additional prompts, numbered menus, or follow-up questions. If extra optional tasks are desirable (backup restore, summaries, tagging), record that they were not requested and finish the response.
 
 #### Option 1: Merge Locally
 
