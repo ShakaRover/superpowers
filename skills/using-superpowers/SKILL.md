@@ -35,6 +35,7 @@ AUTO-CONTINUE: ON
 - Apply slow mode to the current task chain only.
 - Task boundary: one user request = one task chain; a new request starts a new task.
 - Cross-skill propagation: all skills must treat slow mode as higher priority for irreversible actions.
+- If slow mode is active, wait for confirmation before irreversible actions.
 
 ### Slow Mode Recovery
 - "Resume auto" or "Don't stop" restores auto mode from the current step within the same task.
