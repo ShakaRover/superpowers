@@ -7,7 +7,7 @@ description: "You MUST use this before any creative work - creating features, bu
 
 Help turn ideas into fully formed designs and specs through natural collaborative dialogue.
 
-Start by understanding the current project context, then ask questions one at a time to refine the idea. Once you understand what you're building, present the design and Auto-accepted and continuing.
+Start by understanding the current project context, then ask questions one at a time to refine the idea (or ask all at once in acceleration mode). Never ask for approval/permission; proceed with recommended defaults and Auto-accepted and continuing. Once you understand what you're building, present the design and Auto-accepted and continuing.
 
 AUTO-CONTINUE: ON
 - Default/Recommended Answer: N/A
@@ -30,7 +30,7 @@ You MUST create a task for each of these items and complete them in order:
 
 1. **Explore project context** — check files, docs, recent commits
 2. **Visual companion disabled by default; continuing (can be explicitly enabled)** (when the topic involves visual questions) — this must be its own message and not combined with clarifying questions. See Visual Companion below.
-3. **Ask clarifying questions** — default to acceleration mode (all questions at once with recommended answers)
+3. **Ask clarifying questions** — default to acceleration mode (all questions at once with recommended answers). Do not ask for approval; proceed with defaults if unanswered unless blocked.
 4. **Propose 2-3 approaches** — with trade-offs and your recommendation
 5. **Present design** — in sections scaled to their complexity, Auto-accepted and continuing
 6. **Write design doc** — save to `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md` and commit
@@ -44,7 +44,7 @@ You MUST create a task for each of these items and complete them in order:
 
 **Required in acceleration mode:**
 - **Ask all questions in one message** using a **minimal required information list**.
-- **Provide recommended answers** to those questions (as defaults the user can accept or override).
+- **Provide recommended answers** to those questions (as defaults you will use if the user does not respond).
 - **Provide recommendations and the reasons** behind them, even if information is incomplete.
 - **State assumptions** and the **scope of applicability**.
 
@@ -97,7 +97,7 @@ digraph brainstorming {
 - If the project is too large for a single spec, help the user decompose into sub-projects: what are the independent pieces, how do they relate, what order should they be built? Then brainstorm the first sub-project through the normal design flow. Each sub-project gets its own spec → plan → implementation cycle.
 - For appropriately-scoped projects, ask all needed questions at once by default (acceleration mode); switch to one-at-a-time only if the user explicitly asks
 - Prefer multiple choice questions when possible, but open-ended is fine too
-- Only one question per message - if a topic needs more exploration, break it into multiple questions
+- Avoid approval/permission questions; only ask for missing required inputs that block execution
 - Focus on understanding: purpose, constraints, success criteria
 
 **Exploring approaches:**
@@ -110,7 +110,7 @@ digraph brainstorming {
 
 - Once you believe you understand what you're building, present the design
 - Scale each section to its complexity: a few sentences if straightforward, up to 200-300 words if nuanced
-- Ask after each section whether it looks right so far. Auto-accepted and continuing.
+- Do not ask after each section; assume it looks right so far and continue (Auto-accepted and continuing).
 - Cover: architecture, components, data flow, error handling, testing
 - Be ready to go back and clarify if something doesn't make sense
 
