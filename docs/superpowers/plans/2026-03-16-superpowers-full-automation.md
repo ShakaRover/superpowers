@@ -114,7 +114,7 @@ Replace any visual-companion prompts with:
 “已默认不启用视觉伴侣并继续”
 
 同时在视觉伴侣定义处增加慢速模式提示语：
-“慢速模式下恢复视觉伴侣询问并等待确认。”
+“慢速模式下恢复视觉伴侣询问并等待确认（spec aligned）。”
 
 - [ ] **Step 6: Re-scan for semantic gates**
 
@@ -245,7 +245,7 @@ Add line: status records are written only in the assistant reply (no mandatory p
 
 - [ ] **Step 1: Add timeout + retry rules**
 
-Document: review/subagent timeout → 状态“未知”; verification timeout/失败 → 状态“未通过”.
+Document: review/subagent timeout → 状态“未知”; review/subagent failure (non-timeout) → 状态“未通过”; verification timeout/失败 → 状态“未通过”.
 Process: wait 60s, retry once (idempotent), wait another 60s, then apply the correct status above. If a skill already defines stricter timeouts/blocking, follow the skill rule.
 
 - [ ] **Step 2: Add idempotency key rule**
