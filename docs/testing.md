@@ -4,28 +4,28 @@ This document describes how to test Superpowers skills, particularly the integra
 
 ## Overview
 
-Testing skills that involve subagents, workflows, and complex interactions requires running actual Claude Code sessions in headless mode and verifying their behavior through session transcripts.
+Testing skills that involve subagents, workflows, and complex interactions requires running actual Codex sessions in headless mode and verifying their behavior through event logs.
 
 ## Test Structure
 
 ```
 tests/
-├── claude-code/
+├── codex/
 │   ├── test-helpers.sh                    # Shared test utilities
 │   ├── test-subagent-driven-development-integration.sh
 │   ├── analyze-token-usage.py             # Token analysis tool
-│   └── run-skill-tests.sh                 # Test runner (if exists)
+│   └── run-skill-tests.sh                 # Test runner
 ```
 
 ## Running Tests
 
 ### Integration Tests
 
-Integration tests execute real Claude Code sessions with actual skills:
+Integration tests execute real Codex sessions with actual skills:
 
 ```bash
 # Run the subagent-driven-development integration test
-cd tests/claude-code
+cd tests/codex
 ./test-subagent-driven-development-integration.sh
 ```
 
@@ -34,8 +34,8 @@ cd tests/claude-code
 ### Requirements
 
 - Must run from the **superpowers plugin directory** (not from temp directories)
-- Claude Code must be installed and available as `claude` command
-- Local dev marketplace must be enabled: `"superpowers@superpowers-dev": true` in `~/.claude/settings.json`
+- Codex CLI must be installed and available as `codex` command
+- Local dev marketplace must be enabled in Codex configuration
 
 ## Integration Test: subagent-driven-development
 
@@ -53,8 +53,8 @@ The integration test verifies the `subagent-driven-development` skill correctly:
 ### How It Works
 
 1. **Setup**: Creates a temporary Node.js project with a minimal implementation plan
-2. **Execution**: Runs Claude Code in headless mode with the skill
-3. **Verification**: Parses the session transcript (`.jsonl` file) to verify:
+2. **Execution**: Runs Codex in headless mode with the skill
+3. **Verification**: Parses the event log (`.jsonl` file) to verify:
    - Skill tool was invoked
    - Subagents were dispatched (Task tool)
    - TodoWrite was used for tracking
@@ -138,22 +138,18 @@ STATUS: PASSED
 
 ### Usage
 
-Analyze token usage from any Claude Code session:
+Analyze token usage from any Codex session/event log:
 
 ```bash
-python3 tests/claude-code/analyze-token-usage.py ~/.claude/projects/<project-dir>/<session-id>.jsonl
+python3 tests/codex/analyze-token-usage.py /path/to/codex-events.jsonl
 ```
 
-### Finding Session Files
+### Finding Event Logs
 
-Session transcripts are stored in `~/.claude/projects/` with the working directory path encoded:
+The integration test writes a Codex event log to the test project directory:
 
-```bash
-# Example for /Users/jesse/Documents/GitHub/superpowers/superpowers
-SESSION_DIR="$HOME/.claude/projects/-Users-jesse-Documents-GitHub-superpowers-superpowers"
-
-# Find recent sessions
-ls -lt "$SESSION_DIR"/*.jsonl | head -5
+```
+$TEST_PROJECT/codex-events.jsonl
 ```
 
 ### What It Shows
@@ -183,15 +179,15 @@ ls -lt "$SESSION_DIR"/*.jsonl | head -5
 
 **Solutions**:
 1. Ensure you're running FROM the superpowers directory: `cd /path/to/superpowers && tests/...`
-2. Check `~/.claude/settings.json` has `"superpowers@superpowers-dev": true` in `enabledPlugins`
+2. Check Codex plugin configuration enables `superpowers@superpowers-dev`
 3. Verify skill exists in `skills/` directory
 
 ### Permission Errors
 
-**Problem**: Claude blocked from writing files or accessing directories
+**Problem**: Codex blocked from writing files or accessing directories
 
 **Solutions**:
-1. Use `--permission-mode bypassPermissions` flag
+1. Use `--full-auto` or configure permissions in Codex
 2. Use `--add-dir /path/to/temp/dir` to grant access to test directories
 3. Check file permissions on test directories
 

@@ -1,16 +1,14 @@
-# Claude Code Skills Tests
+# Codex Skills Tests
 
-Automated tests for superpowers skills using Claude Code CLI.
-
-**Note:** This directory is retained for fallback only. The default test entry point is now `tests/codex/`.
+Automated tests for superpowers skills using Codex CLI.
 
 ## Overview
 
-This test suite verifies that skills are loaded correctly and Claude follows them as expected. Tests invoke Claude Code in headless mode (`claude -p`) and verify the behavior.
+This test suite verifies that skills are loaded correctly and Codex follows them as expected. Tests invoke Codex in headless mode (`codex exec`) and verify the behavior.
 
 ## Requirements
 
-- Claude Code CLI installed and in PATH (`claude --version` should work)
+- Codex CLI installed and in PATH (`codex --version` should work)
 - Local superpowers plugin installed (see main README for installation)
 
 ## Running Tests
@@ -44,7 +42,7 @@ This test suite verifies that skills are loaded correctly and Claude follows the
 
 ### test-helpers.sh
 Common functions for skills testing:
-- `run_claude "prompt" [timeout]` - Run Claude with prompt
+- `run_codex "prompt" [timeout]` - Run Codex with prompt
 - `assert_contains output pattern name` - Verify pattern exists
 - `assert_not_contains output pattern name` - Verify pattern absent
 - `assert_count output pattern count name` - Verify exact count
@@ -56,7 +54,7 @@ Common functions for skills testing:
 
 Each test file:
 1. Sources `test-helpers.sh`
-2. Runs Claude Code with specific prompts
+2. Runs Codex with specific prompts
 3. Verifies expected behavior using assertions
 4. Returns 0 on success, non-zero on failure
 
@@ -71,8 +69,8 @@ source "$SCRIPT_DIR/test-helpers.sh"
 
 echo "=== Test: My Skill ==="
 
-# Ask Claude about the skill
-output=$(run_claude "What does the my-skill skill do?" 30)
+# Ask Codex about the skill
+output=$(run_codex "What does the my-skill skill do?" 30)
 
 # Verify response
 assert_contains "$output" "expected behavior" "Skill describes behavior"
@@ -121,20 +119,20 @@ Full workflow execution test (~10-30 minutes):
 
 1. Create new test file: `test-<skill-name>.sh`
 2. Source test-helpers.sh
-3. Write tests using `run_claude` and assertions
+3. Write tests using `run_codex` and assertions
 4. Add to test list in `run-skill-tests.sh`
 5. Make executable: `chmod +x test-<skill-name>.sh`
 
 ## Timeout Considerations
 
 - Default timeout: 5 minutes per test
-- Claude Code may take time to respond
+- Codex may take time to respond
 - Adjust with `--timeout` if needed
 - Tests should be focused to avoid long runs
 
 ## Debugging Failed Tests
 
-With `--verbose`, you'll see full Claude output:
+With `--verbose`, you'll see full Codex output:
 ```bash
 ./run-skill-tests.sh --verbose --test test-subagent-driven-development.sh
 ```
