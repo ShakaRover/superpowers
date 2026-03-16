@@ -26,6 +26,14 @@ Status Output Rules
 - Late responses only append a "late response" note and never update prior status.
 - Status records are written only in the assistant reply (no mandatory persistence).
 
+## Operational Rules
+
+- Missing input: record status as `SKIPPED (MISSING INPUT)` with Reason/Impact, then auto-continue.
+- Blocked or risky verification: prefer a safe downgrade/alternative path, record the decision and why.
+- Timeout or missing result: record status as `UNKNOWN (TIMEOUT/MISSING)` and auto-continue.
+- Retries must be idempotent, limited, and record attempt count/outcomes.
+- Status linkage: missing input -> SKIPPED; timeout/missing -> UNKNOWN.
+
 **Core principle:** Evidence before claims, always.
 
 **Violating the letter of this rule is violating the spirit of this rule.**
