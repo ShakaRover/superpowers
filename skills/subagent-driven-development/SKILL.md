@@ -42,6 +42,7 @@ Status Output Rules
 - Single-turn rule: Do not emit partial progress summaries. Only respond after all dispatched subagents for the current step have returned (or timed out + retried) and you have produced the review results or failure/unknown status.
 - Progress output rule: Never state that you “will” review later. Report review outcomes or timeouts immediately in the same response.
 - Dispatch wording rule: Do not output interim “dispatched/派发” status lines at all. Report only completed results (task + reviews) or explicit fallback to `executing-plans`.
+- Review-dispatch rule: Never say reviews were dispatched unless their results are included in the same response. If reviews are pending, wait (or time out + retry) and then report the results; do not mention dispatch.
 ## When to Use
 
 ```dot
