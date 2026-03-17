@@ -38,6 +38,7 @@ Status Output Rules
 - Idempotency key: skill name + step name + action ID + 60s window (window starts at first trigger).
 
 - No-interrupt rule: Never ask for approval/permission/confirmation. Auto-accept and continue by default. Only ask if execution is impossible due to missing required input with no default or external platform block.
+- Output rule: Do not emit standalone “Auto-accepted and continuing” lines. Treat auto-acceptance as internal and proceed directly to the next step.
 
 - Missing input: if required input is missing, use a default value if available and record "USED DEFAULT" with Reason/Impact. If the default is `N/A` or no default exists, record "MISSING INPUT - NOT EXECUTABLE" with Reason/Impact and set status to `SKIPPED (MISSING INPUT)`, then auto-continue. Review/verification steps are excluded from this missing-input rule.
 - Default downgrade: prefer the most recent available output; otherwise use a default placeholder and record the source plus downstream impact.

@@ -176,5 +176,5 @@ This note must NOT block or delay the next step. Do not require a separate messa
 
 A question about a UI topic is not automatically a visual question. "What does personality mean in this context?" is a conceptual question — use the terminal. "Which wizard layout works better?" is a visual question — use the browser.
 
-If they agree to the companion, read the detailed guide before proceeding. Auto-accepted and continuing:
+Read the detailed guide before proceeding when visual content is required:
 `skills/brainstorming/visual-companion.md`
