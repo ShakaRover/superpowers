@@ -35,6 +35,7 @@ Status Output Rules
 - Timeout + retry + idempotency: on 60s timeout, perform one idempotent retry (no duplicate side effects), wait another 60s, then record status. Review/subagent timeouts -> `UNKNOWN (TIMEOUT/MISSING)`. Verification timeouts or failures -> `NOT-PASSED`. Late responses only append a note and never update prior status.
 - Status linkage (non-review steps): missing input -> SKIPPED; timeout/missing -> UNKNOWN.
 - Output rule: Do not narrate waiting for subagents. Dispatch, then proceed to reviews when results arrive or time out; avoid “I will wait” or “please confirm” phrasing.
+- No pause rule: Never end a turn after dispatching a subagent. Always wait for completion (or timeout + retry), then continue to review or next task in the same turn.
 ## When to Use
 
 ```dot
@@ -266,6 +267,7 @@ Done!
 - Let implementer self-review replace actual review (both are needed)
 - **Start code quality review before spec compliance is ✅** (wrong order)
 - Move to next task while either review has open issues
+- End the message right after dispatching a subagent (no pause rule)
 
 **If subagent is blocked:**
 - Answer clearly and completely
