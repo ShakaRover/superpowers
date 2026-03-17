@@ -7,7 +7,7 @@ description: "You MUST use this before any creative work - creating features, bu
 
 Help turn ideas into fully formed designs and specs through natural collaborative dialogue.
 
-Start by understanding the current project context, then ask questions one at a time to refine the idea (or ask all at once in acceleration mode). Never ask for approval/permission; proceed with recommended defaults and Auto-accepted and continuing. Once you understand what you're building, present the design and Auto-accepted and continuing.
+Start by understanding the current project context, then ask questions one at a time to refine the idea (or ask all at once in acceleration mode). Never ask for approval/permission; proceed with recommended defaults without stating acceptance. Once you understand what you're building, present the design and proceed without confirmation prompts.
 
 AUTO-CONTINUE: ON
 - Default/Recommended Answer: N/A
@@ -17,12 +17,12 @@ AUTO-CONTINUE: ON
 - Completion-claim constraint: If verification fails or review does not pass, record failure only; do not claim completion (auto-continue).
 
 <HARD-GATE>
-Do NOT invoke any implementation skill, write any code, scaffold any project, or take any implementation action until you have presented a design and Auto-accepted and continuing. This applies to EVERY project regardless of perceived simplicity.
+Do NOT invoke any implementation skill, write any code, scaffold any project, or take any implementation action until you have presented a design and proceeded automatically (no confirmation prompts). This applies to EVERY project regardless of perceived simplicity.
 </HARD-GATE>
 
 ## Anti-Pattern: "This Is Too Simple To Need A Design"
 
-Every project goes through this process. A todo list, a single-function utility, a config change — all of them. "Simple" projects are where unexamined assumptions cause the most wasted work. The design can be short (a few sentences for truly simple projects), but you MUST present it and Auto-accepted and continuing.
+Every project goes through this process. A todo list, a single-function utility, a config change — all of them. "Simple" projects are where unexamined assumptions cause the most wasted work. The design can be short (a few sentences for truly simple projects), but you MUST present it and proceed automatically without confirmation prompts.
 
 ## Checklist
 
@@ -32,10 +32,10 @@ You MUST create a task for each of these items and complete them in order:
 2. **Visual companion disabled by default; continuing.** (when the topic involves visual questions) — do not pause; proceed directly to clarifying questions. See Visual Companion below.
 3. **Ask clarifying questions** — default to acceleration mode (all questions at once with recommended answers). Do not ask for approval; proceed with defaults if unanswered unless blocked.
 4. **Propose 2-3 approaches** — with trade-offs and your recommendation
-5. **Present design** — in sections scaled to their complexity, Auto-accepted and continuing
+5. **Present design** — in sections scaled to their complexity, proceed automatically without confirmation prompts
 6. **Write design doc** — save to `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md` and commit
-7. **Spec review loop** — dispatch spec-document-reviewer subagent with precisely crafted review context (never your session history); fix issues and re-dispatch. Proceed without emitting standalone “Auto-accepted and continuing” lines (max 5 iterations, then surface to human)
-8. **User reviews written spec** — auto-accepted; proceed without emitting a standalone confirmation line
+7. **Spec review loop** — dispatch spec-document-reviewer subagent with precisely crafted review context (never your session history); fix issues and re-dispatch. Proceed without emitting standalone acceptance lines (max 5 iterations, then surface to human)
+8. **User reviews written spec** — proceed automatically; do not emit a confirmation line
 9. **Transition to implementation** — invoke writing-plans skill to create implementation plan
 
 ## Acceleration Mode (Default)
@@ -60,11 +60,11 @@ digraph brainstorming {
     "Ask clarifying questions" [shape=box];
     "Propose 2-3 approaches" [shape=box];
     "Present design sections" [shape=box];
-    "Design auto-accepted and continuing" [shape=diamond];
+    "Design accepted (implicit)" [shape=diamond];
     "Write design doc" [shape=box];
     "Spec review loop" [shape=box];
-    "Spec check auto-accepted and continuing" [shape=diamond];
-    "Spec auto-accepted and continuing" [shape=diamond];
+    "Spec check accepted (implicit)" [shape=diamond];
+    "Spec accepted (implicit)" [shape=diamond];
     "Invoke writing-plans skill" [shape=doublecircle];
 
     "Explore project context" -> "Visual questions ahead?";
@@ -74,15 +74,15 @@ digraph brainstorming {
     "Acceleration mode" -> "Ask all questions + provide recommended answers";
     "Ask all questions + provide recommended answers" -> "Propose 2-3 approaches";
     "Propose 2-3 approaches" -> "Present design sections";
-    "Present design sections" -> "Design auto-accepted and continuing";
-    "Design auto-accepted and continuing" -> "Present design sections" [label="continue after adjustment"];
-    "Design auto-accepted and continuing" -> "Write design doc" [label="Auto-accepted and continuing"];
+    "Present design sections" -> "设计自动进入后续流程";
+    "Design accepted (implicit)" -> "Present design sections" [label="continue after adjustment"];
+    "Design accepted (implicit)" -> "Write design doc" [label="proceed automatically"];
     "Write design doc" -> "Spec review loop";
-    "Spec review loop" -> "Spec check auto-accepted and continuing";
-    "Spec check auto-accepted and continuing" -> "Spec review loop" [label="issues found,\nfix and re-dispatch"];
-    "Spec check auto-accepted and continuing" -> "Spec auto-accepted and continuing" [label="Auto-accepted and continuing"];
-    "Spec auto-accepted and continuing" -> "Write design doc" [label="changes requested"];
-    "Spec auto-accepted and continuing" -> "Invoke writing-plans skill" [label="Auto-accepted and continuing"];
+    "Spec review loop" -> "Spec check accepted (implicit)";
+    "Spec check accepted (implicit)" -> "Spec review loop" [label="issues found,\nfix and re-dispatch"];
+    "Spec check accepted (implicit)" -> "Spec accepted (implicit)" [label="proceed automatically"];
+    "Spec accepted (implicit)" -> "Write design doc" [label="changes requested"];
+    "Spec accepted (implicit)" -> "Invoke writing-plans skill" [label="proceed automatically"];
 }
 ```
 
@@ -110,7 +110,7 @@ digraph brainstorming {
 
 - Once you believe you understand what you're building, present the design
 - Scale each section to its complexity: a few sentences if straightforward, up to 200-300 words if nuanced
-- Do not ask after each section; assume it looks right so far and continue (Auto-accepted and continuing).
+- Do not ask after each section; assume it looks right so far and continue without confirmation prompts.
 - Cover: architecture, components, data flow, error handling, testing
 - Be ready to go back and clarify if something doesn't make sense
 
@@ -144,12 +144,12 @@ After writing the spec document:
 3. If loop exceeds 5 iterations, surface to human for guidance
 
 **Auto-continue by default:**
-After the spec review loop passes, proceed directly to the next step. Do not emit a standalone “Auto-accepted and continuing” line. If changes are needed, update and re-run the spec review loop.
+规格审阅通过后，直接进入后续环节。不要单独输出接受语句。如需修改，更新后重新运行审阅循环。
 
 **Implementation:**
 
 - Invoke the writing-plans skill to create a detailed implementation plan
-- Do NOT invoke any other skill. writing-plans is the next step.
+- Do NOT invoke any other skill. writing-plans is the required follow-on skill.
 
 ## Key Principles
 
@@ -158,7 +158,7 @@ After the spec review loop passes, proceed directly to the next step. Do not emi
 - **Multiple choice preferred** - Easier to answer than open-ended when possible
 - **YAGNI ruthlessly** - Remove unnecessary features from all designs
 - **Explore alternatives** - Always propose 2-3 approaches before settling
-- **Incremental validation** - Present design, Auto-accepted and continuing
+- **Incremental validation** - Present design and proceed automatically without confirmation prompts
 - **Be flexible** - Go back and clarify when something doesn't make sense
 
 ## Visual Companion
@@ -167,7 +167,7 @@ A browser-based companion for showing mockups, diagrams, and visual options duri
 
 **Offering the companion:** When you anticipate that upcoming questions will involve visual content (mockups, layouts, diagrams), state: "Visual companion disabled by default; continuing." Do not pause or wait.
 
-This note must NOT block or delay the next step. Do not require a separate message.
+此说明不得阻塞或延迟后续环节，不需要单独消息。
 
 **Per-question decision:** Visual companion disabled by default; continuing. The test: **would the user understand this better by seeing it than reading it?**
 

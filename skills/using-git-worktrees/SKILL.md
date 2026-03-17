@@ -48,7 +48,7 @@ grep -i "worktree.*director" CLAUDE.md 2>/dev/null
 If no directory exists and no CLAUDE.md preference:
 
 ```
-No worktree directory found. Defaulting to .worktrees/, auto-accepted and continuing.
+未找到 worktree 目录，默认使用 .worktrees/，自动继续。
 ```
 
 ## Safety Verification
@@ -132,7 +132,7 @@ pytest
 go test ./...
 ```
 
-**If tests fail:** Report failures, Auto-accepted and continuing.
+**If tests fail:** Report failures and proceed automatically.
 
 **If tests pass:** Report ready.
 
@@ -151,9 +151,9 @@ Ready to implement <feature-name>
 | `.worktrees/` exists | Use it (verify ignored) |
 | `worktrees/` exists | Use it (verify ignored) |
 | Both exist | Use `.worktrees/` |
-| Neither exists | Check CLAUDE.md → Auto-accepted and continuing |
+| Neither exists | Check CLAUDE.md → proceed automatically |
 | Directory not ignored | Add to .gitignore + commit |
-| Tests fail during baseline | Report failures + Auto-accepted and continuing |
+| Tests fail during baseline | Report failures + proceed automatically |
 | No package.json/Cargo.toml | Skip dependency install |
 
 ## Common Mistakes
@@ -166,12 +166,12 @@ Ready to implement <feature-name>
 ### Assuming directory location
 
 - **Problem:** Creates inconsistency, violates project conventions
-- **Fix:** Follow priority: existing > CLAUDE.md > Auto-accepted and continuing
+- **Fix:** Follow priority: existing > CLAUDE.md > proceed automatically
 
 ### Proceeding with failing tests
 
 - **Problem:** Can't distinguish new bugs from pre-existing issues
-- **Fix:** Report failures, Auto-accepted and continuing
+- **Fix:** Report failures, proceed automatically
 
 ### Hardcoding setup commands
 
@@ -199,12 +199,12 @@ Ready to implement auth feature
 **Never:**
 - Create worktree without verifying it's ignored (project-local)
 - Skip baseline test verification
-- Proceed with failing tests without Auto-accepted and continuing
+- Proceed with failing tests without explicit auto-continue
 - Assume directory location when ambiguous
 - Skip CLAUDE.md check
 
 **Always:**
-- Follow directory priority: existing > CLAUDE.md > Auto-accepted and continuing
+- Follow directory priority: existing > CLAUDE.md > proceed automatically
 - Verify directory is ignored for project-local
 - Auto-detect and run project setup
 - Verify clean test baseline
@@ -212,7 +212,7 @@ Ready to implement auth feature
 ## Integration
 
 **Called by:**
-- **brainstorming** (Phase 4) - REQUIRED when design Auto-accepted and continuing and implementation follows
+- **brainstorming** (Phase 4) - REQUIRED when design is complete and implementation follows
 - **subagent-driven-development** - REQUIRED before executing any tasks
 - **executing-plans** - REQUIRED before executing any tasks
 - Any skill needing isolated workspace

@@ -38,13 +38,13 @@ Status Output Rules
 - Idempotency key: skill name + step name + action ID + 60s window (window starts at first trigger).
 
 - No-interrupt rule: Never ask for approval/permission/confirmation. Auto-accept and continue by default. Only ask if execution is impossible due to missing required input with no default or external platform block.
-- Output rule: Do not emit standalone “Auto-accepted and continuing” lines. Treat auto-acceptance as internal and proceed directly to the next step.
+- Output rule: 不要输出单独的接受语句；把自动接受视为内部行为，直接进入后续动作。
 - No-future-promise rule: Do not promise to do something “after” or “later.” If you say you will do it, do it in the same response unless blocked; otherwise record a blocking reason and proceed with a fallback.
-- No-interim-dispatch rule: Do not output “dispatched/派发” status lines without completion results. If you must mention dispatch, include completed results in the same response; otherwise omit dispatch mention entirely.
+- No-interim-dispatch rule: 不要输出仅说明已分配/已派送的状态行。若必须提及分配，必须在同一回复提供完成结果，否则省略该描述。
 - Status-output rule: Do not emit PASSED status blocks. Only emit status blocks for NOT-PASSED or UNKNOWN, and only when it changes execution or risk.
-- No-next-step headings: Avoid standalone “下一步/Next step” headings that end a turn. Only mention the next task when you also provide completed results in the same response.
-- No-continue-announcement: Do not announce “继续执行/继续推进/不再中途询问”. Just continue and provide results.
-- Response protocol: End each response with completed results or explicit NOT-PASSED/UNKNOWN status. Never end with questions, confirmation prompts, or “next step” placeholders.
+- No-next-step headings: 避免使用仅暗示后续动作的独立标题并在当轮结束。只有在同一回复提供完成结果时才可提及后续任务。
+- No-continue-announcement: 不要宣告“将继续/无需确认”等话术，直接提供结果。
+- Response protocol: 每次回复都以完成结果或明确的 NOT-PASSED/UNKNOWN 状态收尾。不得以问题、确认提示或后续动作占位收尾。
 
 - Missing input: if required input is missing, use a default value if available and record "USED DEFAULT" with Reason/Impact. If the default is `N/A` or no default exists, record "MISSING INPUT - NOT EXECUTABLE" with Reason/Impact and set status to `SKIPPED (MISSING INPUT)`, then auto-continue. Review/verification steps are excluded from this missing-input rule.
 - Default downgrade: prefer the most recent available output; otherwise use a default placeholder and record the source plus downstream impact.

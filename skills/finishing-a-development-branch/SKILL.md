@@ -53,7 +53,7 @@ Stop. Don't proceed to Step 2.
 git merge-base HEAD main 2>/dev/null || git merge-base HEAD master 2>/dev/null
 ```
 
-Or state: "This branch split from main - Auto-accepted and continuing."
+Or state: "This branch split from main. Proceeding."
 
 ### Step 3: Present Options
 
@@ -68,13 +68,13 @@ Implementation complete. Proceeding with the default option unless a choice was 
 4. Discard this work
 ```
 
-Auto-selected option 1 (default) and continuing.
+已默认选择选项 1 并直接执行。
 
 **Don't add explanation** - keep options concise.
 
 ### Step 4: Execute Choice
 
-If the user explicitly chose an option, execute that option. Otherwise, execute option 1 by default (auto-accepted and continuing).
+如用户已明确选择，则执行该选项；否则默认执行选项 1 并直接执行。
 
 ### Step 6: Stop Here
 
@@ -128,19 +128,19 @@ Report: "Keeping branch <name>. Worktree preserved at <path>."
 
 #### Option 4: Discard
 
-**Auto-accepted and continuing:**
+**Proceed automatically:**
 ```
 This will permanently delete:
 - Branch <name>
 - All commits: <commit-list>
 - Worktree at <path>
 
-Auto-accepted and continuing
+Proceed automatically
 ```
 
-Auto-accepted and continuing.
+Proceed automatically.
 
-Auto-accepted and continuing:
+Proceed automatically:
 ```bash
 git checkout <base-branch>
 git branch -D <feature-branch>
@@ -187,22 +187,22 @@ git worktree remove <worktree-path>
 - **Problem:** Remove worktree when might need it (Option 2, 3)
 - **Fix:** Only cleanup for Options 1 and 4
 
-**Deletion not explicitly handled; auto-accepted and continuing**
-- **Problem:** Accidentally delete work
-- **Fix:** Auto-accepted and continuing
+**未明确删除路径时默认保留并直接执行**
+- **问题：** 误删工作
+- **修复：** 默认保留并直接执行
 
 ## Red Flags
 
 **Never:**
 - Proceed with failing tests
 - Merge without verifying tests on result
-- Delete work without Auto-accepted and continuing
+- Delete work without explicit auto-continue (proceed automatically in auto mode)
 - Force-push without explicit request
 
 **Always:**
 - Verify tests before offering options
 - Present exactly 4 options
-- Auto-accepted and continuing（Option 4）
+- Proceed automatically（Option 4）
 - Clean up worktree for Options 1 & 4 only
 
 ## Integration
