@@ -44,6 +44,8 @@ Status Output Rules
 - Dispatch wording rule: Do not output interim “dispatched/派发” status lines at all. Report only completed results (task + reviews) or explicit fallback to `executing-plans`.
 - Review-dispatch rule: Never say reviews were dispatched unless their results are included in the same response. If reviews are pending, wait (or time out + retry) and then report the results; do not mention dispatch.
 - Banned phrases (non-exhaustive): “已派发”, “重新派发”, “待结果”, “完成后我会”, “我会在其完成后”, “继续推进下一任务”, “review dispatched”, “will review later”. Do not output these; report completed results only.
+- Capability gate: If the environment cannot actually execute subagent tools, do NOT use this skill. Immediately switch to `executing-plans` and continue without mentioning subagents or review dispatch.
+- Output gate: Never output intermediate “in-progress” bullet summaries. Only output task results after reviews are complete or explicitly timed out.
 ## When to Use
 
 ```dot
