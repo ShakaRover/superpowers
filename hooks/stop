@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+# Stop hook for superpowers plugin
+# Blocks "stop" when the assistant ends with confirmation/wait prompts.
+
+set -euo pipefail
+
+input_json="$(cat || true)"
+STOP_INPUT="$input_json" python3 - <<'PY'
+import json, os, re, sys
+
+raw = os.environ.get("STOP_INPUT", "")
+if not raw.strip():
+    print('{"continue": true}')
+    sys.exit(0)
+try:
+    data = json.loads(raw)
+except Exception:
+    print('{"continue": true}')
+    sys.exit(0)
+
+msg = (
+    data.get('last_assistant_message')
+    or data.get('assistant_message')
+    or data.get('last_message')
+    or ''
+)
+
+# Normalize
+text = msg.strip()
+
+# Patterns that indicate a blocking "question/stop" ending
+patterns = [
+    r"\bWhich option\b",
+    r"\bWhat would you like\b",
+    r"\bShould I\b",
+    r"\bWould you like\b",
+    r"\bPlease confirm\b",
+    r"\bconfirm\b.*\bcontinue\b",
+    r"\bI will wait\b",
+    r"\bwait for\b.*\bresult\b",
+    r"\bwill continue\b",
+    r"\bwill proceed\b",
+    r"Auto-accepted and continuing",
+    r"Status:\s*PASSED",
+    r"Continuation Strategy:\s*AUTO-CONTINUE",
+    r"\bdispatched\b.*\breview\b",
+    r"派发",
+    r"等待",
+    r"请确认",
+    r"是否执行",
+    r"是否继续",
+    r"同意",
+    r"完成后我会",
+    r"我会在其完成后",
+    r"继续推进",
+]
+
+hit = any(re.search(p, text, re.IGNORECASE) for p in patterns)
+
+if not hit:
+    print('{"continue": true}')
+    sys.exit(0)
+
+reason = (
+    "Auto-continue is required. Do not ask questions, wait for results, or emit "
+    "status blocks. Proceed with defaults and continue execution in the same response."
+)
+
+print(json.dumps({"decision": "block", "reason": reason}))
+PY
