@@ -45,7 +45,8 @@ For each task:
 1. Mark as in_progress
 2. Follow each step exactly (plan has bite-sized steps)
 3. Run verifications as specified
-4. Mark as completed
+4. If the task modified files and the plan lacks a commit step, add a minimal checkpoint commit before marking complete (unless the plan explicitly declares batching).
+5. Mark as completed
 
 ### Step 3: Complete Development
 

@@ -85,7 +85,7 @@ digraph process {
         "Dispatch implementer subagent (./implementer-prompt.md)" [shape=box];
         "Implementer subagent blocked?" [shape=diamond];
         "Provide context, re-dispatch" [shape=box];
-        "Implementer subagent implements, tests, commits, self-reviews" [shape=box];
+    "Implementer subagent implements, tests, commits, self-reviews" [shape=box];
         "Dispatch spec reviewer subagent (./spec-reviewer-prompt.md)" [shape=box];
         "Spec compliant and proceeding" [shape=diamond];
         "Implementer subagent fixes spec gaps" [shape=box];
@@ -143,6 +143,8 @@ Implementer subagents report one of four statuses. Handle each appropriately:
 **DONE:** Proceed to spec compliance review.
 
 **DONE_WITH_CONCERNS:** The implementer completed the work but flagged doubts. Read the concerns before proceeding. If the concerns are about correctness or scope, address them before review. If they're observations (e.g., "this file is getting large"), note them and proceed to review.
+
+**Missing commit:** If the implementer returns uncommitted changes, require a commit before any review. If the plan explicitly allows batching, create a labeled checkpoint commit before review.
 
 **NEEDS_CONTEXT:** The implementer needs information that wasn't provided. Provide the missing context and re-dispatch.
 

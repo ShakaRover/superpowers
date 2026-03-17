@@ -50,6 +50,8 @@ This structure informs the task decomposition. Each task should produce self-con
 - "Run the tests and make sure they pass" - step
 - "Commit" - step
 
+**Commit requirement:** Every task must include an explicit commit step unless the plan explicitly declares a batching strategy (and explains why). If batching is chosen, add a dedicated "checkpoint commit" task before any merge or branch switch.
+
 ## Plan Document Header
 
 **Every plan MUST start with this header:**
