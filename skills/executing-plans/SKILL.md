@@ -1,13 +1,13 @@
 ---
 name: executing-plans
-description: Use when you have a written implementation plan to execute in a separate session with review checkpoints (Auto-continue)
+description: Use when you have a written implementation plan to execute in a separate session with review checkpoints
 ---
 
 # Executing Plans
 
 ## Overview
 
-Load plan, review critically, execute all tasks, report when complete (Auto-continue).
+加载计划，严格审阅，执行全部任务，完成后报告并自动继续。
 
 AUTO-CONTINUE: ON
 - Default/Recommended Answer: N/A
@@ -53,7 +53,7 @@ For each task:
 ### Step 3: Complete Development
 
 After all tasks complete and verified:
-- Announce: "I'm using the finishing-a-development-branch skill to complete this work."
+- Announce: "我正在使用 finishing-a-development-branch 技能完成收尾。"
 - **REQUIRED SUB-SKILL:** Use superpowers:finishing-a-development-branch
 - Follow that skill to verify tests, present options, execute choice
 
@@ -82,7 +82,7 @@ STOP-TYPE: RECOVERABLE
 - Don't skip verifications
 - Reference skills when plan says to
 - Stop when blocked, don't guess
-- Never start implementation on main/master branch without Auto-accepted and continuing
+- Never start implementation on main/master branch; always use a worktree/feature branch
 
 ## Integration
 

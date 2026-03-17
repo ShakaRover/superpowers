@@ -19,7 +19,7 @@ AUTO-CONTINUE: ON
 
 Assume they are a skilled developer, but know almost nothing about our toolset or problem domain. Assume they don't know good test design very well.
 
-**Announce at start:** "I'm using the writing-plans skill to create the implementation plan."
+**Announce at start:** "我正在使用 writing-plans 技能编写实现计划。"
 
 **Context:** This should be run in a dedicated worktree (created by brainstorming skill).
 
@@ -127,8 +127,8 @@ After completing each chunk of the plan:
 2. If ❌ Issues Found:
    - Fix the issues in the chunk
    - Re-dispatch reviewer for that chunk
-   - Repeat until ✅ Auto-accepted and continuing
-3. If ✅ Auto-accepted and continuing: proceed to next chunk (or execution handoff if last chunk)
+  - Repeat until ✅ approved
+3. If ✅ approved: proceed to next chunk (or execution handoff if last chunk)
 
 **Chunk boundaries:** Use `## Chunk N: <name>` headings to delimit chunks. Each chunk should be ≤1000 lines and logically self-contained.
 
@@ -141,7 +141,7 @@ After completing each chunk of the plan:
 
 After saving the plan:
 
-**"Plan complete and saved to `docs/superpowers/plans/<filename>.md`. Proceeding."**
+**"计划已保存至 `docs/superpowers/plans/<filename>.md`，进入执行路径。"**
 
 **Execution path depends on harness capabilities:**
 
