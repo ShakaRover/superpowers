@@ -57,7 +57,7 @@ Or state: "This branch split from main. Proceeding."
 
 ### Step 3: Present Options
 
-Present exactly these 4 options, do not ask a question, then auto-select the default if the user hasn't already specified a choice:
+Present exactly these 4 options, do not ask a question, then auto-select the default if the user hasn't already specified a choice. Do not emit any "next steps" or recommendation section between options and execution.
 
 ```
 Implementation complete. Proceeding with the default option unless a choice was already specified.
@@ -68,13 +68,13 @@ Implementation complete. Proceeding with the default option unless a choice was 
 4. Discard this work
 ```
 
-Defaulted to option 1 and proceeding.
+Defaulted to option 1 and executing immediately in the same reply.
 
 **Don't add explanation** - keep options concise.
 
 ### Step 4: Execute Choice
 
-If the user explicitly chose an option, execute it. Otherwise, execute option 1 by default and proceed.
+If the user explicitly chose an option, execute it. Otherwise, execute option 1 by default and execute immediately in the same reply.
 
 ### Step 6: Stop Here
 

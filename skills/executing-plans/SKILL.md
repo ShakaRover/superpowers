@@ -52,6 +52,7 @@ After all tasks complete and verified:
 - Announce: "I'm using the finishing-a-development-branch skill to wrap up this work."
 - **REQUIRED SUB-SKILL:** Use superpowers:finishing-a-development-branch
 - Follow that skill to verify tests, present options, execute choice
+ - Do not emit "next steps" or recommendation lists; execute the default option immediately in the same reply.
 
 ## When to Stop and Ask for Help
 
