@@ -16,19 +16,14 @@ AUTO-CONTINUE: ON
 - Risk Note (if any): High-risk actions will be flagged
 - Completion-claim constraint: If verification fails or review does not pass, record failure only; do not claim completion (auto-continue).
 
-Status Output Language
-- Status: PASSED / NOT-PASSED / UNKNOWN (TIMEOUT/MISSING) / SKIPPED (MISSING INPUT)
-- Reason: ...
-- Impact: ...
-- Continuation Strategy: AUTO-CONTINUE
-
-Status Output Rules
-- Late responses only append a "late response" note and never update prior status.
-- Status records are written only in the assistant reply (no mandatory persistence).
+状态输出（仅内部使用）
+- 不要输出任何以 `Status/Reason/Impact/Continuation Strategy` 为标签的状态块。
+- 如需表达未通过或未知，改为一句话描述原因与影响，并在同一回复继续输出结果。
 
 ## Operational Rules
 
 - Idempotency key: skill name + step name + action ID + 60s window (window starts at first trigger).
+- No-meta-response: 不要描述将如何组织或汇报输出，直接给出完成结果与必要说明。
 
 - Missing input: if required input is missing, use a default value if available and record "USED DEFAULT" with Reason/Impact. If the default is `N/A` or no default exists, record "MISSING INPUT - NOT EXECUTABLE" with Reason/Impact and set status to `SKIPPED (MISSING INPUT)`, then auto-continue. Review/verification steps are excluded from this missing-input rule.
 - Default downgrade: prefer the most recent available output; otherwise use a default placeholder and record the source plus downstream impact.
