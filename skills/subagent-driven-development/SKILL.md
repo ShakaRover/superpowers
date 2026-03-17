@@ -41,6 +41,7 @@ Status Output Rules
 - Tool-truth rule: Never claim a subagent was dispatched unless a Task/spawn_agent tool call actually occurred in this turn. If tool dispatch is unavailable or fails, immediately fall back to `executing-plans` and continue without mentioning subagents.
 - Single-turn rule: Do not emit partial progress summaries. Only respond after all dispatched subagents for the current step have returned (or timed out + retried) and you have produced the review results or failure/unknown status.
 - Progress output rule: Never state that you “will” review later. Report review outcomes or timeouts immediately in the same response.
+- Dispatch wording rule: Do not output interim “dispatched/派发” status lines at all. Report only completed results (task + reviews) or explicit fallback to `executing-plans`.
 ## When to Use
 
 ```dot
