@@ -123,6 +123,17 @@ OUTPUT_FILE="$TEST_PROJECT/codex-output.txt"
 EVENTS_FILE="$TEST_PROJECT/codex-events.jsonl"
 LOG_FILE="$TEST_PROJECT/codex-run.log"
 
+# Probe: verify subagent tool availability in this environment
+PROBE_EVENTS="$TEST_PROJECT/codex-subagent-probe.jsonl"
+echo "Probing subagent tool availability..."
+cd "$SCRIPT_DIR/../.." && timeout 120 env CODEX_HOME="$SCRIPT_DIR/.codex-home" codex exec --full-auto -C "$SCRIPT_DIR/../.." --json "Dispatch ONE subagent now. Return only \"done\"." > "$PROBE_EVENTS" 2>> "$LOG_FILE" || true
+if grep -Eq '\"spawn_agent\"|\"Task\"|\"tool_call\"' "$PROBE_EVENTS"; then
+    echo "  [PASS] Subagent tool appears available"
+else
+    echo "  [FAIL] Subagent tool not detected in this environment"
+    echo "  This environment will likely fall back to executing-plans"
+fi
+
 # Create prompt file
 cat > "$TEST_PROJECT/prompt.txt" <<'EOF'
 Respond in English.
