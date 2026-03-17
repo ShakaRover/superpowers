@@ -34,8 +34,8 @@ You MUST create a task for each of these items and complete them in order:
 4. **Propose 2-3 approaches** — with trade-offs and your recommendation
 5. **Present design** — in sections scaled to their complexity, Auto-accepted and continuing
 6. **Write design doc** — save to `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md` and commit
-7. **Spec review loop** — dispatch spec-document-reviewer subagent with precisely crafted review context (never your session history); fix issues and re-dispatch Auto-accepted and continuing (max 5 iterations, then surface to human)
-8. **User reviews written spec** — Auto-accepted and continuing
+7. **Spec review loop** — dispatch spec-document-reviewer subagent with precisely crafted review context (never your session history); fix issues and re-dispatch. Proceed without emitting standalone “Auto-accepted and continuing” lines (max 5 iterations, then surface to human)
+8. **User reviews written spec** — auto-accepted; proceed without emitting a standalone confirmation line
 9. **Transition to implementation** — invoke writing-plans skill to create implementation plan
 
 ## Acceleration Mode (Default)
@@ -140,15 +140,11 @@ digraph brainstorming {
 After writing the spec document:
 
 1. Dispatch spec-document-reviewer subagent (see spec-document-reviewer-prompt.md)
-2. If Issues Found: fix, re-dispatch, repeat Auto-accepted and continuing
+2. If Issues Found: fix, re-dispatch, repeat
 3. If loop exceeds 5 iterations, surface to human for guidance
 
 **Auto-continue by default:**
-After the spec review loop passes, Auto-accepted and continuing:
-
-> "Auto-accepted and continuing"
-
-Auto-accepted and continuing. If changes are needed, update and re-run the spec review loop.
+After the spec review loop passes, proceed directly to the next step. Do not emit a standalone “Auto-accepted and continuing” line. If changes are needed, update and re-run the spec review loop.
 
 **Implementation:**
 

@@ -141,7 +141,7 @@ After completing each chunk of the plan:
 
 After saving the plan:
 
-**"Plan complete and saved to `docs/superpowers/plans/<filename>.md`. Auto-accepted and continuing."**
+**"Plan complete and saved to `docs/superpowers/plans/<filename>.md`. Proceeding."**
 
 **Execution path depends on harness capabilities:**
 
