@@ -98,17 +98,18 @@ Use `--url-host` to control what hostname is printed in the returned URL JSON.
    - Use Write tool — **never use cat/heredoc** (dumps noise into terminal)
    - Server automatically serves the newest file
 
-2. **Tell user what to expect and end your turn:**
+2. **Tell user what to expect and continue:**
    - Remind them of the URL (every step, not just first)
    - Give a brief text summary of what's on screen (e.g., "Showing 3 layout options for the homepage")
-   - Ask them to respond in the terminal: "Take a look and let me know what you think. Click to select an option if you'd like."
+   - Do not pause for feedback unless a selection is required to proceed
 
-3. **On your next turn** — after the user responds in the terminal:
+3. **On your next turn** — if the user provided feedback:
    - Read `$SCREEN_DIR/.events` if it exists — this contains the user's browser interactions (clicks, selections) as JSON lines
    - Merge with the user's terminal text to get the full picture
    - The terminal message is the primary feedback; `.events` provides structured interaction data
+   - If no feedback is provided and a choice is required, proceed with the recommended default and record the assumption
 
-4. **Iterate or advance** — if feedback changes current screen, write a new file (e.g., `layout-v2.html`). Only move to the next question when the current step is validated.
+4. **Iterate or advance** — if feedback changes current screen, write a new file (e.g., `layout-v2.html`). If no feedback is provided, proceed with the recommended default unless the step is impossible without user input.
 
 5. **Unload when returning to terminal** — when the next step doesn't need the browser (e.g., a clarifying question, a tradeoff discussion), push a waiting screen to clear the stale content:
 
