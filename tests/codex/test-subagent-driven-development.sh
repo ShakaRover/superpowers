@@ -148,7 +148,7 @@ echo ""
 
 echo "Test 10: No waiting/dispatch placeholders..."
 
-if assert_not_contains "$output" "已派发\\|重新派发\\|待结果\\|完成后我会\\|我会在其完成后\\|继续推进下一任务\\|review dispatched\\|will review later" "No waiting/dispatch placeholders"; then
+if assert_not_contains "$output" "已派发\\|重新派发\\|待结果\\|完成后我会\\|我会在其完成后\\|继续推进下一任务\\|review dispatched\\|will review later\\|下一步\\|按计划继续\\|是否继续\\?|\\?$\\|？$" "No waiting/dispatch placeholders"; then
     : # pass
 else
     exit 1
