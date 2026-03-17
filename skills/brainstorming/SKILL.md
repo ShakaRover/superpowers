@@ -29,7 +29,7 @@ Every project goes through this process. A todo list, a single-function utility,
 You MUST create a task for each of these items and complete them in order:
 
 1. **Explore project context** — check files, docs, recent commits
-2. **Visual companion disabled by default; continuing (can be explicitly enabled)** (when the topic involves visual questions) — this must be its own message and not combined with clarifying questions. See Visual Companion below.
+2. **Visual companion disabled by default; continuing.** (when the topic involves visual questions) — do not pause; proceed directly to clarifying questions. See Visual Companion below.
 3. **Ask clarifying questions** — default to acceleration mode (all questions at once with recommended answers). Do not ask for approval; proceed with defaults if unanswered unless blocked.
 4. **Propose 2-3 approaches** — with trade-offs and your recommendation
 5. **Present design** — in sections scaled to their complexity, Auto-accepted and continuing
@@ -56,7 +56,7 @@ You MUST create a task for each of these items and complete them in order:
 digraph brainstorming {
     "Explore project context" [shape=box];
     "Visual questions ahead?" [shape=diamond];
-    "Visual companion disabled by default; continuing (can be explicitly enabled)\n(own message, no other content)" [shape=box];
+    "Visual companion disabled by default; continuing.\n(no pause, continue)" [shape=box];
     "Ask clarifying questions" [shape=box];
     "Propose 2-3 approaches" [shape=box];
     "Present design sections" [shape=box];
@@ -68,9 +68,9 @@ digraph brainstorming {
     "Invoke writing-plans skill" [shape=doublecircle];
 
     "Explore project context" -> "Visual questions ahead?";
-    "Visual questions ahead?" -> "Visual companion disabled by default; continuing (can be explicitly enabled)\n(own message, no other content)" [label="yes"];
+    "Visual questions ahead?" -> "Visual companion disabled by default; continuing.\n(no pause, continue)" [label="yes"];
     "Visual questions ahead?" -> "Acceleration mode" [label="no"];
-    "Visual companion disabled by default; continuing (can be explicitly enabled)\n(own message, no other content)" -> "Ask clarifying questions";
+    "Visual companion disabled by default; continuing.\n(no pause, continue)" -> "Ask clarifying questions";
     "Acceleration mode" -> "Ask all questions + provide recommended answers";
     "Ask all questions + provide recommended answers" -> "Propose 2-3 approaches";
     "Propose 2-3 approaches" -> "Present design sections";
@@ -169,12 +169,11 @@ Auto-accepted and continuing. If changes are needed, update and re-run the spec 
 
 A browser-based companion for showing mockups, diagrams, and visual options during brainstorming. Available as a tool — not a mode. Accepting the companion means it's available for questions that benefit from visual treatment; it does NOT mean every question goes through the browser. In slow mode, restore the visual companion prompt and wait for confirmation.
 
-**Offering the companion:** When you anticipate that upcoming questions will involve visual content (mockups, layouts, diagrams), Visual companion disabled by default; continuing (can be explicitly enabled):
-> "Visual companion disabled by default; continuing (can be explicitly enabled)"
+**Offering the companion:** When you anticipate that upcoming questions will involve visual content (mockups, layouts, diagrams), state: "Visual companion disabled by default; continuing." Do not pause or wait.
 
-**This offer MUST be its own message.** Do not combine it with clarifying questions, context summaries, or any other content. The message should contain ONLY the offer above and nothing else. Visual companion disabled by default; continuing (can be explicitly enabled).
+This note must NOT block or delay the next step. Do not require a separate message.
 
-**Per-question decision:** Visual companion disabled by default; continuing (can be explicitly enabled). The test: **would the user understand this better by seeing it than reading it?**
+**Per-question decision:** Visual companion disabled by default; continuing. The test: **would the user understand this better by seeing it than reading it?**
 
 - **Use the browser** for content that IS visual — mockups, wireframes, layout comparisons, architecture diagrams, side-by-side visual designs
 - **Use the terminal** for content that is text — requirements questions, conceptual choices, tradeoff lists, A/B/C/D text options, scope decisions
