@@ -43,6 +43,7 @@ Status Output Rules
 - Progress output rule: Never state that you “will” review later. Report review outcomes or timeouts immediately in the same response.
 - Dispatch wording rule: Do not output interim “dispatched/派发” status lines at all. Report only completed results (task + reviews) or explicit fallback to `executing-plans`.
 - Review-dispatch rule: Never say reviews were dispatched unless their results are included in the same response. If reviews are pending, wait (or time out + retry) and then report the results; do not mention dispatch.
+- Banned phrases (non-exhaustive): “已派发”, “重新派发”, “待结果”, “完成后我会”, “我会在其完成后”, “继续推进下一任务”, “review dispatched”, “will review later”. Do not output these; report completed results only.
 ## When to Use
 
 ```dot
@@ -176,10 +177,10 @@ Implementer: Proceeds with user-level default (~/.config/superpowers/hooks/) and
   - Self-review: Found I missed --force flag, added it
   - Committed
 
-[Dispatch spec compliance reviewer]
+[Run spec compliance review and report result]
 Spec reviewer: ✅ Spec compliant - all requirements met, nothing extra
 
-[Get git SHAs, dispatch code quality reviewer]
+[Run code quality review and report result]
 Code reviewer: Strengths: Good test coverage, clean. Issues: None.
 
 [Mark Task 1 complete]
