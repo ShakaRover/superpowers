@@ -17,18 +17,19 @@ run_codex() {
     codex_home="$repo_root/tests/codex/.codex-home"
     llms_key="${LLMS_OPEN_API_KEY:-}"
 
-    # Build command
+    # Build command (wrap with codex-auto.sh for auto-continue)
     # allowed_tools currently has no effect for codex exec; keep parameter for compatibility
+    local wrapper="$repo_root/commands/codex-auto.sh"
     if [ -n "$llms_key" ]; then
         echo "LLMS_OPEN_API_KEY=SET" >&2
-        local cmd=(env CODEX_HOME="$codex_home" LLMS_OPEN_API_KEY="$llms_key" codex exec --full-auto -C "$repo_root" --output-last-message "$output_file" "$prompt")
+        local cmd=(env CODEX_HOME="$codex_home" LLMS_OPEN_API_KEY="$llms_key" "$wrapper" --max-retries 2 -- exec --full-auto -C "$repo_root" --output-last-message "$output_file")
     else
         echo "LLMS_OPEN_API_KEY=NOT_SET" >&2
-        local cmd=(env CODEX_HOME="$codex_home" codex exec --full-auto -C "$repo_root" --output-last-message "$output_file" "$prompt")
+        local cmd=(env CODEX_HOME="$codex_home" "$wrapper" --max-retries 2 -- exec --full-auto -C "$repo_root" --output-last-message "$output_file")
     fi
 
     # Run Codex in headless mode with timeout
-    if timeout --kill-after=5s "$timeout" "${cmd[@]}" >"$error_file" 2>&1; then
+    if printf '%s' "$prompt" | timeout --kill-after=5s "$timeout" "${cmd[@]}" >"$error_file" 2>&1; then
         cat "$output_file"
         rm -f "$output_file" "$error_file"
         return 0

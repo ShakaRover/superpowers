@@ -171,7 +171,7 @@ Begin now. Execute the plan."
 echo "Running Codex (output will be saved to $OUTPUT_FILE)..."
 echo "================================================================================"
 set +e
-cd "$SCRIPT_DIR/../.." && timeout 1800 env CODEX_HOME="$SCRIPT_DIR/.codex-home" codex exec --full-auto -C "$SCRIPT_DIR/../.." --add-dir "$TEST_PROJECT" --output-last-message "$OUTPUT_FILE" --json "$PROMPT" > "$EVENTS_FILE" 2> "$LOG_FILE"
+cd "$SCRIPT_DIR/../.." && timeout 1800 env CODEX_HOME="$SCRIPT_DIR/.codex-home" "$SCRIPT_DIR/../.."/commands/codex-auto.sh --max-retries 2 -- exec --full-auto -C "$SCRIPT_DIR/../.." --add-dir "$TEST_PROJECT" --output-last-message "$OUTPUT_FILE" --json "$PROMPT" > "$EVENTS_FILE" 2> "$LOG_FILE"
 exit_code=$?
 set -e
 if [ $exit_code -ne 0 ]; then
