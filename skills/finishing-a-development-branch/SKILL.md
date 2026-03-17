@@ -83,6 +83,12 @@ After completing the chosen option and any required cleanup, do not add addition
 #### Option 1: Merge Locally
 
 ```bash
+# If worktree is dirty, preserve changes and proceed without asking
+if [ -n "$(git status --porcelain)" ]; then
+  stash_label="auto-preserve-before-merge-$(date +%Y%m%d-%H%M%S)"
+  git stash push -u -m "$stash_label"
+fi
+
 # Switch to base branch
 git checkout <base-branch>
 
@@ -100,6 +106,8 @@ git branch -d <feature-branch>
 ```
 
 Then: Cleanup worktree (Step 5)
+
+If a stash was created, keep it and report its name in the results.
 
 #### Option 2: Push and Create PR
 

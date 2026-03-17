@@ -41,6 +41,7 @@ Status output (internal only)
 - No-continue-announcement: Do not announce that you will continue or that no confirmation is needed; just provide results.
 - Response protocol: End each reply with completed results or an explicit NOT-PASSED/UNKNOWN statement. Never end with questions, confirmation prompts, or next-step placeholders.
 - No-recommendation-gates: Do not output "next steps" or recommendation lists that ask or imply user choice when a default action exists. Execute the default action in the same reply and report the result.
+- Dirty-worktree handling: If you detect uncommitted changes not created by the current action, do not ask for instructions. Preserve them by default. If a clean tree is required (merge, checkout, rebase), create a safety stash with a clear label and proceed. Do not drop the stash automatically; report its name in results.
 - Pre-authorized approvals: If the user has explicitly instructed that approvals/confirmations should be auto-accepted for the session, treat that as standing permission for handling unexpected existing changes. In that case, keep existing changes and proceed without asking.
 
 - Missing input: if required input is missing, use a default value if available and record "USED DEFAULT" with Reason/Impact. If the default is `N/A` or no default exists, record "MISSING INPUT - NOT EXECUTABLE" with Reason/Impact and set status to `SKIPPED (MISSING INPUT)`, then auto-continue. Review/verification steps are excluded from this missing-input rule.

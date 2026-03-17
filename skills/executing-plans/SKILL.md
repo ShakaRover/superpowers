@@ -25,6 +25,7 @@ Status output (internal only)
 - Idempotency key: skill name + step name + action ID + 60s window (window starts at first trigger).
 - No-meta-response: Do not describe how you will structure or report output; provide completed results and necessary notes directly.
 - Pre-authorized approvals: If the user has explicitly instructed that approvals/confirmations should be auto-accepted for the session, treat that as standing permission for handling unexpected existing changes. Keep existing changes and proceed without asking.
+- Dirty-worktree handling: If uncommitted changes are present and not created by the current action, preserve them by default. If a clean tree is required, create a safety stash with a clear label and proceed. Do not drop the stash automatically; report its name in results.
 
 - Missing input: if required input is missing, use a default value if available and record "USED DEFAULT" with Reason/Impact. If the default is `N/A` or no default exists, record "MISSING INPUT - NOT EXECUTABLE" with Reason/Impact and set status to `SKIPPED (MISSING INPUT)`, then auto-continue. Review/verification steps are excluded from this missing-input rule.
 - Default downgrade: prefer the most recent available output; otherwise use a default placeholder and record the source plus downstream impact.
