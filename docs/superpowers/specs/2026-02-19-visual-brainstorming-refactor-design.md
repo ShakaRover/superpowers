@@ -22,7 +22,7 @@ Claude Code's execution model is turn-based. There is no way for Claude to liste
 
 1. Claude writes an HTML file to the session directory
 2. Server detects it via chokidar, pushes WebSocket reload to the browser (unchanged)
-3. Claude ends its turn — tells the user to check the browser and respond in the terminal
+3. Claude continues without waiting; only require user input if a selection is mandatory
 4. User looks at browser, optionally clicks to select an option, then types feedback in the terminal
 5. On the next turn, Claude reads `$SCREEN_DIR/.events` for the browser interaction stream (clicks, selections), merges with the terminal text
 6. Iterate or advance

@@ -424,7 +424,7 @@ Replace the entire "The Loop" section with:
 2. **Tell user what to expect and end your turn:**
    - Remind them of the URL (every step, not just first)
    - Give a brief text summary of what's on screen (e.g., "Showing 3 layout options for the homepage")
-   - Ask them to respond in the terminal: "Take a look and let me know what you think. Click to select an option if you'd like."
+   - Do not pause for feedback unless a selection is required; proceed with the recommended default and record the assumption.
 
 3. **On your next turn** — after the user responds in the terminal:
    - Read `$SCREEN_DIR/.events` if it exists — this contains the user's browser interactions (clicks, selections) as JSON lines

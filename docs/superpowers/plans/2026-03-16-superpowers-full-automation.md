@@ -4,7 +4,7 @@
 
 **Goal:** Make all superpowers skills run fully automatically by default (no waiting), while preserving existing flow strength and documenting consistent AUTO-CONTINUE behavior.
 
-**Architecture:** Add a single AUTO-CONTINUE block per skill, replace confirmation-gate wording with auto-continue wording, and add STOP-TYPE annotations where needed. Keep workflow structure intact while changing “wait for approval” semantics to “auto-continue with traceable status.”
+**Architecture:** Add a single AUTO-CONTINUE block per skill, replace confirmation-gate wording with auto-continue wording, and add STOP-TYPE annotations where needed. Keep workflow structure intact while changing “approval-gate” semantics to “auto-continue with traceable status.”
 
 **Tech Stack:** Markdown skills (`SKILL.md`), git, ripgrep (`rg`)
 
@@ -90,7 +90,7 @@ In BOTH `skills/using-superpowers/SKILL.md` and `skills/writing-skills/SKILL.md`
 
 - [ ] **Step 1: Locate confirmation gates (keywords + phrases)**
 
-Run: `rg -n "请确认|请审阅|是否继续|等你确认|等待批准|review gate|must wait|wait for approval|wait for confirmation|ask user to review" skills`
+Run: `rg -n "请确认|请审阅|是否继续|等你确认|等待批准|review gate|approval gate|ask user to review" skills`
 Expected: Matches listed for manual edit
 
 - [ ] **Step 2: Semantic gate scan (manual)**
@@ -119,7 +119,7 @@ Replace any visual-companion prompts with:
 "Visual companion disabled by default; continuing (can be explicitly enabled)"
 
 Also add a slow-mode note in the visual-companion definition:
-"In slow mode, restore the visual-companion prompt and wait for confirmation."
+"In slow mode, restore the visual-companion prompt and require confirmation."
 
 - [ ] **Step 6: Re-scan for semantic gates**
 
@@ -145,7 +145,7 @@ Use these annotations near STOP blocks:
 Ensure STOP semantics match spec:
 - TERMINAL: end flow, output failure state
 - RECOVERABLE: perform action, auto-continue; if fail/unexecutable, mark “未通过” and continue
-- High-risk STOP action: in auto mode still execute but must label “高风险自动执行”; in slow mode wait for confirmation
+- High-risk STOP action: in auto mode still execute but must label “高风险自动执行”; in slow mode require confirmation
 - Unlabeled STOP defaults to TERMINAL and logs a warning
 
 - [ ] **Step 3: Add STOP判定准则**
@@ -310,7 +310,7 @@ Expected: No output (all skills have exactly 1 match)
 
 - [ ] **Step 3: Ensure no residual confirmation gates remain**
 
-Run: `rg -n "请确认|请审阅|是否继续|等你确认|等待批准|review gate|must wait|wait for approval|wait for confirmation|ask user to review" skills`
+Run: `rg -n "请确认|请审阅|是否继续|等你确认|等待批准|review gate|approval gate|ask user to review" skills`
 Expected: No gate phrases except explanatory cases with “（已默认继续）”
 
 - [ ] **Step 4: Ensure no visual-companion prompts remain**
@@ -361,4 +361,3 @@ Expected: All present
 使用 `skills/writing-plans/plan-document-reviewer-prompt.md` 派发 Chunk 1 审阅，引用规格 `docs/superpowers/specs/2026-03-16-superpowers-full-automation-design.md`，修复问题并复审直到 Approved。
 
 Note: Chunk 3 includes missing-input handling, review/verification timeout+retry, idempotency keys, and downgrade strategy (Tasks 6/7/7A).
-
