@@ -37,6 +37,7 @@ Status Output Rules
 - Output rule: Do not narrate waiting for subagents. Dispatch, then proceed to reviews when results arrive or time out; avoid “I will wait” or “please confirm” phrasing.
 - No pause rule: Never end a turn after dispatching a subagent. Always wait for completion (or timeout + retry), then continue to review or next task in the same turn.
 - Re-dispatch rule: When a task is re-dispatched, do not summarize and stop. Wait for the re-dispatch to complete in the same turn and proceed immediately to review/next task.
+- Banned phrasing: Do not output any future-tense placeholders such as “I will wait”, “when it completes”, “after it finishes”, “I will review later”, or “I will continue later”. If a tool wait is required, perform it and then continue with results in the same response.
 ## When to Use
 
 ```dot
