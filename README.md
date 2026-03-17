@@ -98,6 +98,16 @@ gemini extensions update superpowers
 
 Start a new session in your chosen platform and ask for something that should trigger a skill (for example, "help me plan this feature" or "let's debug this issue"). The agent should automatically invoke the relevant superpowers skill.
 
+### Codex Interaction Note
+
+In interactive Codex sessions, there is no session-complete hook to auto-correct stop/confirmation prompts. If you need fully automatic continuation, use the non-interactive wrapper:
+
+```bash
+commands/codex-auto.sh --max-retries 2 -- exec --full-auto
+```
+
+This wrapper detects confirmation/stop prompts and re-runs with an auto-continue instruction. It is intended for non-interactive runs. In interactive Codex, the best available behavior is to avoid emitting stop/confirmation prompts in the skills themselves.
+
 ## The Basic Workflow
 
 1. **brainstorming** - Activates before writing code. Refines rough ideas through questions, explores alternatives, presents design in sections for validation. Saves design document.
