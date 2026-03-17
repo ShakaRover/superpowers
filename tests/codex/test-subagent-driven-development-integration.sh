@@ -127,8 +127,10 @@ LOG_FILE="$TEST_PROJECT/codex-run.log"
 PROBE_EVENTS="$TEST_PROJECT/codex-subagent-probe.jsonl"
 echo "Probing subagent tool availability..."
 cd "$SCRIPT_DIR/../.." && timeout 120 env CODEX_HOME="$SCRIPT_DIR/.codex-home" codex exec --full-auto -C "$SCRIPT_DIR/../.." --json "Dispatch ONE subagent now. Return only \"done\"." > "$PROBE_EVENTS" 2>> "$LOG_FILE" || true
+SUBAGENT_AVAILABLE=0
 if grep -Eq '\"spawn_agent\"|\"Task\"|\"tool_call\"' "$PROBE_EVENTS"; then
     echo "  [PASS] Subagent tool appears available"
+    SUBAGENT_AVAILABLE=1
 else
     echo "  [FAIL] Subagent tool not detected in this environment"
     echo "  This environment will likely fall back to executing-plans"
@@ -202,41 +204,53 @@ FAILED=0
 echo "=== Verification Tests ==="
 echo ""
 
-# Test 1: Skill was invoked
+# Test 1: Skill was invoked (or fallback expected)
 echo "Test 1: Skill tool invoked..."
-if grep -q '"name":"Skill".*"skill":"superpowers:subagent-driven-development"' "$EVENTS_FILE"; then
-    echo "  [PASS] subagent-driven-development skill was invoked"
+if [ "$SUBAGENT_AVAILABLE" -eq 1 ]; then
+    if grep -q '"name":"Skill".*"skill":"superpowers:subagent-driven-development"' "$EVENTS_FILE"; then
+        echo "  [PASS] subagent-driven-development skill was invoked"
+    else
+        echo "  [FAIL] Skill was not invoked"
+        FAILED=$((FAILED + 1))
+    fi
 else
-    echo "  [FAIL] Skill was not invoked"
-    FAILED=$((FAILED + 1))
+    echo "  [SKIP] Subagent tool unavailable; fallback to executing-plans expected"
 fi
 echo ""
 
-# Test 2: Subagents were used (Task tool)
+# Test 2: Subagents were used (Task tool) or fallback expected
 echo "Test 2: Subagents dispatched..."
 task_count=$(grep -c '"name":"Task"' "$EVENTS_FILE" || true)
 if [ -z "$task_count" ]; then
     task_count=0
 fi
-if [ "$task_count" -ge 2 ]; then
-    echo "  [PASS] $task_count subagents dispatched"
+if [ "$SUBAGENT_AVAILABLE" -eq 1 ]; then
+    if [ "$task_count" -ge 2 ]; then
+        echo "  [PASS] $task_count subagents dispatched"
+    else
+        echo "  [FAIL] Only $task_count subagent(s) dispatched (expected >= 2)"
+        FAILED=$((FAILED + 1))
+    fi
 else
-    echo "  [FAIL] Only $task_count subagent(s) dispatched (expected >= 2)"
-    FAILED=$((FAILED + 1))
+    echo "  [SKIP] Subagent tool unavailable; dispatch not required"
 fi
 echo ""
 
-# Test 3: TodoWrite was used for tracking
+# Test 3: TodoWrite was used for tracking or fallback expected
 echo "Test 3: Task tracking..."
 todo_count=$(grep -c '"name":"TodoWrite"' "$EVENTS_FILE" || true)
 if [ -z "$todo_count" ]; then
     todo_count=0
 fi
-if [ "$todo_count" -ge 1 ]; then
-    echo "  [PASS] TodoWrite used $todo_count time(s) for task tracking"
+if [ "$SUBAGENT_AVAILABLE" -eq 1 ]; then
+    if [ "$todo_count" -ge 1 ]; then
+        echo "  [PASS] TodoWrite used $todo_count time(s) for task tracking"
+    else
+        echo "  [FAIL] TodoWrite not used"
+        FAILED=$((FAILED + 1))
+    fi
 else
-    echo "  [FAIL] TodoWrite not used"
-    FAILED=$((FAILED + 1))
+    echo "  [SKIP] Subagent tool unavailable; TodoWrite may be absent"
 fi
 echo ""
 
