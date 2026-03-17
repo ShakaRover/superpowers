@@ -76,7 +76,7 @@ digraph when_to_use {
 
 ### Step 0: Subagent Tool Availability Probe
 
-Attempt a minimal subagent dispatch (one-line acknowledgment). If the Task/spawn_agent tool is unavailable or errors, immediately switch to `executing-plans` and continue without mentioning subagents or dispatch.
+Attempt a minimal subagent dispatch (one-line acknowledgment). If the Task/spawn_agent tool is unavailable or errors, immediately switch to `executing-plans` and continue without mentioning subagents or dispatch. This is mandatory; do not attempt subagent-driven execution when the probe fails.
 
 ```dot
 digraph process {
