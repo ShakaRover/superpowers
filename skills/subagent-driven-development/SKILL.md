@@ -34,6 +34,7 @@ Status Output Rules
 - Default downgrade: prefer the most recent available output; otherwise use a default placeholder and record the source plus downstream impact.
 - Timeout + retry + idempotency: on 60s timeout, perform one idempotent retry (no duplicate side effects), wait another 60s, then record status. Review/subagent timeouts -> `UNKNOWN (TIMEOUT/MISSING)`. Verification timeouts or failures -> `NOT-PASSED`. Late responses only append a note and never update prior status.
 - Status linkage (non-review steps): missing input -> SKIPPED; timeout/missing -> UNKNOWN.
+- Output rule: Do not narrate waiting for subagents. Dispatch, then proceed to reviews when results arrive or time out; avoid “I will wait” or “please confirm” phrasing.
 ## When to Use
 
 ```dot
@@ -160,11 +161,7 @@ Task 1: Hook installation script
 [Get Task 1 text and context (already extracted)]
 [Dispatch implementation subagent with full task text + context]
 
-Implementer: "Before I begin - should the hook be installed at user or system level?"
-
-You: "User level (~/.config/superpowers/hooks/)"
-
-Implementer: "Got it. Implementing now..."
+Implementer: Proceeds with user-level default (~/.config/superpowers/hooks/) and records the assumption.
 [Later] Implementer:
   - Implemented install-hook command
   - Added tests, 5/5 passing
@@ -175,7 +172,7 @@ Implementer: "Got it. Implementing now..."
 Spec reviewer: ✅ Spec compliant - all requirements met, nothing extra
 
 [Get git SHAs, dispatch code quality reviewer]
-Code reviewer: Strengths: Good test coverage, clean. Issues: None. Auto-accepted and continuing.
+Code reviewer: Strengths: Good test coverage, clean. Issues: None.
 
 [Mark Task 1 complete]
 
