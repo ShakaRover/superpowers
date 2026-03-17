@@ -146,6 +146,8 @@ Implementer subagents report one of four statuses. Handle each appropriately:
 
 **Missing commit:** If the implementer returns uncommitted changes, require a commit before any review. If the plan explicitly allows batching, create a labeled checkpoint commit before review.
 
+**Pre-task git check:** Each task must start with a recorded `git status --porcelain` baseline before any changes are made.
+
 **NEEDS_CONTEXT:** The implementer needs information that wasn't provided. Provide the missing context and re-dispatch.
 
 **BLOCKED:** The implementer cannot complete the task. Assess the blocker:

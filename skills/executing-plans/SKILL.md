@@ -43,10 +43,11 @@ Status output (internal only)
 
 For each task:
 1. Mark as in_progress
-2. Follow each step exactly (plan has bite-sized steps)
-3. Run verifications as specified
-4. If the task modified files and the plan lacks a commit step, add a minimal checkpoint commit before marking complete (unless the plan explicitly declares batching).
-5. Mark as completed
+2. Run `git status --porcelain` and record the baseline
+3. Follow each step exactly (plan has bite-sized steps)
+4. Run verifications as specified
+5. If the task modified files and the plan lacks a commit step, add a minimal checkpoint commit before marking complete (unless the plan explicitly declares batching).
+6. Mark as completed
 
 ### Step 3: Complete Development
 

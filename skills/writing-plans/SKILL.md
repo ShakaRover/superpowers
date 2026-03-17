@@ -52,6 +52,8 @@ This structure informs the task decomposition. Each task should produce self-con
 
 **Commit requirement:** Every task must include an explicit commit step unless the plan explicitly declares a batching strategy (and explains why). If batching is chosen, add a dedicated "checkpoint commit" task before any merge or branch switch.
 
+**Pre-task git check requirement:** Every task must begin with a "Check git status" step to record a clean baseline before making changes.
+
 ## Plan Document Header
 
 **Every plan MUST start with this header:**
