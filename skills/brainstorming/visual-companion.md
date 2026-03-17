@@ -111,7 +111,7 @@ Use `--url-host` to control what hostname is printed in the returned URL JSON.
 
 4. **Iterate or advance** — if feedback changes current screen, write a new file (e.g., `layout-v2.html`). If no feedback is provided, proceed with the recommended default unless the step is impossible without user input.
 
-5. **Unload when returning to terminal** — 当后续环节不需要浏览器（如澄清问题或权衡讨论）时，推送等待屏以清理过期内容：
+5. **Unload when returning to terminal** — when the follow-on stage doesn't need the browser (e.g., a clarifying question or tradeoff discussion), push a waiting screen to clear stale content:
 
    ```html
    <!-- filename: waiting.html (or waiting-2.html, etc.) -->

@@ -16,29 +16,29 @@ AUTO-CONTINUE: ON
 - Risk Note (if any): High-risk actions will be flagged
 - Completion-claim constraint: If verification fails or review does not pass, record failure only; do not claim completion (auto-continue).
 
-状态输出（仅内部使用）
-- 不要输出任何以 `Status/Reason/Impact/Continuation Strategy` 为标签的状态块。
-- 如需表达未通过或未知，改为一句话描述原因与影响，并在同一回复继续输出结果。
+Status output (internal only)
+- Do not output any status blocks labeled `Status/Reason/Impact/Continuation Strategy`.
+- If you must express not-passed or unknown, state the reason and impact in one sentence and continue with results in the same reply.
 
 ## Operational Rules
 
 - Idempotency key: skill name + step name + action ID + 60s window (window starts at first trigger).
-- No-meta-response: 不要描述将如何组织或汇报输出，直接给出完成结果与必要说明。
+- No-meta-response: Do not describe how you will structure or report output; provide completed results and necessary notes directly.
 
 - Missing input: if required input is missing, use a default value if available and record "USED DEFAULT" with Reason/Impact. If the default is `N/A` or no default exists, record "MISSING INPUT - NOT EXECUTABLE" with Reason/Impact and set status to `SKIPPED (MISSING INPUT)`, then auto-continue. Review/verification steps are excluded from this missing-input rule.
 - Default downgrade: prefer the most recent available output; otherwise use a default placeholder and record the source plus downstream impact.
 - Timeout + retry + idempotency: on 60s timeout, perform one idempotent retry (no duplicate side effects), wait another 60s, then record status. Review/subagent timeouts -> `UNKNOWN (TIMEOUT/MISSING)`. Verification timeouts or failures -> `NOT-PASSED`. Late responses only append a note and never update prior status.
 - Status linkage (non-review steps): missing input -> SKIPPED; timeout/missing -> UNKNOWN.
-- Output rule: 不要叙述等待子代理的过程。启动子代理后在结果返回或超时后直接进入评审；避免任何等待或确认话术。
+- Output rule: Do not narrate waiting for subagents. After dispatch, proceed to reviews when results arrive or time out; avoid any waiting or confirmation phrasing.
 - No pause rule: Never end a turn after dispatching a subagent. Always wait for completion (or timeout + retry), then continue to review or next task in the same turn.
 - Re-dispatch rule: When a task is re-dispatched, do not summarize and stop. Wait for the re-dispatch to complete in the same turn and proceed immediately to review/next task.
-- Banned phrasing: 不要输出任何将来时占位语句（例如“我会等待/完成后再看/稍后继续”等）。如需等待工具结果，应等待完成并在同一回复给出结果。
+- Banned phrasing: Do not output any future-tense placeholders (e.g., I will wait/after it finishes/continue later). If a tool wait is required, wait and then provide results in the same reply.
 - Tool-truth rule: Never claim a subagent was dispatched unless a Task/spawn_agent tool call actually occurred in this turn. If tool dispatch is unavailable or fails, immediately fall back to `executing-plans` and continue without mentioning subagents.
 - Single-turn rule: Do not emit partial progress summaries. Only respond after all dispatched subagents for the current step have returned (or timed out + retried) and you have produced the review results or failure/unknown status.
 - Progress output rule: Never state that you “will” review later. Report review outcomes or timeouts immediately in the same response.
-- Dispatch wording rule: 不要输出仅说明已分配/已派送的中间状态行。只报告完成结果（任务 + 评审）或明确回退到 `executing-plans`。
-- Review-dispatch rule: 除非在同一回复提供评审结果，否则不要说明评审已分配。若评审尚未完成，应等待（或超时重试）后再报告结果，不要描述分配过程。
-- Banned phrases: 禁止输出任何“等待/后续再做/之后继续”的占位说法；只报告已完成结果。
+- Dispatch wording rule: Do not output interim lines that only state dispatch. Report completed results (task + reviews) or explicitly fall back to `executing-plans`.
+- Review-dispatch rule: Do not say reviews were dispatched unless results are included in the same reply. If reviews are pending, wait (or time out + retry) and then report results; do not describe dispatch.
+- Banned phrases: Do not output placeholder wording about waiting or continuing later; report completed results only.
 - Also avoid standalone headings that imply a follow-on action at end of turn. Only mention follow-on tasks when you also provide completed review results in the same response.
 - Capability gate: If the environment cannot actually execute subagent tools, do NOT use this skill. Immediately switch to `executing-plans` and continue without mentioning subagents or review dispatch.
 - Output gate: Never output intermediate “in-progress” bullet summaries. Only output task results after reviews are complete or explicitly timed out.
@@ -85,10 +85,10 @@ digraph process {
         "Provide context, re-dispatch" [shape=box];
         "Implementer subagent implements, tests, commits, self-reviews" [shape=box];
         "Dispatch spec reviewer subagent (./spec-reviewer-prompt.md)" [shape=box];
-        "规格符合并进入后续流程" [shape=diamond];
+        "Spec compliant and proceeding" [shape=diamond];
         "Implementer subagent fixes spec gaps" [shape=box];
         "Dispatch code quality reviewer subagent (./code-quality-reviewer-prompt.md)" [shape=box];
-        "质量检查通过并进入后续流程" [shape=diamond];
+        "Quality check passed and proceeding" [shape=diamond];
         "Implementer subagent fixes quality issues" [shape=box];
         "Mark task complete in TodoWrite" [shape=box];
     }
@@ -104,14 +104,14 @@ digraph process {
     "Provide context, re-dispatch" -> "Dispatch implementer subagent (./implementer-prompt.md)";
     "Implementer subagent blocked?" -> "Implementer subagent implements, tests, commits, self-reviews" [label="no"];
     "Implementer subagent implements, tests, commits, self-reviews" -> "Dispatch spec reviewer subagent (./spec-reviewer-prompt.md)";
-    "Dispatch spec reviewer subagent (./spec-reviewer-prompt.md)" -> "规格符合并进入后续流程";
-    "规格符合并进入后续流程" -> "Implementer subagent fixes spec gaps" [label="no"];
+    "Dispatch spec reviewer subagent (./spec-reviewer-prompt.md)" -> "Spec compliant and proceeding";
+    "Spec compliant and proceeding" -> "Implementer subagent fixes spec gaps" [label="no"];
     "Implementer subagent fixes spec gaps" -> "Dispatch spec reviewer subagent (./spec-reviewer-prompt.md)" [label="re-review"];
-    "规格符合并进入后续流程" -> "Dispatch code quality reviewer subagent (./code-quality-reviewer-prompt.md)" [label="yes"];
-    "Dispatch code quality reviewer subagent (./code-quality-reviewer-prompt.md)" -> "质量检查通过并进入后续流程";
-    "质量检查通过并进入后续流程" -> "Implementer subagent fixes quality issues" [label="no"];
+    "Spec compliant and proceeding" -> "Dispatch code quality reviewer subagent (./code-quality-reviewer-prompt.md)" [label="yes"];
+    "Dispatch code quality reviewer subagent (./code-quality-reviewer-prompt.md)" -> "Quality check passed and proceeding";
+    "Quality check passed and proceeding" -> "Implementer subagent fixes quality issues" [label="no"];
     "Implementer subagent fixes quality issues" -> "Dispatch code quality reviewer subagent (./code-quality-reviewer-prompt.md)" [label="re-review"];
-    "质量检查通过并进入后续流程" -> "Mark task complete in TodoWrite" [label="yes"];
+    "Quality check passed and proceeding" -> "Mark task complete in TodoWrite" [label="yes"];
     "Mark task complete in TodoWrite" -> "More tasks remain?";
     "More tasks remain?" -> "Dispatch implementer subagent (./implementer-prompt.md)" [label="yes"];
     "More tasks remain?" -> "Dispatch final code reviewer subagent for entire implementation" [label="no"];

@@ -16,9 +16,9 @@ AUTO-CONTINUE: ON
 - Risk Note (if any): High-risk actions will be flagged
 - Completion-claim constraint: If verification fails or review does not pass, record failure only; do not claim completion (auto-continue).
 
-状态输出（仅内部使用）
-- 不要输出任何以 `Status/Reason/Impact/Continuation Strategy` 为标签的状态块。
-- 如需表达未通过或未知，改为一句话描述原因与影响，并在同一回复继续输出结果。
+Status output (internal only)
+- Do not output any status blocks labeled `Status/Reason/Impact/Continuation Strategy`.
+- If you must express not-passed or unknown, state the reason and impact in one sentence and continue with results in the same reply.
 
 ## Operational Rules
 

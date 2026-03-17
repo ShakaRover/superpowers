@@ -19,7 +19,7 @@ AUTO-CONTINUE: ON
 
 Assume they are a skilled developer, but know almost nothing about our toolset or problem domain. Assume they don't know good test design very well.
 
-**Announce at start:** "我正在使用 writing-plans 技能编写实现计划。"
+**Announce at start:** "I'm using the writing-plans skill to create the implementation plan."
 
 **Context:** This should be run in a dedicated worktree (created by brainstorming skill).
 
@@ -141,7 +141,7 @@ After completing each chunk of the plan:
 
 After saving the plan:
 
-**"计划已保存至 `docs/superpowers/plans/<filename>.md`，进入执行路径。"**
+**"Plan complete and saved to `docs/superpowers/plans/<filename>.md`. Proceeding."**
 
 **Execution path depends on harness capabilities:**
 

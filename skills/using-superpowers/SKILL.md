@@ -23,23 +23,23 @@ AUTO-CONTINUE: ON
 - Risk Note (if any): High-risk actions will be flagged
 - Completion-claim constraint: If verification fails or review does not pass, record failure only; do not claim completion (auto-continue).
 
-状态输出（仅内部使用）
-- 不要输出任何以 `Status/Reason/Impact/Continuation Strategy` 为标签的状态块。
-- 如需表达未通过或未知，改为一句话描述原因与影响，并在同一回复继续输出结果。
+Status output (internal only)
+- Do not output any status blocks labeled `Status/Reason/Impact/Continuation Strategy`.
+- If you must express not-passed or unknown, state the reason and impact in one sentence and continue with results in the same reply.
 
 ## Operational Rules
 
 - Idempotency key: skill name + step name + action ID + 60s window (window starts at first trigger).
 
 - No-interrupt rule: Never ask for approval/permission/confirmation. Auto-accept and continue by default. Only ask if execution is impossible due to missing required input with no default or external platform block.
-- Output rule: 不要输出单独的接受语句；把自动接受视为内部行为，直接进入后续动作。
+- Output rule: Do not emit standalone acceptance lines. Treat auto-acceptance as internal and proceed directly to the follow-on action.
 - No-future-promise rule: Do not promise to do something “after” or “later.” If you say you will do it, do it in the same response unless blocked; otherwise record a blocking reason and proceed with a fallback.
-- No-meta-response rule: 不要描述“我将如何组织/汇报/结构化输出”。直接给出结果与必要说明。
-- No-interim-dispatch rule: 不要输出仅说明已分配/已派送的状态行。若必须提及分配，必须在同一回复提供完成结果，否则省略该描述。
+- No-meta-response rule: Do not describe how you will organize/report/structure output. Provide results and necessary notes directly.
+- No-interim-dispatch rule: Do not output status lines that only state dispatch. If you must mention dispatch, include completed results in the same reply; otherwise omit it.
 - Status-output rule: Do not emit PASSED status blocks. Only emit status blocks for NOT-PASSED or UNKNOWN, and only when it changes execution or risk.
-- No-next-step headings: 避免使用仅暗示后续动作的独立标题并在当轮结束。只有在同一回复提供完成结果时才可提及后续任务。
-- No-continue-announcement: 不要宣告“将继续/无需确认”等话术，直接提供结果。
-- Response protocol: 每次回复都以完成结果或明确的 NOT-PASSED/UNKNOWN 状态收尾。不得以问题、确认提示或后续动作占位收尾。
+- No-next-step headings: Avoid standalone headings that only imply a follow-on action at end of turn. Only mention the next task when you also provide completed results in the same reply.
+- No-continue-announcement: Do not announce that you will continue or that no confirmation is needed; just provide results.
+- Response protocol: End each reply with completed results or an explicit NOT-PASSED/UNKNOWN statement. Never end with questions, confirmation prompts, or next-step placeholders.
 
 - Missing input: if required input is missing, use a default value if available and record "USED DEFAULT" with Reason/Impact. If the default is `N/A` or no default exists, record "MISSING INPUT - NOT EXECUTABLE" with Reason/Impact and set status to `SKIPPED (MISSING INPUT)`, then auto-continue. Review/verification steps are excluded from this missing-input rule.
 - Default downgrade: prefer the most recent available output; otherwise use a default placeholder and record the source plus downstream impact.

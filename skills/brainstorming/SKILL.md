@@ -74,7 +74,7 @@ digraph brainstorming {
     "Acceleration mode" -> "Ask all questions + provide recommended answers";
     "Ask all questions + provide recommended answers" -> "Propose 2-3 approaches";
     "Propose 2-3 approaches" -> "Present design sections";
-    "Present design sections" -> "设计自动进入后续流程";
+    "Present design sections" -> "Design proceeds automatically";
     "Design accepted (implicit)" -> "Present design sections" [label="continue after adjustment"];
     "Design accepted (implicit)" -> "Write design doc" [label="proceed automatically"];
     "Write design doc" -> "Spec review loop";
@@ -144,7 +144,7 @@ After writing the spec document:
 3. If loop exceeds 5 iterations, surface to human for guidance
 
 **Auto-continue by default:**
-规格审阅通过后，直接进入后续环节。不要单独输出接受语句。如需修改，更新后重新运行审阅循环。
+After the spec review loop passes, proceed directly to the follow-on stage. Do not emit a standalone acceptance line. If changes are needed, update and re-run the review loop.
 
 **Implementation:**
 
@@ -167,7 +167,7 @@ A browser-based companion for showing mockups, diagrams, and visual options duri
 
 **Offering the companion:** When you anticipate that upcoming questions will involve visual content (mockups, layouts, diagrams), state: "Visual companion disabled by default; continuing." Do not pause or wait.
 
-此说明不得阻塞或延迟后续环节，不需要单独消息。
+This note must not block or delay the follow-on stage. Do not require a separate message.
 
 **Per-question decision:** Visual companion disabled by default; continuing. The test: **would the user understand this better by seeing it than reading it?**
 

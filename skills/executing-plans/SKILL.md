@@ -7,7 +7,7 @@ description: Use when you have a written implementation plan to execute in a sep
 
 ## Overview
 
-加载计划，严格审阅，执行全部任务，完成后报告并自动继续。
+Load the plan, review critically, execute all tasks, report when complete and continue automatically.
 
 AUTO-CONTINUE: ON
 - Default/Recommended Answer: N/A
@@ -16,14 +16,14 @@ AUTO-CONTINUE: ON
 - Risk Note (if any): High-risk actions will be flagged
 - Completion-claim constraint: If verification fails or review does not pass, record failure only; do not claim completion (auto-continue).
 
-状态输出（仅内部使用）
-- 不要输出任何以 `Status/Reason/Impact/Continuation Strategy` 为标签的状态块。
-- 如需表达未通过或未知，改为一句话描述原因与影响，并在同一回复继续输出结果。
+Status output (internal only)
+- Do not output any status blocks labeled `Status/Reason/Impact/Continuation Strategy`.
+- If you must express not-passed or unknown, state the reason and impact in one sentence and continue with results in the same reply.
 
 ## Operational Rules
 
 - Idempotency key: skill name + step name + action ID + 60s window (window starts at first trigger).
-- No-meta-response: 不要描述将如何组织或汇报输出，直接给出完成结果与必要说明。
+- No-meta-response: Do not describe how you will structure or report output; provide completed results and necessary notes directly.
 
 - Missing input: if required input is missing, use a default value if available and record "USED DEFAULT" with Reason/Impact. If the default is `N/A` or no default exists, record "MISSING INPUT - NOT EXECUTABLE" with Reason/Impact and set status to `SKIPPED (MISSING INPUT)`, then auto-continue. Review/verification steps are excluded from this missing-input rule.
 - Default downgrade: prefer the most recent available output; otherwise use a default placeholder and record the source plus downstream impact.
@@ -48,7 +48,7 @@ For each task:
 ### Step 3: Complete Development
 
 After all tasks complete and verified:
-- Announce: "我正在使用 finishing-a-development-branch 技能完成收尾。"
+- Announce: "I'm using the finishing-a-development-branch skill to wrap up this work."
 - **REQUIRED SUB-SKILL:** Use superpowers:finishing-a-development-branch
 - Follow that skill to verify tests, present options, execute choice
 

@@ -68,13 +68,13 @@ Implementation complete. Proceeding with the default option unless a choice was 
 4. Discard this work
 ```
 
-已默认选择选项 1 并直接执行。
+Defaulted to option 1 and proceeding.
 
 **Don't add explanation** - keep options concise.
 
 ### Step 4: Execute Choice
 
-如用户已明确选择，则执行该选项；否则默认执行选项 1 并直接执行。
+If the user explicitly chose an option, execute it. Otherwise, execute option 1 by default and proceed.
 
 ### Step 6: Stop Here
 
@@ -187,9 +187,9 @@ git worktree remove <worktree-path>
 - **Problem:** Remove worktree when might need it (Option 2, 3)
 - **Fix:** Only cleanup for Options 1 and 4
 
-**未明确删除路径时默认保留并直接执行**
-- **问题：** 误删工作
-- **修复：** 默认保留并直接执行
+**Deletion not explicitly handled; default to keep and proceed**
+- **Problem:** Accidental deletion of work
+- **Fix:** Default to keep and proceed
 
 ## Red Flags
 

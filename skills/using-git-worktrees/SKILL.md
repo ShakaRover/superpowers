@@ -48,7 +48,7 @@ grep -i "worktree.*director" CLAUDE.md 2>/dev/null
 If no directory exists and no CLAUDE.md preference:
 
 ```
-未找到 worktree 目录，默认使用 .worktrees/，自动继续。
+No worktree directory found. Defaulting to .worktrees/ and proceeding automatically.
 ```
 
 ## Safety Verification
