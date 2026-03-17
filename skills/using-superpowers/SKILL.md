@@ -42,6 +42,7 @@ Status Output Rules
 - No-future-promise rule: Do not promise to do something “after” or “later.” If you say you will do it, do it in the same response unless blocked; otherwise record a blocking reason and proceed with a fallback.
 - No-interim-dispatch rule: Do not output “dispatched/派发” status lines without completion results. If you must mention dispatch, include completed results in the same response; otherwise omit dispatch mention entirely.
 - Status-output rule: Do not emit PASSED status blocks. Only emit status blocks for NOT-PASSED or UNKNOWN, and only when it changes execution or risk.
+- No-next-step headings: Avoid standalone “下一步/Next step” headings that end a turn. Only mention the next task when you also provide completed results in the same response.
 
 - Missing input: if required input is missing, use a default value if available and record "USED DEFAULT" with Reason/Impact. If the default is `N/A` or no default exists, record "MISSING INPUT - NOT EXECUTABLE" with Reason/Impact and set status to `SKIPPED (MISSING INPUT)`, then auto-continue. Review/verification steps are excluded from this missing-input rule.
 - Default downgrade: prefer the most recent available output; otherwise use a default placeholder and record the source plus downstream impact.

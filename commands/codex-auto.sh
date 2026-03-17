@@ -79,6 +79,8 @@ stop_patterns=(
   "完成后我会"
   "我会在其完成后"
   "继续推进"
+  "下一步"
+  "按计划继续"
   "Which option"
   "What would you like"
   "Should I"
