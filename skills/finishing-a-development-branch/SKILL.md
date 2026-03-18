@@ -78,7 +78,7 @@ If the user explicitly chose an option, execute it. Otherwise, execute option 1 
 
 ### Step 6: Stop Here
 
-After completing the chosen option and any required cleanup, do not add additional prompts, numbered menus, or follow-up questions. If extra optional tasks are desirable (backup restore, summaries, tagging), record that they were not requested and finish the response.
+After completing the chosen option and any required cleanup, do not add additional prompts, numbered menus, follow-up questions, or conditional tail offers. End with final completed state only.
 
 #### Option 1: Merge Locally
 

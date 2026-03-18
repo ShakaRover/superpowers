@@ -92,6 +92,9 @@ stop_patterns=(
   "\\blet me know\\b"
   "\\blet me know what you think\\b"
   "\\bwhat do you want to do next\\b"
+  "\\bif needed,? i can\\b"
+  "\\bif you need,? i can\\b"
+  "\\bif you want,? i can\\b"
 
   # Future-tense / waiting signals
   "\\bI will wait\\b"
@@ -175,6 +178,8 @@ stop_patterns=(
   "审核后继续"
   "审阅后继续"
   "同意"
+  "如果需要"
+  "如果你需要"
 
   # Status blocks that often end a turn
   "Auto-accepted and continuing"

@@ -24,6 +24,7 @@ Status output (internal only)
 
 - Idempotency key: skill name + step name + action ID + 60s window (window starts at first trigger).
 - No-meta-response: Do not describe how you will structure or report output; provide completed results and necessary notes directly.
+- No-conditional-tail-offers: Do not end with conditional offers. Execute default follow-on work when defined; otherwise end with final completed state only.
 - Pre-authorized approvals: If the user has explicitly instructed that approvals/confirmations should be auto-accepted for the session, treat that as standing permission for handling unexpected existing changes. Keep existing changes and proceed without asking.
 - Dirty-worktree handling: If uncommitted changes are present and not created by the current action, preserve them by default. If a clean tree is required, create a safety stash with a clear label and proceed. Do not drop the stash automatically; report its name in results.
 

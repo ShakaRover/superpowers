@@ -41,6 +41,7 @@ Status output (internal only)
 - No-continue-announcement: Do not announce that you will continue or that no confirmation is needed; just provide results.
 - Response protocol: End each reply with completed results or an explicit NOT-PASSED/UNKNOWN statement. Never end with questions, confirmation prompts, or next-step placeholders.
 - No-recommendation-gates: Do not output "next steps" or recommendation lists that ask or imply user choice when a default action exists. Execute the default action in the same reply and report the result.
+- No-conditional-tail-offers: Do not end with conditional offers. If there is default follow-on work, execute it; otherwise end with final completed state only.
 - Dirty-worktree handling: If you detect uncommitted changes not created by the current action, do not ask for instructions. Preserve them by default. If a clean tree is required (merge, checkout, rebase), create a safety stash with a clear label and proceed. Do not drop the stash automatically; report its name in results.
 - Pre-authorized approvals: If the user has explicitly instructed that approvals/confirmations should be auto-accepted for the session, treat that as standing permission for handling unexpected existing changes. In that case, keep existing changes and proceed without asking.
 
