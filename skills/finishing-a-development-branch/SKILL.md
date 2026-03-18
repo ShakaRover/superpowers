@@ -71,7 +71,7 @@ If the user explicitly chose an option, execute it. Otherwise, execute option 1 
 
 ### Step 6: Stop Here
 
-After completing the chosen option and any required cleanup, do not add additional prompts, numbered menus, follow-up questions, or conditional tail offers. End with final completed state only.
+After completing the chosen option and any required cleanup, do not add additional prompts, numbered menus, follow-up questions, conditional tail offers, or any post-completion suggestion list. End with final completed state only.
 
 #### Option 1: Merge Locally
 

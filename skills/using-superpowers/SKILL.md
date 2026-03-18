@@ -33,6 +33,7 @@ Status output (internal only)
 - Auto-mode terminal rule: If no defined follow-on action remains, end with final completed state only.
 - Auto-mode continuation rule: If a default follow-on action is defined, execute it in the same turn.
 - Menu suppression rule: In auto mode, do not print option menus, recommendation lists, or "what should I do next" prompts.
+- Post-completion suppression rule: After reporting completed results, do not append additional possible actions, optional batches, publish suggestions, or "I can also..." offers.
 
 ## Operational Rules
 

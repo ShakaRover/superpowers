@@ -95,6 +95,8 @@ stop_patterns=(
   "\\bif needed,? i can\\b"
   "\\bif you need,? i can\\b"
   "\\bif you want,? i can\\b"
+  "\\bi can also\\b"
+  "\\bi can continue with\\b"
 
   # Future-tense / waiting signals
   "\\bI will wait\\b"
@@ -180,6 +182,11 @@ stop_patterns=(
   "同意"
   "如果需要"
   "如果你需要"
+  "如果你要我"
+  "若你要我"
+  "我可以直接继续"
+  "我可以继续下一批"
+  "我可以直接做"
 
   # Status blocks that often end a turn
   "Auto-accepted and continuing"
