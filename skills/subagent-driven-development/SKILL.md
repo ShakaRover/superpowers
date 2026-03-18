@@ -45,6 +45,7 @@ Status output (internal only)
 - Also avoid standalone headings that imply a follow-on action at end of turn. Only mention follow-on tasks when you also provide completed review results in the same response.
 - Capability gate: If the environment cannot actually execute subagent tools, do NOT use this skill. Immediately switch to `executing-plans` and continue without mentioning subagents or review dispatch.
 - Output gate: Never output intermediate “in-progress” bullet summaries. Only output task results after reviews are complete or explicitly timed out.
+- Completion handoff rule: At final handoff to `finishing-a-development-branch`, execute the default completion path in auto mode. Do not print option menus, recommendation lists, or "what next" prompts.
 ## When to Use
 
 ```dot

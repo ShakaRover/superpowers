@@ -18,7 +18,7 @@ AUTO-CONTINUE: ON
 
 If slow mode is active, wait for confirmation before irreversible actions.
 
-**Core principle:** Verify tests → Present options → Execute choice → Clean up.
+**Core principle:** Verify tests → Select execution path deterministically → Execute → Clean up.
 
 **Announce at start:** "I'm using the finishing-a-development-branch skill to complete this work."
 
@@ -55,22 +55,15 @@ git merge-base HEAD main 2>/dev/null || git merge-base HEAD master 2>/dev/null
 
 Or state: "This branch split from main. Proceeding."
 
-### Step 3: Present Options
+### Step 3: Determine Execution Path
 
-Present exactly these 4 options, do not ask a question, then auto-select the default if the user hasn't already specified a choice. Do not emit any "next steps" or recommendation section between options and execution.
+In AUTO-CONTINUE mode:
+- If the user explicitly chose an option, execute it.
+- Otherwise, execute option 1 (merge locally) immediately.
+- Do not print option menus, recommendation lists, or "what next" text.
 
-```
-Implementation complete. Proceeding with the default option unless a choice was already specified.
-
-1. Merge back to <base-branch> locally
-2. Push and create a Pull Request
-3. Keep the branch as-is (I'll handle it later)
-4. Discard this work
-```
-
-Defaulted to option 1 and executing immediately in the same reply.
-
-**Don't add explanation** - keep options concise.
+In slow mode only:
+- Present the four completion options from the Quick Reference table, then wait for confirmation.
 
 ### Step 4: Execute Choice
 
@@ -189,7 +182,7 @@ git worktree remove <worktree-path>
 
 **Open-ended questions**
 - **Problem:** "What should I do next?" → ambiguous
-- **Fix:** Present exactly 4 structured options
+- **Fix:** In auto mode, execute default path immediately; in slow mode, present exactly 4 structured options
 
 **Automatic worktree cleanup**
 - **Problem:** Remove worktree when might need it (Option 2, 3)
@@ -209,7 +202,8 @@ git worktree remove <worktree-path>
 
 **Always:**
 - Verify tests before offering options
-- Present exactly 4 options
+- In auto mode, execute default path immediately
+- In slow mode, present exactly 4 options
 - Proceed automatically（Option 4）
 - Clean up worktree for Options 1 & 4 only
 

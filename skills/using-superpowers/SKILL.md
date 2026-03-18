@@ -27,6 +27,13 @@ Status output (internal only)
 - Do not output any status blocks labeled `Status/Reason/Impact/Continuation Strategy`.
 - If you must express not-passed or unknown, state the reason and impact in one sentence and continue with results in the same reply.
 
+## Execution Contract
+
+- Deterministic step rule: Each turn must execute one deterministic next action, not just describe possible actions.
+- Auto-mode terminal rule: If no defined follow-on action remains, end with final completed state only.
+- Auto-mode continuation rule: If a default follow-on action is defined, execute it in the same turn.
+- Menu suppression rule: In auto mode, do not print option menus, recommendation lists, or "what should I do next" prompts.
+
 ## Operational Rules
 
 - Idempotency key: skill name + step name + action ID + 60s window (window starts at first trigger).
